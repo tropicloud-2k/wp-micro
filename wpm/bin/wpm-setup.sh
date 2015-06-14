@@ -63,5 +63,8 @@ wpm_setup() {
 	mkdir -p /etc/wpm
 	mkdir -p /var/wpm
 	mkdir -p /var/ssl
+	
+	chown -R $user:nginx /var/wpm
+	chmod 755 /var/wpm
 
 }

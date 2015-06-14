@@ -4,7 +4,7 @@
 
 wpm_mysql_setup() {
 	
-	wpm_header "MariaDB Setup"
+	wpm_header "Configuring MariaDB Server"
 
 	echo -ne `openssl rand -hex 36` > /etc/.header_mustache
 	sed -i 's/^\(bind-address\s.*\)/# \1/' /etc/mysql/my.cnf
@@ -17,7 +17,7 @@ wpm_mysql_setup() {
 	while [[  ! -e /run/mysqld/mysqld.sock  ]]; do
 		echo -n '.' && sleep 1
 	done
-	echo -ne "done!/n"
+	echo -ne "done!\n"
 	
 	echo "Creating MariaDB database"
 	mysql -u root -e "CREATE USER '$user'@'%' IDENTIFIED BY '$mysql_password'"

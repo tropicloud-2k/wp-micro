@@ -4,6 +4,8 @@ wpm_setup() {
 	# PACKGES
 	# ------------------------
 	
+	wpm_header "Installing Packges"
+
 	apk add --update \
 		mariadb \
 		mariadb-client \
@@ -43,7 +45,7 @@ wpm_setup() {
 	
 	wpm_header "Installing Composer"
 	
-	curl -sS https://getcomposer.org/installer | php
+	curl -S https://getcomposer.org/installer | php
 	mv composer.phar /usr/local/bin/composer
 	
 	# ------------------------
@@ -52,8 +54,8 @@ wpm_setup() {
 	
 	wpm_header "Installing WP-CLI"
 
-	curl -sO https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar > /usr/local/bin/wp
-	chmod +x /usr/local/bin/wp
+	curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && chmod +x wp-cli.phar
+	mv wp-cli.phar /usr/local/bin/wp
 		
 	# ------------------------
 	# WP-MICRO
@@ -70,4 +72,5 @@ wpm_setup() {
 
 	chmod +x /wpm/wpm.sh && ln -s /wpm/wpm.sh /usr/bin/wpm
 
+	wpm_header "Build Completed!"
 }

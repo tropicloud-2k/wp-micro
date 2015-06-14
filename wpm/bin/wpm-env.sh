@@ -4,6 +4,8 @@
 
 wpm_env() {
 
+	wpm_header "Configuring Environment"
+
 	if [[  $WP_SSL == 'true'  ]];
 	then SCHEME="https" && cat /wpm/etc/nginx/wpssl.conf | sed -e "s/example.com/$HOSTNAME/g" > $home/etc/nginx.conf && wpm_ssl $HOSTNAME
 	else SCHEME="http" && cat /wpm/etc/nginx/wp.conf | sed -e "s/example.com/$HOSTNAME/g" > $home/etc/nginx.conf

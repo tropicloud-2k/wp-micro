@@ -8,7 +8,7 @@
 # ------------------------------------
 
 user="wordpress"
-home="/var/wpm"
+home="/var/www"
 
 # ------------------------------------
 # wpm functions

@@ -4,8 +4,6 @@
 
 wpm_mysql_setup() {
 	
-	timeout=30
-	
 	echo -ne `openssl rand -hex 36` > /etc/wpm/.mustache
 	sed -i 's/^\(bind-address\s.*\)/# \1/' /etc/mysql/my.cnf
 
@@ -13,17 +11,11 @@ wpm_mysql_setup() {
 	mysql_install_db --user=mysql > /dev/null 2>&1
 	mysqld_safe > /dev/null 2>&1 &
 	
-	echo -n "=> Waiting for MariaDB service startup"
-	while [[  ! /usr/bin/mysqladmin -u root status >/dev/null 2>&1  ]]; do
-	
-		timeout=$(($timeout - 1))
-		if [[  $timeout -eq 0  ]]; then
-			echo -e "=> Could not start MariaDB server. Aborting..."
-			exit 1
-		fi
-		echo -n "." && sleep 1
-		
+	echo -ne "=> Starting MariaDB Server..."
+	while [[  ! -e /run/mysqld/mysqld.sock  ]]; do
+		echo -n '.' && sleep 1
 	done
+	echo -ne " done!\n"
 	
 	echo "=> Creating MySQL user and database"
 	mysql -u root -e "CREATE USER '$user'@'%' IDENTIFIED BY '$mysql_password'"

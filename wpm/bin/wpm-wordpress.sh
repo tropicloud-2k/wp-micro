@@ -7,10 +7,4 @@ wpm_wordpress() {
 	su -l $user -c "git clone https://github.com/roots/bedrock.git ."
 	su -l $user -c "composer install"
 	
-	if [[  -f $home/nginx.conf  ]];
-		then cat $home/nginx.conf > /etc/wpm/wpm.conf
-		else cat /wpm/etc/wp.conf > /etc/wpm/wpm.conf
-	fi
-	
-
 }	

@@ -13,11 +13,11 @@ wpm_mysql_setup() {
 	mysql_install_db --user=mysql > /dev/null 2>&1
 	mysqld_safe > /dev/null 2>&1 &
 	
-	echo "Starting MariaDB Server..."
+	echo -n "Starting MariaDB Server..."
 	while [[  ! -e /run/mysqld/mysqld.sock  ]]; do
 		echo -n '.' && sleep 1
 	done
-	echo " done!/n"
+	echo -n " done/n"
 	
 	echo "Creating MariaDB database"
 	mysql -u root -e "CREATE USER '$user'@'%' IDENTIFIED BY '$mysql_password'"

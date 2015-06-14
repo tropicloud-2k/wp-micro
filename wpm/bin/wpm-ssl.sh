@@ -4,6 +4,8 @@
 
 wpm_ssl() {
 
+	wpm_header "Generating SSL Cert."
+
 	cd $home/ssl
 	
 	cat /wpm/etc/nginx/openssl.conf | sed -e "s/example.com/$HOSTNAME/g" > openssl.conf

@@ -4,7 +4,7 @@
 
 wpm_mysql_setup() {
 	
-	wpm_header "Configuring MariaDB Server"
+	wpm_header "MariaDB Setup"
 
 	echo -ne `openssl rand -hex 36` > /etc/.header_mustache
 	sed -i 's/^\(bind-address\s.*\)/# \1/' /etc/mysql/my.cnf
@@ -13,13 +13,18 @@ wpm_mysql_setup() {
 	mysql_install_db --user=mysql > /dev/null 2>&1
 	mysqld_safe > /dev/null 2>&1 &
 	
+	echo "Starting MariaDB Server..."
 	while [[  ! -e /run/mysqld/mysqld.sock  ]]; do
 		echo -n '.' && sleep 1
 	done
+	echo " done!/n"
 	
+	echo "Creating MariaDB database"
 	mysql -u root -e "CREATE USER '$user'@'%' IDENTIFIED BY '$mysql_password'"
 	mysql -u root -e "CREATE DATABASE $user"
 	mysql -u root -e "GRANT ALL PRIVILEGES ON *.* TO '$user'@'%' WITH GRANT OPTION"
+	
+	echo "Securing MariaDB installation"
 	mysql -u root -e "DELETE FROM mysql.user WHERE User='';"
 	mysql -u root -e "DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');"
 	mysql -u root -e "DROP DATABASE test;"

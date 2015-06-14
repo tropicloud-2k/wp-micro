@@ -72,5 +72,4 @@ wpm_setup() {
 
 	chmod +x /wpm/wpm.sh && ln -s /wpm/wpm.sh /usr/bin/wpm
 
-	wpm_header "Build Completed!"
 }

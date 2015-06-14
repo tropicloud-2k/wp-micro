@@ -8,9 +8,9 @@ wpm_env() {
 DB_NAME=$user
 DB_USER=$user
 DB_PASSWORD=`cat /etc/.header_mustache`
-DB_HOST=localhost
+DB_HOST=127.0.0.1
 
-WP_ENV=production
+WP_ENV=development
 WP_HOME=$SCHEME://$HOSTNAME
 WP_SITEURL=$SCHEME://$HOSTNAME/wp
 END

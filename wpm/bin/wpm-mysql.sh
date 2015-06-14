@@ -39,4 +39,4 @@ wpm_mysql_setup() {
 		
 	mysqladmin -u root shutdown
 
-}	
+}

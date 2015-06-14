@@ -10,17 +10,7 @@ mysql_setup() {
 	mysql_install_db --user=mysql > /dev/null 2>&1
 	mysqld_safe > /dev/null 2>&1 &
 	
-	timeout=30
-	echo -n "=> Waiting for MariaDB service startup"
-	
-	while [[  ! /usr/bin/mysqladmin -u root status >/dev/null 2>&1  ]]; do
-		timeout=$(($timeout - 1))
-		if [[  $timeout -eq 0  ]]; then
-			echo -e "=> Could not start MariaDB server. Aborting..."
-			exit 1
-		fi
-		echo -n "." && sleep 1
-	done
+sleep 3
 	
 	echo "=> Creating MySQL user and database"
 	mysql -u root -e "CREATE USER '$user'@'%' IDENTIFIED BY '$mysql_password'"

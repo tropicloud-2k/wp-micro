@@ -4,7 +4,7 @@ wpm_setup() {
 	# PACKGES
 	# ------------------------
 	
-	wpm_header "Installing Packges"
+	wpm_header "APK Install"
 
 	apk add --update \
 		mariadb \
@@ -43,7 +43,7 @@ wpm_setup() {
 	# COMPOSER
 	# ------------------------
 	
-	wpm_header "Installing Composer"
+	wpm_header "Composer Install"
 	
 	curl -S https://getcomposer.org/installer | php
 	mv composer.phar /usr/local/bin/composer
@@ -52,7 +52,7 @@ wpm_setup() {
 	# WP-CLI
 	# ------------------------
 	
-	wpm_header "Installing WP-CLI"
+	wpm_header "WP-CLI Install"
 
 	curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && chmod +x wp-cli.phar
 	mv wp-cli.phar /usr/local/bin/wp

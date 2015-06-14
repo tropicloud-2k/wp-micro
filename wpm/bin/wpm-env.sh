@@ -12,7 +12,7 @@ wpm_env() {
 	cat > $home/.env <<END
 DB_NAME=$user
 DB_USER=$user
-DB_PASSWORD=`cat /etc/wpm/.wpm_shadow`
+DB_PASSWORD=`cat /etc/.header_mustache`
 DB_HOST=localhost
 
 WP_ENV=production

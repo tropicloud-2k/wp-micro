@@ -4,7 +4,7 @@ wpm_setup() {
 	# PACKGES
 	# ------------------------
 	
-	wpm_header "APK Install"
+	wpm_header "Alpine Packges"
 
 	apk add --update \
 		mariadb \

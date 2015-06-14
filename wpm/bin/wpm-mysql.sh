@@ -2,14 +2,18 @@
 # MYSQL SETUP
 # ------------------------
 
-wpm_mysql_setup() {
+wpm_mysql() {
 	
-	wpm_header "MariaDB Setup"
+	wpm_header "MariaDB Setup (mysql)"
+	
+	token=`openssl rand -hex 8`
+	db_user="wp_$token"
+	db_name="db_$token"
 	
 	wpm_mysql_database() {
-		mysql -u root -e "CREATE USER '$user'@'%' IDENTIFIED BY '$mysql_password'"
-		mysql -u root -e "CREATE DATABASE $user"
-		mysql -u root -e "GRANT ALL PRIVILEGES ON *.* TO '$user'@'%' WITH GRANT OPTION"
+		mysql -u root -e "CREATE USER '$db_user'@'%' IDENTIFIED BY '$mysql_password'"
+		mysql -u root -e "CREATE DATABASE $db_name"
+		mysql -u root -e "GRANT ALL PRIVILEGES ON *.* TO '$db_user'@'%' WITH GRANT OPTION"
 	}
 	
 	wpm_mysql_secure() {
@@ -20,8 +24,8 @@ wpm_mysql_setup() {
 		mysql -u root -e "FLUSH PRIVILEGES"
 	}
 	
-	echo -ne `openssl rand -hex 36` > /etc/.header_mustache
 	sed -i 's/^\(bind-address\s.*\)/# \1/' /etc/mysql/my.cnf
+	echo -ne `openssl rand -hex 36` > /etc/.header_mustache
 
 	mysql_password=`cat /etc/.header_mustache`
 	mysql_install_db --user=mysql > /dev/null 2>&1
@@ -43,6 +47,7 @@ wpm_mysql_setup() {
 	while ! wpm_mysql_secure true; do
 		echo -n '.' && sleep 1
 	done
+	echo -ne "done!\n"
 	
 	mysqladmin -u root shutdown
 

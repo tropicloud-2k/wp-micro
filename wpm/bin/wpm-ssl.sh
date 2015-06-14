@@ -4,7 +4,7 @@
 
 wpm_ssl() {
 
-	wpm_header "Generating SSL Cert."
+	wpm_header "SSL Certificates"
 
 	cd $home/ssl
 	
@@ -16,4 +16,4 @@ wpm_ssl() {
 	
 	rm -f openssl.conf
 			
-}	
+}

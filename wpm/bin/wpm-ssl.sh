@@ -4,7 +4,7 @@
 
 wpm_ssl() {
 
-	cd /var/ssl
+	cd $home/ssl
 	
 	cat /wpm/etc/nginx/openssl.conf | sed -e "s/example.com/$HOSTNAME/g" > openssl.conf
 	

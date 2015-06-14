@@ -58,6 +58,9 @@ wpm_setup() {
 	mkdir -p $home/log
 	mkdir -p $home/ssl
 	
+	cat /wpm/etc/nginx/nginx.conf > /etc/nginx/nginx.conf
+	cat /wpm/etc/php/php-fpm.conf > /etc/php/php-fpm.conf
+
 	chmod +x /wpm/wpm.sh && ln -s /wpm/wpm.sh /usr/bin/wpm
 
 }

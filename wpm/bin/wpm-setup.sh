@@ -4,7 +4,7 @@ wpm_setup() {
 	# PACKGES
 	# ------------------------
 	
-	wpm_header "Image Builder"
+	wpm_header "Image Build"
 
 	apk add --update \
 		mariadb \
@@ -65,10 +65,9 @@ wpm_setup() {
 	mkdir -p /var/log/php
 	
 	chown -R $user:nginx /var/wpm
-	chmod +x /wpm/wpm.sh
+	chmod +x /wpm/wpm.sh && ln -s /wpm/wpm.sh /usr/bin/wpm
 	
-	ln -s /wpm/wpm.sh /usr/bin/wpm
-	ln -s /var/log ~/
-	ln -s /var/ssl ~/
+	ln -s /var/log $home
+	ln -s /var/ssl $home
 
 }

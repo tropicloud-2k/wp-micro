@@ -1,18 +1,6 @@
 wpm_setup() {
 
 	# ------------------------
-	# WP-MICRO
-	# ------------------------
-	
-	chmod +x /wpm/wpm.sh && ln -s /wpm/wpm.sh /usr/bin/wpm
-	
-	mkdir -p /etc/wpm
-	mkdir -p /var/log/wpm
-	mkdir -p /var/ssl
-	
-	echo -ne `openssl rand -hex 36` > /etc/wpm/.wpm_shadow
-	
-	# ------------------------
 	# PACKGES
 	# ------------------------
 	
@@ -61,12 +49,15 @@ wpm_setup() {
 	chmod +x /usr/local/bin/wp
 		
 	# ------------------------
-	# WORDPRESS
+	# WP-MICRO
 	# ------------------------
 	
 	adduser -D -G nginx -s "/bin/sh" -h $home $user
 	
-	su -l $user -c "git clone https://github.com/roots/bedrock.git ."
-	su -l $user -c "composer install"
+	mkdir -p /etc/wpm
+	mkdir -p /var/ssl
+	mkdir -p /var/log/wpm
 	
+	chmod +x /wpm/wpm.sh && ln -s /wpm/wpm.sh /usr/bin/wpm
+
 }

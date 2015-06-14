@@ -14,11 +14,12 @@ wpm_start() {
 		
 	else
 	
-		if [[  ! -d /var/lib/mysql  ]]; then mysql_setup; fi
-		if [[  ! -f /var/wpm/.env   ]]; then wpm_env; fi
+		if [[  ! -d /var/lib/mysql  ]];	then wpm_mysql_setup; fi
+		if [[  ! -d /var/wpm/web  ]];	then wpm_wordpress; fi
+		if [[  ! -f /var/wpm/.env   ]];	then wpm_env; fi
 		
-		if [[  ! -f "/var/log/php-fpm.log"  ]]; then touch /var/log/php-fpm.log; fi
-		if [[  ! -f "/var/log/nginx.log"  ]]; then touch /var/log/nginx.log; fi
+		if [[  ! -f "/var/log/php-fpm.log"  ]];	then touch /var/log/php-fpm.log; fi
+		if [[  ! -f "/var/log/nginx.log"  ]];	then touch /var/log/nginx.log; fi
 		
 		exec /usr/bin/supervisord -n -c /wpm/etc/supervisord.conf
 	

@@ -4,7 +4,7 @@
 
 wpm_env() {
 
-	cat > $home/.env <<END
+	cat > $home/www/.env <<END
 DB_NAME=$user
 DB_USER=$user
 DB_PASSWORD=`cat /etc/.header_mustache`

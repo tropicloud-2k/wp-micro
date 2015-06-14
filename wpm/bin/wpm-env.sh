@@ -22,10 +22,9 @@ wpm_env() {
 	else cat /wpm/etc/php/php-fpm-min.conf > /etc/wpm/php-fpm.conf
 	fi
 	
-	wpm_dotenv() {
-		cat > /var/wpm/.env <<END
-DB_NAME=$wpm_db_name
-DB_USER=$wpm_db_user
+	cat > /var/wpm/.env <<END
+DB_NAME=$user
+DB_USER=$user
 DB_PASSWORD=`cat /etc/.header_mustache`
 DB_HOST=127.0.0.1
 
@@ -33,8 +32,7 @@ WP_ENV=$WP_ENV
 WP_HOME=$SCHEME://$HOSTNAME
 WP_SITEURL=$SCHEME://$HOSTNAME/wp
 END
-	}
 
-	su -l $user -c wpm_dotenv
+	chmod $user:nginx /var/wpm/.env
 	
 }

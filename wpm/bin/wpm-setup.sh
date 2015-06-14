@@ -61,6 +61,7 @@ wpm_setup() {
 	adduser -D -G nginx -s "/bin/sh" -h $home $user
 
 	mkdir -p /etc/wpm
+	mkdir -p /var/wpm
 	mkdir -p /var/ssl
 
 }

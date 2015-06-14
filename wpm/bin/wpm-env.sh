@@ -14,5 +14,7 @@ WP_ENV=production
 WP_HOME=$SCHEME://$HOSTNAME
 WP_SITEURL=$SCHEME://$HOSTNAME/wp
 END
-		
+
+chown $user:nginx $home/www/.env
+
 }

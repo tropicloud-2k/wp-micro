@@ -41,6 +41,8 @@ wpm_setup() {
 	# COMPOSER
 	# ------------------------
 	
+	wpm_header "Installing Composer"
+	
 	curl -sS https://getcomposer.org/installer | php
 	mv composer.phar /usr/local/bin/composer
 	
@@ -48,6 +50,8 @@ wpm_setup() {
 	# WP-CLI
 	# ------------------------
 	
+	wpm_header "Installing WP-CLI"
+
 	curl -sO https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar > /usr/local/bin/wp
 	chmod +x /usr/local/bin/wp
 		

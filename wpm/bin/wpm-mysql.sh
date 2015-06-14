@@ -6,7 +6,7 @@ wpm_mysql() {
 	
 	wpm_header "MariaDB Setup (mysql)"
 	
-	token=`openssl rand -hex 8`
+	token=`openssl rand -hex 6`
 	db_user="wp_$token"
 	db_name="db_$token"
 	

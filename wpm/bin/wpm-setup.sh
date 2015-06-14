@@ -4,7 +4,7 @@ wpm_setup() {
 	# PACKGES
 	# ------------------------
 	
-	wpm_header "Alpine Packges"
+	wpm_header "Requirements"
 
 	apk add --update \
 		mariadb \
@@ -43,33 +43,24 @@ wpm_setup() {
 	# COMPOSER
 	# ------------------------
 	
-	wpm_header "Composer Install"
-	
-	curl -S https://getcomposer.org/installer | php
+	curl -sS https://getcomposer.org/installer | php
 	mv composer.phar /usr/local/bin/composer
 	
 	# ------------------------
 	# WP-CLI
 	# ------------------------
 	
-	wpm_header "WP-CLI Install"
-
-	curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && chmod +x wp-cli.phar
+	curl -sO https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && chmod +x wp-cli.phar
 	mv wp-cli.phar /usr/local/bin/wp
 		
 	# ------------------------
 	# WP-MICRO
 	# ------------------------
 	
-	adduser -D -G nginx -s "/bin/sh" -h $home $user
-	
-	mkdir -p $home/etc
-	mkdir -p $home/log
-	mkdir -p $home/ssl
-	
-	cat /wpm/etc/nginx/nginx.conf > /etc/nginx/nginx.conf
-	cat /wpm/etc/php/php-fpm.conf > /etc/php/php-fpm.conf
-
 	chmod +x /wpm/wpm.sh && ln -s /wpm/wpm.sh /usr/bin/wpm
+	adduser -D -G nginx -s "/bin/sh" -h $home $user
+
+	mkdir -p /etc/wpm
+	mkdir -p /var/ssl
 
 }

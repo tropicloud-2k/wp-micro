@@ -4,11 +4,12 @@
 
 wpm_mysql() {
 	
-	wpm_header "MariaDB Setup (mysql)"
+	wpm_header "MariaDB Setup"
 	
 	token=`openssl rand -hex 6`
-	db_user="wp_$token"
-	db_name="db_$token"
+	
+	export wpm_db_user="wp_$token"
+	export wpm_db_name="db_$token"
 	
 	wpm_mysql_database() {
 		mysql -u root -e "CREATE USER '$db_user'@'%' IDENTIFIED BY '$mysql_password'"

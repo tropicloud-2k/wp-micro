@@ -33,6 +33,6 @@ WP_HOME=$SCHEME://$HOSTNAME
 WP_SITEURL=$SCHEME://$HOSTNAME/wp
 END
 
-	chmod $user:nginx /var/wpm/.env
+	chown $user:nginx /var/wpm/.env
 	
 }

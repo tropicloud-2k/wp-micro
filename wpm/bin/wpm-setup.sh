@@ -57,7 +57,6 @@ wpm_setup() {
 	# WP-MICRO
 	# ------------------------
 	
-	chmod +x /wpm/wpm.sh && ln -s /wpm/wpm.sh /usr/bin/wpm
 	adduser -D -G nginx -s "/bin/sh" -h $home $user
 
 	mkdir -p /etc/wpm
@@ -66,6 +65,10 @@ wpm_setup() {
 	mkdir -p /var/log/php
 	
 	chown -R $user:nginx /var/wpm
-	chmod 755 /var/wpm
+	chmod +x /wpm/wpm.sh
+	
+	ln -s /wpm/wpm.sh /usr/bin/wpm
+	ln -s /var/log ~/
+	ln -s /var/ssl ~/
 
 }

@@ -4,10 +4,10 @@
 
 wpm_mysql_setup() {
 	
-	echo -ne `openssl rand -hex 36` > /etc/wpm/.mustache
+	echo -ne `openssl rand -hex 36` > /etc/.header_mustache
 	sed -i 's/^\(bind-address\s.*\)/# \1/' /etc/mysql/my.cnf
 
-	mysql_password=`cat /etc/wpm/.mustache`
+	mysql_password=`cat /etc/.header_mustache`
 	mysql_install_db --user=mysql > /dev/null 2>&1
 	mysqld_safe > /dev/null 2>&1 &
 	

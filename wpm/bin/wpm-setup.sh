@@ -4,7 +4,7 @@ wpm_setup() {
 	# PACKGES
 	# ------------------------
 	
-	wpm_header "Requirements"
+	wpm_header "Image Builder"
 
 	apk add --update \
 		mariadb \

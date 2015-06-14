@@ -18,8 +18,8 @@ wpm_env() {
 	# ------------------------
 	
 	if [[  $(free -m | grep 'Mem' | awk '{print $2}') -gt 1800  ]];
-	then cat /wpm/etc/php/php-fpm.conf > /etc/wpm/php-fpm.conf
-	else cat /wpm/etc/php/php-fpm-min.conf > /etc/wpm/php-fpm.conf
+	then cat /wpm/etc/php/php-fpm.conf > /etc/php/php-fpm.conf
+	else cat /wpm/etc/php/php-fpm-min.conf > /etc/php/php-fpm.conf
 	fi
 	
 	cat > /var/wpm/.env <<END

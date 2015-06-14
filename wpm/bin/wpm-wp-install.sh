@@ -1,5 +1,5 @@
 # ------------------------
-# WORDPRESS SETUP
+# WORDPRESS INSTALL
 # ------------------------
 
 wpm_wp_url() {
@@ -66,6 +66,10 @@ wpm_wp_install() {
 	then cat /wpm/etc/php/php-fpm.conf > /etc/php/php-fpm.conf
 	else cat /wpm/etc/php/php-fpm-min.conf > /etc/php/php-fpm.conf
 	fi
+	
+	# ------------------------
+	# WORDPRESS
+	# ------------------------
 	
 	su -l $user -c "cd /var/wpm && git clone https://github.com/roots/bedrock.git ."
 	su -l $user -c "cd /var/wpm && composer install && ln -s /var/wpm/web ~/"

@@ -4,28 +4,28 @@
 
 wpm_wp_url() {
 	echo -ne "\033[0;34m  WP Domain: \033[1;37m"
-	read HOSTNAME && echo "\033[0m"
+	read HOSTNAME && echo -e "\033[0m"
 }
 
 wpm_wp_title() {
-	echo -ne "\033[1;37m  WP Title: \033[1;37m"
-	read WP_TITLE && echo "\033[0m"
+	echo -ne "\033[0;34m  WP Title: \033[1;37m"
+	read WP_TITLE && echo -e "\033[0m"
 }
 
 
 wpm_wp_user() {
 	echo -ne "\033[0;34m  WP User: \033[1;37m"
-	read WP_USER && echo "\033[0m"
+	read WP_USER && echo -e "\033[0m"
 }
 
 wpm_wp_mail() {
 	echo -ne "\033[0;34m  WP Email: \033[1;37m"
-	read WP_MAIL && echo "\033[0m"
+	read WP_MAIL && echo -e "\033[0m"
 }
 
 wpm_wp_pass() {
 	echo -ne "\033[0;34m  WP Pass: \033[1;37m"
-	read WP_PASS && echo "\033[0m"
+	read WP_PASS && echo -e "\033[0m"
 }
 
 wpm_wp_ssl() {
@@ -71,8 +71,12 @@ wpm_wp_install() {
 	# WORDPRESS
 	# ------------------------
 	
+
 	su -l $user -c "cd /var/wpm && git clone https://github.com/roots/bedrock.git ."
 	su -l $user -c "cd /var/wpm && composer install && ln -s /var/wpm/web ~/"
+
+	if [[  ! -f /var/www/web/.env   ]]; then wpm_env; fi
+
 	su -l $user -c "cd /var/wpm && wp core install \
 --url=${WP_URL} \
 --title=${WP_TITLE} \

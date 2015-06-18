@@ -4,9 +4,9 @@
 
 wpm_start() {	
 
+	if [[  ! -f /var/www/web/.env   ]]; then wpm_env; fi
 	if [[  ! -d /var/lib/mysql  ]]; then wpm_mysql_setup; fi
 	if [[  ! -d /var/www/web  ]]; then wpm_wp_install; fi
-	if [[  ! -f /var/www/web/.env   ]]; then wpm_env; fi
 
 	wpm_header "Service Startup"
 

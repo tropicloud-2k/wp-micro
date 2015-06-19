@@ -42,8 +42,6 @@ wpm_stop() {
 
 wpm_restart() {
 	
-	wpm_header "Service Restart"
-
 	if [[  -f /tmp/supervisord.pid  ]]; then
 	
 		if [[  -z $2  ]];

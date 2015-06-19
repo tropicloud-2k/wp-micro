@@ -30,20 +30,20 @@ wpm_mysql_setup() {
 	while [[  ! -e /run/mysqld/mysqld.sock  ]]; do
 		echo -n '.' && sleep 1
 	done
-	echo -ne "\033[1;32m done\n\033[0m"
+	echo -ne "done\n"
 	
 	
 	echo -ne "Creating MariaDB database..."
 	while ! wpm_mysql_database true; do
 		echo -n '.' && sleep 1
 	done
-	echo -ne "\033[1;32m done\n\033[0m"
+	echo -ne "done\n"
 	
 	echo -ne "Securing MariaDB installation..."
 	while ! wpm_mysql_secure true; do
 		echo -n '.' && sleep 1
 	done
-	echo -ne "\033[1;32m done\n\033[0m"
+	echo -ne "done\n"
 	
 	mysqladmin -u root shutdown
 

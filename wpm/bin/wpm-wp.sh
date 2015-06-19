@@ -7,12 +7,14 @@ wpm_wp_install() {
 	wp core install --allow-root --url=$WP_HOME --title=$WP_TITLE --admin_name=$WP_USER --admin_email=$WP_MAIL --admin_password=$WP_PASS
 	wp rewrite structure --allow-root '/%postname%/'
 	
-	sed -i "s/DISALLOW_FILE_MODS/DISALLOW_FILE_EDIT/g" /var/wpm/config/environments/production.php
-	echo "define('WP_CACHE', true);" >> /var/wpm/config/environments/production.php
-	
-	if [[  -n $MEMCACHE_PORT  ]];
-	then su -l $user -c "cd /var/wpm/web && wp plugin install wp-ffpc --activate"
+	if [[  -n $MEMCACHE_PORT  ]]; then
+		MEMCACHE_SERVER=`echo $MEMCACHE_PORT | cut -d/ -f3`
+		su -l $user -c "cd /var/wpm/web && wp plugin install wp-ffpc --activate"
+		echo -e "Memcache listening on $MEMCACHE_SERVER"
 	fi
+	
+	sed -i '/DISALLOW_FILE_MODS/d' /var/wpm/config/environments/production.php
+	echo "define('WP_CACHE', true);" >> /var/wpm/config/environments/production.php
 	
 	mysqladmin -u root shutdown
 }
@@ -30,10 +32,8 @@ wpm_wp_setup() {
 	else WP_HOME="http://${HOSTNAME}" && cat /wpm/etc/nginx/wp.conf | sed -e "s/example.com/$HOSTNAME/g" > /etc/wpm/wordpress.conf
 	fi
 	
-	if [[  -n $MEMCACHE_PORT  ]]; then 
-		MEMCACHE_SERVER=`echo $MEMCACHE_PORT | cut -d/ -f3`
-		sed -i "s/127.0.0.1:11211/$MEMCACHE_SERVER/g" /etc/wpm/wordpress.conf
-		echo -e "Memcached listening on $MEMCACHE_SERVER"
+	if [[  -n $MEMCACHE_PORT  ]];
+	then sed -i "s/127.0.0.1:11211/$MEMCACHE_SERVER/g" /etc/wpm/wordpress.conf
 	fi
 
 	# ------------------------

@@ -31,7 +31,6 @@ wpm_setup() {
 		php-xml \
 		php-zlib \
 		php-zip \
-		phpredis \
 		supervisor \
 		nano curl git zip
 	                 

@@ -1,4 +1,4 @@
-FROM alpine:edge
+FROM alpine:3.2
 MAINTAINER "Tropicloud" <admin@tropicloud.net>
 
 ADD wpm /wpm

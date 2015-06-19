@@ -24,7 +24,6 @@ wpm_wp_install() {
 	# WORDPRESS
 	# ------------------------
 	
-
 	su -l $user -c "cd /var/wpm && git clone $WP_REPO ."
 	su -l $user -c "cd /var/wpm && composer install && ln -s /var/wpm/web ~/"
 

@@ -7,14 +7,15 @@ wpm_env() {
 	if [[  -z $WP_ENV  ]]; then WP_ENV="production"; fi
 	
 	cat > /var/wpm/.env <<END
+WP_ENV=$WP_ENV
+
+WP_HOME=$WP_URL
+WP_SITEURL=$WP_URL/wp
+
 DB_NAME=$user
 DB_USER=$user
 DB_PASSWORD=`cat /etc/.header_mustache`
 DB_HOST=127.0.0.1
-
-WP_ENV=$WP_ENV
-WP_HOME=$WP_URL
-WP_SITEURL=$WP_URL/wp
 
 AUTH_KEY="`openssl rand 48 -base64`"
 SECURE_AUTH_KEY="`openssl rand 48 -base64`"

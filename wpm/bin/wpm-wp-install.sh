@@ -42,12 +42,12 @@ wpm_wp_install() {
 
 	wpm_header "WordPress Install"
 	
-	if [[  -z $HOSTNAME  ]]; then wpm_wp_url; fi
-	if [[  -z $WP_TITLE  ]]; then wpm_wp_title; fi
-	if [[  -z $WP_USER  ]];  then wpm_wp_user; fi
-	if [[  -z $WP_MAIL  ]];  then wpm_wp_mail; fi
-	if [[  -z $WP_PASS  ]];  then wpm_wp_pass; fi
-	if [[  -z $WP_SSL  ]];   then wpm_wp_ssl; fi
+# 	if [[  -z $HOSTNAME  ]]; then wpm_wp_url; fi
+# 	if [[  -z $WP_TITLE  ]]; then wpm_wp_title; fi
+# 	if [[  -z $WP_USER  ]];  then wpm_wp_user; fi
+# 	if [[  -z $WP_MAIL  ]];  then wpm_wp_mail; fi
+# 	if [[  -z $WP_PASS  ]];  then wpm_wp_pass; fi
+# 	if [[  -z $WP_SSL  ]];   then wpm_wp_ssl; fi
 
 	# ------------------------
 	# NGINX
@@ -106,6 +106,7 @@ END
 # --admin_email=${WP_MAIL} \
 # --admin_password=${WP_PASS}"
 # 
+
 }
 
 

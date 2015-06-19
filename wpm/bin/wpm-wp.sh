@@ -26,12 +26,9 @@ wpm_wp_setup() {
 	# NGINX
 	# ------------------------
 	
-	if [[  -n $WP_SSL  ]]; then
-		if [[  $WP_SSL == 'true'  ]]; then
-			WP_HOME="https://${HOSTNAME}" && cat /wpm/etc/nginx/wpssl.conf | sed -e "s/example.com/$HOSTNAME/g" > /etc/wpm/wordpress.conf
-		elif [[  $WP_SSL == 'false'  ]]; then
-			WP_HOME="http://${HOSTNAME}" && cat /wpm/etc/nginx/wp.conf | sed -e "s/example.com/$HOSTNAME/g" > /etc/wpm/wordpress.conf
-		fi
+	if [[  $WP_SSL == "true"  ]];
+	then WP_HOME="https://${HOSTNAME}" && cat /wpm/etc/nginx/wpssl.conf | sed -e "s/example.com/$HOSTNAME/g" > /etc/wpm/wordpress.conf;
+	else WP_HOME="http://${HOSTNAME}" && cat /wpm/etc/nginx/wp.conf | sed -e "s/example.com/$HOSTNAME/g" > /etc/wpm/wordpress.conf;
 	fi
 	
 	if [[  -n $MEMCACHE_PORT  ]];

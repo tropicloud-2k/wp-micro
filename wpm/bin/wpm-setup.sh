@@ -20,7 +20,6 @@ wpm_setup() {
 		php-gettext \
 		php-iconv \
 		php-json \
-		php-mbstring \
 		php-mcrypt \
 		php-memcache \
 		php-mysql \

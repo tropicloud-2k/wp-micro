@@ -72,16 +72,51 @@ wpm_wp_install() {
 	# ------------------------
 	
 
-	su -l $user -c "cd /var/wpm && git clone https://github.com/roots/bedrock.git ."
+	su -l $user -c "cd /var/wpm && git clone $WP_REPO ."
 	su -l $user -c "cd /var/wpm && composer install && ln -s /var/wpm/web ~/"
 
-	if [[  ! -f /var/www/web/.env   ]]; then wpm_env; fi
+	if [[  ! -f /var/www/web/.env   ]]; then
+		
+		if [[  -z $WP_ENV  ]]; then WP_ENV="production"; fi
+		cat > /var/wpm/.env <<END
+DB_NAME=$user
+DB_USER=$user
+DB_PASSWORD=`cat /etc/.header_mustache`
+DB_HOST=127.0.0.1
 
-	su -l $user -c "cd /var/wpm && wp core install \
---url=${WP_URL} \
---title=${WP_TITLE} \
---admin_name=${WP_USER} \
---admin_email=${WP_MAIL} \
---admin_password=${WP_PASS}"
+WP_ENV=$WP_ENV
+WP_HOME=$WP_URL
+WP_SITEURL=$WP_URL/wp
 
+AUTH_KEY=`openssl rand 48 -base64`
+SECURE_AUTH_KEY=`openssl rand 48 -base64`
+LOGGED_IN_KEY=`openssl rand 48 -base64`
+NONCE_KEY=`openssl rand 48 -base64`
+AUTH_SALT=`openssl rand 48 -base64`
+SECURE_AUTH_SALT=`openssl rand 48 -base64`
+LOGGED_IN_SALT=`openssl rand 48 -base64`
+NONCE_SALT=`openssl rand 48 -base64`
+END
+	fi
+
+# 	su -l $user -c "cd /var/wpm && wp core install \
+# --url=${WP_URL} \
+# --title=${WP_TITLE} \
+# --admin_name=${WP_USER} \
+# --admin_email=${WP_MAIL} \
+# --admin_password=${WP_PASS}"
+# 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

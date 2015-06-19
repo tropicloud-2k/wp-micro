@@ -4,7 +4,7 @@
 
 wpm_login() {
 
-	wpm_header "Login as $user"
+	wpm_header "Logged in as $user"
 	su -l $user;
 }
 
@@ -14,6 +14,6 @@ wpm_login() {
 
 wpm_root() {
 
-	wpm_header "Login as root"
+	wpm_header "Logged in as root"
 	/bin/sh;
 }

@@ -7,6 +7,9 @@ wpm_wp_install() {
 	wp core install --allow-root --url=$WP_HOME --title=$WP_TITLE --admin_name=$WP_USER --admin_email=$WP_MAIL --admin_password=$WP_PASS
 	wp rewrite structure --allow-root '/%postname%/'
 	
+	sed -i "s/DISALLOW_FILE_MODS/DISALLOW_FILE_EDIT/g" /var/wpm/config/environments/production.php
+	echo "define('WP_CACHE', true);" >> /var/wpm/config/environments/production.php
+	
 	mysqladmin -u root shutdown
 
 }

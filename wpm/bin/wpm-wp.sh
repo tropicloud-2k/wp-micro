@@ -9,7 +9,7 @@ wpm_wp_install() {
 	
 	if [[  -n $MEMCACHE_PORT  ]]; then
 		su -l $user -c "cd /var/wpm/web && wp plugin install wp-ffpc --activate"
-		echo -e "Memcache listening on `echo $MEMCACHE_PORT | cut -d/ -f3`"
+		echo -e "\033[1;32mMemcache:\033[0m `echo $MEMCACHE_PORT | cut -d/ -f3`"
 	fi
 	
 	sed -i '/DISALLOW_FILE_MODS/d' /var/wpm/config/environments/production.php

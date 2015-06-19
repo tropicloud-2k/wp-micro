@@ -10,8 +10,11 @@ wpm_wp_install() {
 	sed -i "s/DISALLOW_FILE_MODS/DISALLOW_FILE_EDIT/g" /var/wpm/config/environments/production.php
 	echo "define('WP_CACHE', true);" >> /var/wpm/config/environments/production.php
 	
+	if [[  -n $MEMCACHE_PORT  ]];
+	then su -l $user -c "cd /var/wpm/web && wp plugin install wp-ffpc --activate"
+	fi
+	
 	mysqladmin -u root shutdown
-
 }
 
 wpm_wp_setup() {
@@ -53,5 +56,4 @@ wpm_wp_setup() {
 	if [[  -n "$WP_TITLE" && -n "$WP_USER" && -n "$WP_MAIL" && -n "$WP_PASS"  ]]; then wpm_wp_install; fi
 	
 	wpm_ssl $HOSTNAME
-
 }

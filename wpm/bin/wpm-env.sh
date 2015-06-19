@@ -4,10 +4,10 @@
 
 wpm_env() {
 	
-	if [[  -z $WP_ENV  ]]; then WP_ENV="production"; fi
-	
 	cat > /var/wpm/.env <<END
+WP_REPO=$WP_REPO
 WP_ENV=$WP_ENV
+WP_SSL=$WP_SSL
 
 WP_HOME=$WP_HOME
 WP_SITEURL=$WP_HOME/wp
@@ -27,6 +27,11 @@ LOGGED_IN_SALT="`openssl rand 48 -base64`"
 NONCE_SALT="`openssl rand 48 -base64`"
 END
 
+	if [[  -n $MEMCACHE_PORT  ]]; then
+		su -l $user -c "cd /var/wpm/web && wp plugin install wp-ffpc --activate"
+		echo -e "\nMEMCACHE_SERVER=`echo $MEMCACHE_PORT | cut -d/ -f3`" >> /var/wpm/.env
+	fi
+	
 	chown $user:nginx /var/wpm/.env
 	
 }

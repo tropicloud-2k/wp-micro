@@ -88,14 +88,14 @@ WP_ENV=$WP_ENV
 WP_HOME=$WP_URL
 WP_SITEURL=$WP_URL/wp
 
-AUTH_KEY=`openssl rand 48 -base64`
-SECURE_AUTH_KEY=`openssl rand 48 -base64`
-LOGGED_IN_KEY=`openssl rand 48 -base64`
-NONCE_KEY=`openssl rand 48 -base64`
-AUTH_SALT=`openssl rand 48 -base64`
-SECURE_AUTH_SALT=`openssl rand 48 -base64`
-LOGGED_IN_SALT=`openssl rand 48 -base64`
-NONCE_SALT=`openssl rand 48 -base64`
+AUTH_KEY="`openssl rand 48 -base64`"
+SECURE_AUTH_KEY="`openssl rand 48 -base64`"
+LOGGED_IN_KEY="`openssl rand 48 -base64`"
+NONCE_KEY="`openssl rand 48 -base64`"
+AUTH_SALT="`openssl rand 48 -base64`"
+SECURE_AUTH_SALT="`openssl rand 48 -base64`"
+LOGGED_IN_SALT="`openssl rand 48 -base64`"
+NONCE_SALT="`openssl rand 48 -base64`"
 END
 	fi
 
@@ -108,16 +108,3 @@ END
 # 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

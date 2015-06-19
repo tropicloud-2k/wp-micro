@@ -28,7 +28,7 @@ wpm_wp_install() {
 	su -l $user -c "cd /var/wpm && composer install"
 	su -l $user -c "ln -s /var/wpm/web ~/"
 
-	if [[  -z /var/www/web/.env   ]]; then wpm_env; fi
+	if [[  ! -f /var/www/web/.env   ]]; then wpm_env; fi
 	
 	if [[  -n "$WP_URL" && -n "$WP_TITLE" && -n "$WP_USER" && -n "$WP_MAIL" && -n "$WP_PASS"  ]] ; then
 		su -l $user -c "cd /var/wpm/web && wp core install --url=${WP_URL} --title=${WP_TITLE} --admin_name=${WP_USER} --admin_email=${WP_MAIL} --admin_password=${WP_PASS}"

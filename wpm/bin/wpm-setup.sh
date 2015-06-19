@@ -12,7 +12,6 @@ wpm_setup() {
 		nginx \
 		openssl \
 		php-cli \
-		php-common \
 		php-curl \
 		php-fpm \
 		php-ftp \

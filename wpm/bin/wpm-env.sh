@@ -27,6 +27,6 @@ LOGGED_IN_SALT="`openssl rand 48 -base64`"
 NONCE_SALT="`openssl rand 48 -base64`"
 END
 
-	chown $user:nginx /var/wpm/.env
+	chown $user:nginx /var/wpm/.env && . /var/wpm/.env
 	
 }

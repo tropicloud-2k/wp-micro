@@ -28,7 +28,6 @@ NONCE_SALT="`openssl rand 48 -base64`"
 END
 
 	if [[  -n $MEMCACHE_PORT  ]]; then
-		su -l $user -c "cd /var/wpm/web && wp plugin install wp-ffpc --activate"
 		echo -e "\nMEMCACHE_SERVER=`echo $MEMCACHE_PORT | cut -d/ -f3`" >> /var/wpm/.env
 	fi
 	

@@ -1,5 +1,0 @@
-for var in $(cat /etc/environment); do 
-	key=$(echo $var | cut -d= -f1)
-	val=$(echo $var | cut -d= -f2)
-	export ${key}=${val}
-done

@@ -68,4 +68,5 @@ wpm_setup() {
 	ln -s /var/log $home
 	ln -s /var/ssl $home
 
+	cat /wpm/etc/supervisord.conf > /etc/supervisord.conf
 }

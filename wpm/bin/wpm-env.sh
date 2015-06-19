@@ -9,8 +9,8 @@ wpm_env() {
 	cat > /var/wpm/.env <<END
 WP_ENV=$WP_ENV
 
-WP_HOME=$WP_URL
-WP_SITEURL=$WP_URL/wp
+WP_HOME=$WP_HOME
+WP_SITEURL=$WP_HOME/wp
 
 DB_HOST=127.0.0.1
 DB_NAME=$user

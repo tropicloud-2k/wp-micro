@@ -16,6 +16,6 @@ wpm_start() {
 		else /usr/bin/supervisorctl start $2;
 		fi
 
-	else exec /usr/bin/supervisord -n -c /wpm/etc/supervisord.conf	
+	else exec /usr/bin/supervisord -n -c /etc/supervisord.conf	
 	fi
 }

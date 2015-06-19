@@ -12,10 +12,10 @@ WP_ENV=$WP_ENV
 WP_HOME=$WP_URL
 WP_SITEURL=$WP_URL/wp
 
+DB_HOST=127.0.0.1
 DB_NAME=$user
 DB_USER=$user
 DB_PASSWORD=`cat /etc/.header_mustache`
-DB_HOST=127.0.0.1
 
 AUTH_KEY="`openssl rand 48 -base64`"
 SECURE_AUTH_KEY="`openssl rand 48 -base64`"

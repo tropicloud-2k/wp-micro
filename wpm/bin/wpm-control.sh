@@ -42,7 +42,10 @@ wpm_stop() {
 
 wpm_restart() {
 	
-	wpm_environment
+	if [[  ! -d /var/lib/mysql  ]]; then wpm_mysql_setup; fi
+	if [[  ! -d /var/wpm/web  ]]; then wpm_wp_setup; fi
+
+	wpm_header "Restarting..."
 
 	if [[  -f /tmp/supervisord.pid  ]]; then
 	
@@ -60,8 +63,6 @@ wpm_restart() {
 # ------------------------
 
 wpm_reload() {
-
-	wpm_environment
 
 	if [[  -f /tmp/supervisord.pid  ]];
 	then /usr/bin/supervisorctl reload;

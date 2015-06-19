@@ -11,28 +11,14 @@ wpm_setup() {
 		mariadb-client \
 		nginx \
 		openssl \
-		php-cli \
-		php-common \
-		php-curl \
 		php-fpm \
-		php-ftp \
-		php-gd \
-		php-gettext \
 		php-json \
-		php-mcrypt \
-		php-memcache \
 		php-mysql \
 		php-opcache \
-		php-openssl \
 		php-phar \
 		php-pear \
 		php-pdo \
-		php-pdo_pgsql \
-		php-pdo_sqlite \
 		php-pdo_mysql \
-		php-xml \
-		php-zlib \
-		php-zip \
 		supervisor \
 		nano curl git zip
 	                 

@@ -26,6 +26,10 @@ wpm_wp_setup() {
 	then WP_HOME="https://${HOSTNAME}" && cat /wpm/etc/nginx/wpssl.conf | sed -e "s/example.com/$HOSTNAME/g" > /etc/wpm/wordpress.conf
 	else WP_HOME="http://${HOSTNAME}" && cat /wpm/etc/nginx/wp.conf | sed -e "s/example.com/$HOSTNAME/g" > /etc/wpm/wordpress.conf
 	fi
+	
+	if [[  -n $MEMCACHE_PORT  ]];
+	then sed -i "s/127.0.0.1:11211/`echo $MEMCACHE_PORT | cut -d/ -f3`/g" /etc/wpm/wordpress.conf
+	fi
 
 	# ------------------------
 	# PHP-FPM

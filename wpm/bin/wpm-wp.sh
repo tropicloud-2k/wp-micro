@@ -30,8 +30,10 @@ wpm_wp_setup() {
 	else WP_HOME="http://${HOSTNAME}" && cat /wpm/etc/nginx/wp.conf | sed -e "s/example.com/$HOSTNAME/g" > /etc/wpm/wordpress.conf
 	fi
 	
-	if [[  -n $MEMCACHE_PORT  ]];
-	then sed -i "s/127.0.0.1:11211/`echo $MEMCACHE_PORT | cut -d/ -f3`/g" /etc/wpm/wordpress.conf
+	if [[  -n $MEMCACHE_PORT  ]]; then 
+		MEMCACHE_SERVER=`echo $MEMCACHE_PORT | cut -d/ -f3`
+		sed -i "s/127.0.0.1:11211/$MEMCACHE_SERVER/g" /etc/wpm/wordpress.conf
+		echo -e "Memcached listening on $MEMCACHE_SERVER"
 	fi
 
 	# ------------------------

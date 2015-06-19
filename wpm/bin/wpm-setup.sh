@@ -7,6 +7,7 @@ wpm_setup() {
 	wpm_header "Docker Image"
 
 	apk add --update \
+		libmemcached \
 		mariadb \
 		mariadb-client \
 		nginx \
@@ -31,11 +32,15 @@ wpm_setup() {
 		php-xml \
 		php-zlib \
 		php-zip \
+		perl \
 		supervisor \
 		nano curl git zip
 	                 
 	rm -rf /var/cache/apk/*
 	rm -rf /var/lib/apt/lists/*
+	
+	curl -sO https://raw.githubusercontent.com/memcached/memcached/master/scripts/memcached-tool > /usr/bin/memcached-tool
+	chmod +x /usr/bin/memcached-tool
 	
 	# ------------------------
 	# COMPOSER

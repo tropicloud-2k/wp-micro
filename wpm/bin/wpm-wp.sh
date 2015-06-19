@@ -8,9 +8,8 @@ wpm_wp_install() {
 	wp rewrite structure --allow-root '/%postname%/'
 	
 	if [[  -n $MEMCACHE_PORT  ]]; then
-		MEMCACHE_SERVER=`echo $MEMCACHE_PORT | cut -d/ -f3`
 		su -l $user -c "cd /var/wpm/web && wp plugin install wp-ffpc --activate"
-		echo -e "Memcache listening on $MEMCACHE_SERVER"
+		echo -e "Memcache listening on `echo $MEMCACHE_PORT | cut -d/ -f3`"
 	fi
 	
 	sed -i '/DISALLOW_FILE_MODS/d' /var/wpm/config/environments/production.php
@@ -33,7 +32,7 @@ wpm_wp_setup() {
 	fi
 	
 	if [[  -n $MEMCACHE_PORT  ]];
-	then sed -i "s/127.0.0.1:11211/$MEMCACHE_SERVER/g" /etc/wpm/wordpress.conf
+	then sed -i "s/127.0.0.1:11211/`echo $MEMCACHE_PORT | cut -d/ -f3`/g" /etc/wpm/wordpress.conf
 	fi
 
 	# ------------------------

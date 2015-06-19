@@ -4,7 +4,7 @@ wpm_setup() {
 	# PACKGES
 	# ------------------------
 	
-	wpm_header "Image Build"
+	wpm_header "Docker Image"
 
 	apk add --update \
 		mariadb \

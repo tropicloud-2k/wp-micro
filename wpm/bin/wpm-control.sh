@@ -42,10 +42,7 @@ wpm_stop() {
 
 wpm_restart() {
 	
-	if [[  ! -d /var/lib/mysql  ]]; then wpm_mysql_setup; fi
-	if [[  ! -d /var/wpm/web  ]]; then wpm_wp_setup; fi
-
-	wpm_header "Restarting..."
+	wpm_header "Service Restart"
 
 	if [[  -f /tmp/supervisord.pid  ]]; then
 	

@@ -39,15 +39,19 @@ wpm_setup() {
 	rm -rf /var/cache/apk/*
 	rm -rf /var/lib/apt/lists/*
 	
-	curl -sO https://raw.githubusercontent.com/memcached/memcached/master/scripts/memcached-tool > /usr/bin/memcached-tool
-	chmod +x /usr/bin/memcached-tool
-	
 	# ------------------------
 	# COMPOSER
 	# ------------------------
 	
 	curl -sS https://getcomposer.org/installer | php
 	mv composer.phar /usr/local/bin/composer
+	
+	# ------------------------
+	# MEMCACHED TOOL
+	# ------------------------
+	
+	curl -sL https://raw.githubusercontent.com/memcached/memcached/master/scripts/memcached-tool > /usr/bin/memcached-tool
+	chmod +x /usr/bin/memcached-tool
 	
 	# ------------------------
 	# WP-CLI

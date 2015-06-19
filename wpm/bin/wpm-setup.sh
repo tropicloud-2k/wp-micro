@@ -15,6 +15,7 @@ wpm_setup() {
 		php-json \
 		php-mysql \
 		php-opcache \
+		php-openssl \
 		php-phar \
 		php-pear \
 		php-pdo \

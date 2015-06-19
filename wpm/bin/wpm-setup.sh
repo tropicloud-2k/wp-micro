@@ -40,6 +40,13 @@ wpm_setup() {
 	rm -rf /var/lib/apt/lists/*
 	
 	# ------------------------
+	# PREDIS
+	# ------------------------
+	
+	pear channel-discover pear.nrk.io
+	pear install nrk/Predis
+	
+	# ------------------------
 	# COMPOSER
 	# ------------------------
 	
@@ -50,32 +57,16 @@ wpm_setup() {
 	# MEMCACHED TOOL
 	# ------------------------
 	
-	get_memcached_tool() {
-		curl -sL https://raw.githubusercontent.com/memcached/memcached/master/scripts/memcached-tool > /usr/bin/memcached-tool
-		chmod +x /usr/bin/memcached-tool
-	}
-	
-	echo -ne "Installing Memcached-Tool..."
-	while ! get_memcached_tool true; do
-		echo -n '.' && sleep 1
-	done
-	echo -ne "done\n"
-		
+	curl -sL https://raw.githubusercontent.com/memcached/memcached/master/scripts/memcached-tool > /usr/bin/memcached-tool
+	chmod +x /usr/bin/memcached-tool
+
 	# ------------------------
 	# WP-CLI
 	# ------------------------
 	
-	get_wp_cli() {
-		curl -sO https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && chmod +x wp-cli.phar
-		mv wp-cli.phar /usr/local/bin/wp
-	}
-	
-	echo -ne "Installing WP-CLI..."
-	while ! get_wp_cli true; do
-		echo -n '.' && sleep 1
-	done
-	echo -ne "done\n"
-	
+	curl -sO https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && chmod +x wp-cli.phar
+	mv wp-cli.phar /usr/local/bin/wp
+
 	# ------------------------
 	# WP-MICRO
 	# ------------------------

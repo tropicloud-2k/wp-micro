@@ -6,7 +6,7 @@ RUN /wpm/wpm.sh setup
 
 ENV WP_REPO="https://github.com/roots/bedrock.git \
 	WP_ENV="production" \
-	WP_SSL="no"
+	WP_SSL="true"
 
 EXPOSE 80 443
 ENTRYPOINT ["wpm"]

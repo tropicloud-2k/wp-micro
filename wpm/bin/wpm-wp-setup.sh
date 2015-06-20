@@ -28,19 +28,9 @@ wpm_wp_setup() {
 	su -l $user -c "cd $wpm && composer install"
 	su -l $user -c "ln -s $web ~/"
 	
-	# start mysql server
-	mysqld_safe > /dev/null 2>&1 &
-	while [[  ! -e /run/mysqld/mysqld.sock  ]]; do sleep 1; done
-		
-		echo -ne "Configuring WordPress..."
-		while ! `wpm_wp_install > /var/log/wpm_wp_install.log 2>&1` true; do
-			echo -n '.' && sleep 1
-		done
-		echo -ne ", done\n"
+	echo -e "Configuring WordPress"
 	
-	# shutdown mysql server
-	mysqladmin -u root shutdown
-	
+	wpm_wp_install > /var/log/wpm_wp_install.log 2>&1		
 	wpm_ssl $HOSTNAME
 
 }

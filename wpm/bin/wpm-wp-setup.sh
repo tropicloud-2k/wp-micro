@@ -1,23 +1,3 @@
-wpm_wp_install() {
-
-	mysqld_safe > /dev/null 2>&1 &
-	while [[  ! -e /run/mysqld/mysqld.sock  ]]; do sleep 1; done
-	
-	cd /var/wpm/web
-	wp core install --allow-root --url=$WP_HOME --title=$WP_TITLE --admin_name=$WP_USER --admin_email=$WP_MAIL --admin_password=$WP_PASS
-	wp rewrite structure --allow-root '/%postname%/'
-	
-	if [[  -n $MEMCACHE_PORT  ]]; then
-		su -l $user -c "cd /var/wpm/web && wp plugin install wp-ffpc --activate"
-		echo -e "\033[1;32mMemcache:\033[0m `echo $MEMCACHE_PORT | cut -d/ -f3`"
-	fi
-	
-	sed -i '/DISALLOW_FILE_MODS/d' /var/wpm/config/environments/production.php
-	echo "define('WP_CACHE', true);" >> /var/wpm/config/environments/production.php
-	
-	mysqladmin -u root shutdown
-}
-
 wpm_wp_setup() {
 
 	wpm_header "WordPress Setup"
@@ -60,18 +40,18 @@ wpm_wp_setup() {
 	su -l $user -c "cd /var/wpm && composer install"
 	su -l $user -c "ln -s /var/wpm/web ~/"
 	
+	wpm_ssl $HOSTNAME
+
 	if [[  ! -f /var/wpm/.env   ]]; then wpm_env; fi	
 
 	if [[  -n "$WP_TITLE" && -n "$WP_USER" && -n "$WP_MAIL" && -n "$WP_PASS"  ]]; then wpm_wp_install; fi
 	
-	wpm_ssl $HOSTNAME
-	
-	wpm_header "Backing Services"
-	
-	echo -e "
-\033[1;37m  Memcached:\033[0m $WP_MEMCACHE
-\033[1;37m  Redis:\033[0m $WP_REDIS
-\033[0;30m
------------------------------------------------------
-\033[0m"
+	if [[  -n $MEMCACHE_PORT || -n $REDIS_PORT  ]]; then
+		
+		wpm_header "Backing Services"
+		
+		if [[  -n $MEMCACHE_PORT  ]]; then echo -e "\033[1;37m  Memcached:\033[0m $WP_MEMCACHE\033[0m"; fi
+		if [[  -n $REDIS_PORT  ]]; then echo -e "\033[1;37m  Redis:\033[0m $WP_REDIS\033[0m"; fi
+	fi
+
 }

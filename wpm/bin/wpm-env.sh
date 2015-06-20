@@ -36,7 +36,7 @@ LOGGED_IN_SALT="`openssl rand 48 -base64`"
 NONCE_SALT="`openssl rand 48 -base64`"
 END
 
-	# fix: The mysql extension is deprecated and will be removed in the future: use mysqli or PDO
+	# hide "The mysql extension is deprecated and will be removed in the future: use mysqli or PDO"
 	sed -i "s/define('WP_DEBUG'.*/define('WP_DEBUG', false);/g" $wpm/config/environments/development.php
 
 	cat ~/.profile > ${home}/.profile

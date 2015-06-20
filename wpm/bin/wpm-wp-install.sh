@@ -5,7 +5,7 @@
 wpm_wp_install() {
 
 # start mysql server
-mysqld_safe > /dev/null 2>&1 &
+mysqld_safe > /dev/null 2>&1
 while [[  ! -e /run/mysqld/mysqld.sock  ]]; do sleep 1; done
 	
 	cd $web && wpm_env
@@ -15,7 +15,7 @@ while [[  ! -e /run/mysqld/mysqld.sock  ]]; do sleep 1; done
 	wp rewrite structure --allow-root '/%postname%/'
 	fi
 	
-	wpm_wp_plugins > /dev/null 2>&1
+	wpm_wp_plugins
 
 # shutdown mysql server
 mysqladmin -u root shutdown

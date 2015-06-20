@@ -1,13 +1,13 @@
 # ------------------------
-# WPM START
+# WPM RUN
 # ------------------------
 
-wpm_start() {	
+wpm_run() {	
 
 	if [[  ! -d /var/lib/mysql  ]]; then wpm_mysql_setup; fi
 	if [[  ! -d /var/wpm/web  ]]; then wpm_wp_setup; fi
 
-	wpm_header "Startup" && wpm_listen
+	wpm_header "Run forest! Run fast!" && wpm_listen
 	
 	if [[  -f /tmp/supervisord.pid  ]]; then
 	
@@ -117,6 +117,17 @@ wpm_log() {
 	if [[  -f /tmp/supervisord.pid  ]];
 	then /usr/bin/supervisorctl maintail;
 	fi
+	echo ""
+}
+
+# ------------------------
+# WPM PS
+# ------------------------
+
+wpm_ps() {
+
+	wpm_header "Container Processes"
+	ps auxf
 	echo ""
 }
 

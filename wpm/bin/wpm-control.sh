@@ -17,9 +17,8 @@ wpm_start() {
 		else /usr/bin/supervisorctl start $2;
 		fi
 
-	else exec /usr/bin/supervisord -n -c /etc/supervisord.conf	
+	else exec /usr/bin/supervisord -n -c /etc/supervisord.conf && echo -e "\033[0m"
 	fi
-	echo ""
 }
 
 # ------------------------

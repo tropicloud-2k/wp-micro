@@ -5,7 +5,7 @@ ADD wpm /wpm
 RUN /wpm/wpm.sh setup
 
 ENV WP_REPO=https://github.com/roots/bedrock.git \
-	WP_ENV=production \
+	WP_ENV=development \
 	WP_SSL=false
 
 EXPOSE 80 443

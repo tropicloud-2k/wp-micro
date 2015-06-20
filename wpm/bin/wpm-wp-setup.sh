@@ -29,9 +29,12 @@ wpm_wp_setup() {
 	su -l $user -c "ln -s $web ~/"
 	
 	wpm_wp_install > /var/log/wp_core_install.log 2>&1
+
 	if [[  $? == 0  ]]; then echo -e "WordPress installed successfully"; fi
+
  	sed -i "/'WP_DEBUG'/d" /var/wpm/config/environments/development.php
 	echo "define('WP_DEBUG', false);" >> /var/wpm/config/environments/development.php
+
 	wpm_ssl $HOSTNAME
 
 }

@@ -37,7 +37,7 @@ NONCE_SALT="`openssl rand 48 -base64`"
 END
 
 	# fix: The mysql extension is deprecated and will be removed in the future: use mysqli or PDO
-	sed -i "s/define('WP_DEBUG'.*/define('WP_DEBUG', false);/g" /var/wpm/config/environments/development.php
+	sed -i "s/define('WP_DEBUG'.*/define('WP_DEBUG', false);/g" $wpm/config/environments/development.php
 
 	cat ~/.profile > ${home}/.profile
 	chown $user:nginx $wpm/.env

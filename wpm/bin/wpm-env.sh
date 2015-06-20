@@ -14,12 +14,12 @@ wpm_env() {
 	export DB_NAME=$user
 	export DB_USER=$user
 	
-	if [[  ! -z $MEMCACHE_PORT  ]];
-	then export WPM_MEMCACHE=`echo $MEMCACHE_PORT | cut -d/ -f3`
+	if [[  ! -z $MEMCACHED_PORT  ]];
+	then export MEMCACHED_WPM=`echo $MEMCACHED_PORT | cut -d/ -f3`
 	fi		
 
 	if [[  ! -z $REDIS_PORT  ]]; 
-	then export WPM_REDIS=`echo $REDIS_PORT | cut -d/ -f3`
+	then export REDIS_WPM=`echo $REDIS_PORT | cut -d/ -f3`
 	fi
 	
 	echo "" > /etc/.env && env | grep = >> /etc/.env
@@ -36,5 +36,9 @@ LOGGED_IN_SALT="`openssl rand 48 -base64`"
 NONCE_SALT="`openssl rand 48 -base64`"
 END
 
+	# fix: The mysql extension is deprecated and will be removed in the future: use mysqli or PDO
+	sed -i "s/define('WP_DEBUG'.*/define('WP_DEBUG', false);/g" /var/wpm/config/environments/development.php
+
+	cat ~/.profile > ${home}/.profile
 	chown $user:nginx $wpm/.env
 }

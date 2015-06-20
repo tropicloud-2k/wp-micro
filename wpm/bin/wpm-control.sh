@@ -1,14 +1,20 @@
+wpm_hostname() {
+case "$HOSTNAME" in
+    *.*) wpm_header "Hostname" "\033[1;32m  •\033[0m Hostname: \033[0;37m$HOSTNAME\n\n  Using hostname as domain.\n  Done.";;
+    *) wpm_header "Hostname" "\033[1;31m  •\033[0m Hostname: \033[1;31mnot set!\n\n  docker run -d -h example.com tropicloud/wp-micro\n  Aborting..." && exit 1 ;;
+esac
+}
+
+echo -e "\033[1;33m • \033[0m"
+
 # ------------------------
 # WPM START
 # ------------------------
 
 wpm_start() {
 
-	case "$HOSTNAME" in
-	    *.*) echo "HOSTNAME exists. Good!";;
-	    *) echo "HOSTNAME is not set! Aborting..." && exit 1 ;;
-	esac
-
+	wpm_hostname
+	
 	if [[  ! -d /var/lib/mysql  ]]; then wpm_mysql_setup; fi
 	if [[  ! -d /var/wpm/web  ]]; then wpm_wp_setup; fi
 

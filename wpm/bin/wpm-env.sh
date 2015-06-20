@@ -26,14 +26,11 @@ NONCE_SALT="`openssl rand 48 -base64`"
 END
 
 	cat >> /root/.profile <<"EOF"
-for var in $(cat /etc/.env); do 
-	key=$(echo $var | cut -d= -f1)
-	val=$(echo $var | cut -d= -f2)
-	export ${key}=${val}
+for var in `cat /etc/.env`; do
+	export $var;
 done
 EOF
 
 	chown $user:nginx /var/wpm/.env
-	chown $user:nginx $home/.profile
 
 }

@@ -28,8 +28,11 @@ wpm_wp_setup() {
 	su -l $user -c "cd $wpm && composer install"
 	su -l $user -c "ln -s $web ~/"
 	
-	echo -ne "Configuring WordPress \n"
-	while ! wpm_wp_install > /dev/null 2>&1 true; do sleep 1; done
+	echo -ne "Configuring environment..."
+	while ! wpm_wp_install > /dev/null 2>&1 true; do
+		echo -n '.' && sleep 1
+	done
+	echo -ne ", done\n"
 	
 	wpm_ssl $HOSTNAME
 	wpm_back_serv

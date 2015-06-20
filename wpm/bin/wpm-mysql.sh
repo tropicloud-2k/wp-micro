@@ -6,6 +6,8 @@ wpm_mysql_setup() {
 	
 	wpm_header "MariaDB Setup"
 	
+	export DB_PASSWORD=`openssl rand -hex 36`
+
 	sed -i 's/^\(bind-address\s.*\)/# \1/' /etc/mysql/my.cnf
 	
 	wpm_mysql_create() {
@@ -20,6 +22,9 @@ wpm_mysql_setup() {
 		mysql -u root -e "DROP DATABASE test;"
 		mysql -u root -e "DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%'"
 	}
+	
+	mysql_install_db --user=mysql > /dev/null 2>&1
+	mysqld_safe > /dev/null 2>&1 &
 	
 	echo -ne "Starting MySQL Server..."
 	while [[  ! -e /run/mysqld/mysqld.sock  ]]; do
@@ -44,5 +49,7 @@ wpm_mysql_setup() {
 		echo -n '.' && sleep 1
 	done
 	echo -ne ", done\n"
+	
+	mysqladmin -u root shutdown
 
 }

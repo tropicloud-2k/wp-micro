@@ -28,14 +28,14 @@ wpm_wp_setup() {
 	su -l $user -c "cd $wpm && composer install"
 	su -l $user -c "ln -s $web ~/"
 	
-	echo -e "Configuring environment"
-	
 	# start mysql server
 	mysqld_safe > /dev/null 2>&1 &
 	while [[  ! -e /run/mysqld/mysqld.sock  ]]; do sleep 1; done
 		
-		wpm_wp_install > /dev/null 2>&1
-		wpm_wp_plugins
+		echo -ne "Configuring environment..."
+		while ! wpm_wp_install > /dev/null 2>&1 true; do
+			echo -n '.' && sleep 1
+		done && echo -ne ", done\n"
 	
 	# shutdown mysql server
 	mysqladmin -u root shutdown

@@ -21,7 +21,6 @@ wpm_mysql_setup() {
 		mysql -u root -e "DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');"
 		mysql -u root -e "DROP DATABASE test;"
 		mysql -u root -e "DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%'"
-		mysql -u root -e "FLUSH PRIVILEGES"
 	}
 	
 	mysql_install_db --user=mysql > /dev/null 2>&1
@@ -42,6 +41,12 @@ wpm_mysql_setup() {
 	
 	echo -ne "Securing MariaDB installation..."
 	while ! wpm_mysql_secure true; do
+		echo -n '.' && sleep 1
+	done
+	echo -ne "done\n"
+	
+	echo -ne "Flusing privileges..."
+	while ! `mysql -u root -e "FLUSH PRIVILEGES"` true; do
 		echo -n '.' && sleep 1
 	done
 	echo -ne "done\n"

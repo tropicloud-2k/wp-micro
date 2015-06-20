@@ -21,7 +21,6 @@ wpm_wp_install() {
 	
 	fi
 	
-	if [[  $? == 0  ]];
-	then echo -e "WordPress installed successfully"
-	fi
+	echo -e "WordPress installed successfully"
+
 }

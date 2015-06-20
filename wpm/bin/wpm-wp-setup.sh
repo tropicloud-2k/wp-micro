@@ -1,6 +1,6 @@
 wpm_wp_setup() {
 
-	wpm_header "WordPress Install"
+	wpm_header "WordPress Setup"
 	
 	# ------------------------
 	# NGINX

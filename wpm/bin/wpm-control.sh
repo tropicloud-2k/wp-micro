@@ -2,7 +2,12 @@
 # WPM START
 # ------------------------
 
-wpm_start() {	
+wpm_start() {
+
+	case "$HOSTNAME" in
+	    *.*) echo "HOSTNAME exists. Good!";;
+	    *) echo "HOSTNAME is not set! Aborting..." && exit 1 ;;
+	esac
 
 	if [[  ! -d /var/lib/mysql  ]]; then wpm_mysql_setup; fi
 	if [[  ! -d /var/wpm/web  ]]; then wpm_wp_setup; fi

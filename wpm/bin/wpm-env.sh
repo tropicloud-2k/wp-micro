@@ -4,12 +4,17 @@
 
 wpm_env() {
 	
+	if [[  $WP_SSL == 'true'  ]];
+	then export WP_HOME="https://${HOSTNAME}"
+	     export WP_SITEURL="https://${HOSTNAME}/wp"
+	else export WP_HOME="http://${HOSTNAME}"
+	     export WP_SITEURL="http://${HOSTNAME}/wp"
+	fi
+
 	export DB_HOST="127.0.0.1"
 	export DB_NAME="$user"
 	export DB_USER="$user"
 	export DB_PASSWORD=`cat /etc/.header_mustache`
-
-	echo "" > /etc/.env && env | grep = >> /etc/.env
 
 	for var in `cat /etc/.env`; do 
 		key=`echo $var | cut -d= -f1`

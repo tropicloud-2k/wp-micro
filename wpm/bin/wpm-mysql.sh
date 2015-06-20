@@ -4,7 +4,7 @@
 
 wpm_mysql_setup() {
 	
-	wpm_header "MariaDB Setup"
+	wpm_header "MySQL Setup"
 	
 	export DB_PASSWORD=`openssl rand -hex 36`
 

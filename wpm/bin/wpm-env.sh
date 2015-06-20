@@ -13,7 +13,6 @@ wpm_env() {
 	export DB_HOST=127.0.0.1
 	export DB_NAME=$user
 	export DB_USER=$user
-	export DB_PASSWORD=`openssl rand -hex 36`
 	
 	if [[  ! -z $MEMCACHE_PORT  ]];
 	then export WPM_MEMCACHE=`echo $MEMCACHE_PORT | cut -d/ -f3`

@@ -32,7 +32,7 @@ wpm_wp_setup() {
 	mysqld_safe > /dev/null 2>&1 &
 	while [[  ! -e /run/mysqld/mysqld.sock  ]]; do sleep 1; done
 		
-		echo -ne "Configuring environment..."
+		echo -ne "Configuring WordPress..."
 		while ! `wpm_wp_install > /var/log/wpm_wp_install.log` true; do
 			echo -n '.' && sleep 1
 		done

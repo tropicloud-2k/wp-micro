@@ -8,7 +8,7 @@ wpm_header() {
 -----------------------------------------------------
 \033[1;33m  (wpm+) \033[0m|\033[1;37m $1 \033[0;30m
 -----------------------------------------------------
-\033[0m" && if [[  ! -z $2  ]]; then echo -e "$2"; fi
+\033[0m" && if [[  -n $2  ]]; then echo -e "$2"; fi
 
 }
 
@@ -28,8 +28,8 @@ wpm_listen() {
 
 wpm_hostname() {
 case "$HOSTNAME" in
-	*.*) wpm_header "Hostname" "\033[1;32m  •\033[0m Hostname: \033[0;37m$HOSTNAME\n\n  Using hostname as domain.\n  Done.";;
-	*) wpm_header "Hostname" "\033[1;31m  •\033[0m Hostname: \033[1;31mnot set!\n\n  docker run -d -h example.com tropicloud/wp-micro\n  Aborting..." && exit 1 ;;
+	*.*) wpm_header "Hostname" "Using hostname as domain.\n  Done.";;
+	*) wpm_header "Hostname" "Use -h flag to set hostname (domain)\n\n  Aborting..." && exit 1;;
 esac
 }
 

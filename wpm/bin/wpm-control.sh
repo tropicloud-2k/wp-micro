@@ -8,11 +8,7 @@ wpm_start() {
 	if [[  ! -d /var/wpm/web  ]]; then wpm_wp_setup; fi
 
 	wpm_header "Startup"
-
-	if [[  ! -z $MEMCACHE_PORT || ! -z $REDIS_PORT  ]]; then
-		if [[  ! -z $REDIS_PORT  ]]; then echo -e "  Redis\033[0;37m @\033[0m $WPM_REDIS"; fi
-		if [[  ! -z $MEMCACHE_PORT  ]]; then echo -e "  Memcached\033[0;37m @\033[0m $WPM_MEMCACHE \n"; fi
-	fi
+	wpm_listen
 	
 	if [[  -f /tmp/supervisord.pid  ]]; then
 	

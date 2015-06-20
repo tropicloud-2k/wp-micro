@@ -9,9 +9,11 @@ wpm_env() {
 	export DB_USER="$user"
 	export DB_PASSWORD=`cat /etc/.header_mustache`
 
-	echo "" > /etc/environment && env | grep = >> /etc/environment
+	echo "" > /etc/.env && env | grep = >> /etc/.env
 
-	for var in `cat /etc/environment`; do 
+	for var in `cat /etc/.env`; do 
+		key=`echo $var | cut -d= -f1`
+		val=`echo $var | cut -d= -f2`
 		echo -e "$key=$val" >> /var/wpm/.env
 	done
 	
@@ -29,5 +31,5 @@ NONCE_SALT="`openssl rand 48 -base64`"
 END
 	
 	chown $user:nginx /var/wpm/.env
-	
+
 }

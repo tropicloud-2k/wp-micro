@@ -52,8 +52,8 @@ wpm_wp_setup() {
 	su -l $user -c "cd /var/wpm && composer install"
 	su -l $user -c "ln -s /var/wpm/web ~/"
 
-	if [[  ! -f /var/wpm/.env   ]]; then wpm_env && . /var/wpm/.env; fi	
-
+	if [[  ! -f /var/wpm/.env   ]]; then wpm_env; fi	
+	
 	if [[  -n "$WP_TITLE" && -n "$WP_USER" && -n "$WP_MAIL" && -n "$WP_PASS"  ]]; then wpm_wp_install; fi
 	
 	wpm_ssl $HOSTNAME

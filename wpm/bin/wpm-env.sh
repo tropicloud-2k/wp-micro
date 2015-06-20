@@ -6,9 +6,7 @@ wpm_env() {
 	
 	if [[  $WP_SSL == 'true'  ]];
 	then export WP_HOME="https://${HOSTNAME}"
-	     export WP_SITEURL="https://${HOSTNAME}/wp"
 	else export WP_HOME="http://${HOSTNAME}"
-	     export WP_SITEURL="http://${HOSTNAME}/wp"
 	fi
 	
 	if [[  -n $MEMCACHE_PORT  ]]; then export WP_MEMCACHE=`echo $MEMCACHE_PORT | cut -d/ -f3`; fi
@@ -18,6 +16,9 @@ wpm_env() {
 	export DB_NAME="$user"
 	export DB_USER="$user"
 	export DB_PASSWORD=`openssl rand -hex 36`
+	export WP_SITEURL="${WP_HOME}/wp"
+	
+	echo "" > /etc/.env && env | grep = >> /etc/.env
 
 	for var in `cat /etc/.env`; do 
 		key=`echo $var | cut -d= -f1`

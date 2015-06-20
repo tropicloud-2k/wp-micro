@@ -7,10 +7,9 @@ wpm_mysql_setup() {
 	wpm_header "MariaDB Setup"
 	
 	sed -i 's/^\(bind-address\s.*\)/# \1/' /etc/mysql/my.cnf
-	mysql_password=`openssl rand -hex 36` && echo -ne $mysql_password > /etc/.header_mustache
 	
 	wpm_mysql_database() {
-		mysql -u root -e "CREATE USER '$user'@'%' IDENTIFIED BY '$mysql_password'"
+		mysql -u root -e "CREATE USER '$user'@'%' IDENTIFIED BY '$DB_PASSWORD'"
 		mysql -u root -e "CREATE DATABASE $user"
 		mysql -u root -e "GRANT ALL PRIVILEGES ON *.* TO '$user'@'%' WITH GRANT OPTION"
 	}

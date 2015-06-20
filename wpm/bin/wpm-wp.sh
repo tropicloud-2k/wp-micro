@@ -27,13 +27,12 @@ wpm_wp_setup() {
 	# ------------------------
 	
 	if [[  $WP_SSL == 'true'  ]];
-	then WP_HOME="https://${HOSTNAME}" && cat /wpm/etc/nginx/wpssl.conf | sed -e "s/example.com/$HOSTNAME/g" > /etc/wpm/wordpress.conf;
-	else WP_HOME="http://${HOSTNAME}" && cat /wpm/etc/nginx/wp.conf | sed -e "s/example.com/$HOSTNAME/g" > /etc/wpm/wordpress.conf;
+	then cat /wpm/etc/nginx/wpssl.conf | sed -e "s/example.com/$HOSTNAME/g" > /etc/wpm/wordpress.conf;
+	else cat /wpm/etc/nginx/wp.conf | sed -e "s/example.com/$HOSTNAME/g" > /etc/wpm/wordpress.conf;
 	fi
 	
-	if [[  -n $MEMCACHE_PORT  ]];
-	then sed -i "s/127.0.0.1:11211/`echo $MEMCACHE_PORT | cut -d/ -f3`/g" /etc/wpm/wordpress.conf
-	fi
+	if [[  -n $MEMCACHE_PORT  ]]; then sed -i "s/127.0.0.1:11211/$WP_MEMCACHE/g" /etc/wpm/nginx.conf; fi
+	if [[  -n $REDIS_PORT  ]]; then sed -i "s/127.0.0.1:11211/$WP_REDIS/g" /etc/wpm/nginx.conf; fi
 
 	# ------------------------
 	# PHP-FPM
@@ -51,8 +50,6 @@ wpm_wp_setup() {
 	su -l $user -c "cd /var/wpm && git clone $WP_REPO ."
 	su -l $user -c "cd /var/wpm && composer install"
 	su -l $user -c "ln -s /var/wpm/web ~/"
-
-	if [[  ! -f /var/wpm/.env   ]]; then wpm_env; fi	
 	
 	if [[  -n "$WP_TITLE" && -n "$WP_USER" && -n "$WP_MAIL" && -n "$WP_PASS"  ]]; then wpm_wp_install; fi
 	

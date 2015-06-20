@@ -10,11 +10,14 @@ wpm_env() {
 	else export WP_HOME="http://${HOSTNAME}"
 	     export WP_SITEURL="http://${HOSTNAME}/wp"
 	fi
+	
+	if [[  -n $MEMCACHE_PORT  ]]; then export WP_MEMCACHE=`echo $MEMCACHE_PORT | cut -d/ -f3`; fi
+	if [[  -n $REDIS_PORT  ]]; then export WP_REDIS=`echo $REDIS_PORT | cut -d/ -f3`; fi	
 
 	export DB_HOST="127.0.0.1"
 	export DB_NAME="$user"
 	export DB_USER="$user"
-	export DB_PASSWORD=`cat /etc/.header_mustache`
+	export DB_PASSWORD=`openssl rand -hex 36`
 
 	for var in `cat /etc/.env`; do 
 		key=`echo $var | cut -d= -f1`

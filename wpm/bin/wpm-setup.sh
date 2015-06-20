@@ -27,6 +27,7 @@ wpm_setup() {
 		php-phar \
 		php-pear \
 		php-pdo \
+		php-pdo_mysql \
 		php-xml \
 		php-zlib \
 		php-zip \

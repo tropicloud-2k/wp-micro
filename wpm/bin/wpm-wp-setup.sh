@@ -14,12 +14,12 @@ wpm_wp_setup() {
 	    cat /wpm/etc/nginx/wp.conf | sed -e "s/example.com/$HOSTNAME/g" > /etc/wpm/wordpress.conf
 	fi
 	
-	if [[  ! -z $MEMCACHE_PORT  ]]; then 
+	if [[  $WP_ENV == 'production' && -n $MEMCACHE_PORT  ]]; then 
 		export WP_MEMCACHE=`echo $MEMCACHE_PORT | cut -d/ -f3`
 		sed -i "s/127.0.0.1:11211/$WP_MEMCACHE/g" /etc/wpm/nginx.conf
 	fi
 	
-	if [[  ! -z $REDIS_PORT  ]]; then 
+	if [[  $WP_ENV == 'production' && -n $REDIS_PORT  ]]; then 
 		export WP_REDIS=`echo $REDIS_PORT | cut -d/ -f3`
 		sed -i "s/127.0.0.1:11211/$WP_REDIS/g" /etc/wpm/nginx.conf
 	fi	
@@ -41,7 +41,7 @@ wpm_wp_setup() {
 	su -l $user -c "cd /var/wpm && composer install"
 	su -l $user -c "ln -s /var/wpm/web ~/"
 	
-	if [[  ! -f /var/wpm/.env   ]]; then wpm_env; fi	
+	if [[  ! -f /var/wpm/.env   ]]; then wpm_env; fi
 
 	if [[  -n "$WP_TITLE" && -n "$WP_USER" && -n "$WP_MAIL" && -n "$WP_PASS"  ]]; then wpm_wp_install; fi
 	

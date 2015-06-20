@@ -26,13 +26,11 @@ LOGGED_IN_SALT="`openssl rand 48 -base64`"
 NONCE_SALT="`openssl rand 48 -base64`"
 END
 
-	cat > ~/.profile <<END
-for var in $(cat /etc/.env); do 
-	key=$(echo $var | cut -d= -f1)
-	val=$(echo $var | cut -d= -f2)
-	export ${key}=${val}
-done
-END
+# 	cat > ~/.profile <<'END'
+# for var in `cat /etc/.env`; do 
+# 	export $var
+# done
+# END
 
 	chown $user:nginx /var/wpm/.env
 

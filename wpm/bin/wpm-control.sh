@@ -7,8 +7,7 @@ wpm_start() {
 	if [[  ! -d /var/lib/mysql  ]]; then wpm_mysql_setup; fi
 	if [[  ! -d /var/wpm/web  ]]; then wpm_wp_setup; fi
 
-	wpm_header "Startup"
-	wpm_listen
+	wpm_header "Startup" && wpm_listen
 	
 	if [[  -f /tmp/supervisord.pid  ]]; then
 	
@@ -17,7 +16,7 @@ wpm_start() {
 		else /usr/bin/supervisorctl start $2;
 		fi
 
-	else exec /usr/bin/supervisord -n -c /etc/supervisord.conf && echo -e "\033[0m"
+	else exec /usr/bin/supervisord -n -c /etc/supervisord.conf
 	fi
 }
 

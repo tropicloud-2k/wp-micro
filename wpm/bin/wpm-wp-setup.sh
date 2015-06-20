@@ -6,21 +6,22 @@ wpm_wp_setup() {
 	# NGINX
 	# ------------------------
 
-	if [[  $WP_SSL == 'true'  ]];
-	then export WP_HOME="https://${HOSTNAME}"
-	     cat /wpm/etc/nginx/wpssl.conf | sed -e "s/example.com/$HOSTNAME/g" > /etc/wpm/wordpress.conf
-	else export WP_HOME="http://${HOSTNAME}"
-	     cat /wpm/etc/nginx/wp.conf | sed -e "s/example.com/$HOSTNAME/g" > /etc/wpm/wordpress.conf;
+	if [[  $WP_SSL == 'true'  ]]; then 
+		export WP_HOME="https://${HOSTNAME}"
+	    cat /wpm/etc/nginx/wpssl.conf | sed -e "s/example.com/$HOSTNAME/g" > /etc/wpm/wordpress.conf
+	else 
+		export WP_HOME="http://${HOSTNAME}"
+	    cat /wpm/etc/nginx/wp.conf | sed -e "s/example.com/$HOSTNAME/g" > /etc/wpm/wordpress.conf
 	fi
 	
-	if [[  -n $MEMCACHE_PORT  ]];
-	then export WP_MEMCACHE=`echo $MEMCACHE_PORT | cut -d/ -f3`
-		 sed -i "s/127.0.0.1:11211/$WP_MEMCACHE/g" /etc/wpm/nginx.conf
+	if [[  ! -z $MEMCACHE_PORT  ]]; then 
+		export WP_MEMCACHE=`echo $MEMCACHE_PORT | cut -d/ -f3`
+		sed -i "s/127.0.0.1:11211/$WP_MEMCACHE/g" /etc/wpm/nginx.conf
 	fi
 	
-	if [[  -n $REDIS_PORT  ]];
-	then export WP_REDIS=`echo $REDIS_PORT | cut -d/ -f3`
-		 sed -i "s/127.0.0.1:11211/$WP_REDIS/g" /etc/wpm/nginx.conf
+	if [[  ! -z $REDIS_PORT  ]]; then 
+		export WP_REDIS=`echo $REDIS_PORT | cut -d/ -f3`
+		sed -i "s/127.0.0.1:11211/$WP_REDIS/g" /etc/wpm/nginx.conf
 	fi	
 	
 	# ------------------------

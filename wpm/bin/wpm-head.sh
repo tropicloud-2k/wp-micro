@@ -8,8 +8,7 @@ wpm_header() {
 -----------------------------------------------------
 \033[1;33m  (wpm+) \033[0m|\033[1;37m $1 \033[0;30m
 -----------------------------------------------------
-\033[0m" && if [[  -n $2  ]]; then echo -e "$2"; fi
-
+\033[0m"
 }
 
 # ------------------------
@@ -27,9 +26,9 @@ wpm_listen() {
 # ------------------------
 
 wpm_hostname() {
-case "$HOSTNAME" in
-	*.*) wpm_header "Hostname" "Using hostname as domain.\n  Done.";;
-	*) wpm_header "Hostname" "Use -h flag to set hostname (domain)\n\n  Aborting..." && exit 1;;
-esac
+	case "$HOSTNAME" in
+		*.*) wpm_header "Hostname" && echo -e "  Using hostname as domain.\n  Done.";;
+		*) wpm_header "Hostname" && echo -e "  Use -h flag to set hostname (domain)\n\n  Aborting..." && exit 1;;
+	esac
 }
 

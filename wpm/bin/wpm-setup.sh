@@ -61,7 +61,7 @@ wpm_setup() {
 	# ------------------------
 		
 	curl -sO https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
-	chmod +x mv wp-cli.phar && mv wp-cli.phar /usr/local/bin/wp
+	chmod +x wp-cli.phar && mv wp-cli.phar /usr/local/bin/wp
 
 	# ------------------------
 	# WP-MICRO

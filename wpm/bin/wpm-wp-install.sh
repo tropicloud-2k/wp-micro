@@ -18,6 +18,6 @@ while [[  ! -e /run/mysqld/mysqld.sock  ]]; do sleep 1; done
 	wpm_wp_plugins
 
 # shutdown mysql server
-mysqladmin -u root shutdown && exit 0
+mysqladmin -u root shutdown
 
 }

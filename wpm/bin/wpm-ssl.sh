@@ -4,7 +4,7 @@
 
 wpm_ssl() {
 
-	wpm_header "SSL Certificates"
+	wpm_header "SSL Cert."
 
 	cd /var/ssl
 	

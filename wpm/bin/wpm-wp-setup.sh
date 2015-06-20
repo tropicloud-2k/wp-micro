@@ -28,9 +28,7 @@ wpm_wp_setup() {
 	su -l $user -c "cd $wpm && composer install"
 	su -l $user -c "ln -s $web ~/"
 	
-	echo -e "Configuring environment"
-	
-	wpm_wp_install > /dev/null 2>&1
+	wpm_wp_install
 	wpm_ssl $HOSTNAME
 	wpm_back_serv
 

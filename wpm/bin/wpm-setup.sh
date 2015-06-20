@@ -39,14 +39,14 @@ wpm_setup() {
 	rm -rf /var/lib/apt/lists/*
 	
 	# ------------------------
-	# COMPOSER
+	# WP-CLI
 	# ------------------------
 	
-	wpm_header "Composer"
+	wpm_header "WP-Cli"
 
-	curl -sS https://getcomposer.org/installer | php
-	mv composer.phar /usr/local/bin/composer
-	
+	curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && chmod +x wp-cli.phar
+	mv wp-cli.phar /usr/local/bin/wp
+
 	# ------------------------
 	# PREDIS
 	# ------------------------
@@ -57,14 +57,14 @@ wpm_setup() {
 	pear install nrk/Predis
 	
 	# ------------------------
-	# WP-CLI
+	# COMPOSER
 	# ------------------------
 	
-	wpm_header "WP-Cli"
+	wpm_header "Composer"
 
-	curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && chmod +x wp-cli.phar
-	mv wp-cli.phar /usr/local/bin/wp
-
+	curl -sS https://getcomposer.org/installer | php
+	mv composer.phar /usr/local/bin/composer
+	
 	# ------------------------
 	# WP-MICRO
 	# ------------------------

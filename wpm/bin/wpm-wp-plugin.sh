@@ -4,7 +4,7 @@
 
 wpm_wp_plugins() {
 
-	if [[  ! -z $MEMCACHE_PORT  ]]; then WPM_MEMCACHE=`echo $MEMCACHE_PORT | cut -d/ -f3`
+	if [[  ! -z $MEMCACHE_PORT  ]]; then
 	
 		su -l $user -c "cd $web && wp plugin install wp-ffpc --activate"
 	
@@ -18,7 +18,7 @@ wpm_wp_plugins() {
 	
 	fi
 	
-	if [[  ! -z $REDIS_PORT  ]]; then WPM_REDIS=`echo $REDIS_PORT | cut -d/ -f3`
+	if [[  ! -z $REDIS_PORT  ]]; then
 	
 		su -l $user -c "cd $web && wp plugin install redis-cache --activate"
 		

@@ -15,11 +15,11 @@ wpm_env() {
 	export DB_USER=$user
 	
 	if [[  ! -z $MEMCACHE_PORT  ]];
-	then export WP_MEMCACHE=`echo $MEMCACHE_PORT | cut -d/ -f3`
+	then export WPM_MEMCACHE=`echo $MEMCACHE_PORT | cut -d/ -f3`
 	fi		
 
 	if [[  ! -z $REDIS_PORT  ]]; 
-	then export WP_REDIS=`echo $REDIS_PORT | cut -d/ -f3`
+	then export WPM_REDIS=`echo $REDIS_PORT | cut -d/ -f3`
 	fi
 	
 	echo "" > /etc/.env && env | grep = >> /etc/.env

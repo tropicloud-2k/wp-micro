@@ -30,8 +30,16 @@ wpm_wp_setup() {
 	
 	echo -e "Configuring environment"
 	
-	wpm_wp_install > /dev/null 2>&1
+	# start mysql server
+	mysqld_safe > /dev/null 2>&1 &
+	while [[  ! -e /run/mysqld/mysqld.sock  ]]; do sleep 1; done
+		
+		wpm_wp_install > /dev/null 2>&1
+		wpm_wp_plugins
+	
+	# shutdown mysql server
+	mysqladmin -u root shutdown
+	
 	wpm_ssl $HOSTNAME
-	wpm_back_serv
 
 }

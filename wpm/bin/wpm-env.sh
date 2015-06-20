@@ -25,14 +25,6 @@ LOGGED_IN_SALT="`openssl rand 48 -base64`"
 NONCE_SALT="`openssl rand 48 -base64`"
 END
 
-	cat >> $home/.profile <<"EOF"
-for var in $(cat /etc/.env); do 
-	key=$(echo $var | cut -d= -f1)
-	val=$(echo $var | cut -d= -f2)
-	export ${key}=${val}
-done
-EOF
-
 	cat >> /root/.profile <<"EOF"
 for var in $(cat /etc/.env); do 
 	key=$(echo $var | cut -d= -f1)

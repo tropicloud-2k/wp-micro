@@ -6,6 +6,8 @@ wpm_mysql_setup() {
 	
 	wpm_header "MariaDB Setup"
 	
+	export DB_PASSWORD=`openssl rand -hex 36`
+
 	sed -i 's/^\(bind-address\s.*\)/# \1/' /etc/mysql/my.cnf
 	
 	wpm_mysql_database() {

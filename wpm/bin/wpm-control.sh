@@ -4,7 +4,6 @@
 
 wpm_start() {	
 
-	if [[  ! -f /var/wpm/.env   ]]; then wpm_env; fi	
 	if [[  ! -d /var/lib/mysql  ]]; then wpm_mysql_setup; fi
 	if [[  ! -d /var/wpm/web  ]]; then wpm_wp_setup; fi
 

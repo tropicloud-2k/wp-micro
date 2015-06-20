@@ -4,7 +4,7 @@ wpm_setup() {
 	# PACKGES
 	# ------------------------
 	
-	wpm_header "Docker Image"
+	wpm_header "Alpine Packges"
 
 	apk add --update \
 		libmemcached \
@@ -39,24 +39,30 @@ wpm_setup() {
 	rm -rf /var/lib/apt/lists/*
 	
 	# ------------------------
-	# PREDIS
-	# ------------------------
-	
-	pear channel-discover pear.nrk.io
-	pear install nrk/Predis
-	
-	# ------------------------
 	# COMPOSER
 	# ------------------------
 	
+	wpm_header "Composer"
+
 	curl -sS https://getcomposer.org/installer | php
 	mv composer.phar /usr/local/bin/composer
+	
+	# ------------------------
+	# PREDIS
+	# ------------------------
+	
+	wpm_header "Predis"
+
+	pear channel-discover pear.nrk.io
+	pear install nrk/Predis
 	
 	# ------------------------
 	# WP-CLI
 	# ------------------------
 	
-	curl -sO https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && chmod +x wp-cli.phar
+	wpm_header "WP-Cli"
+
+	curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && chmod +x wp-cli.phar
 	mv wp-cli.phar /usr/local/bin/wp
 
 	# ------------------------

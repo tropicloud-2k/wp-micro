@@ -10,7 +10,7 @@ wpm_mysql_setup() {
 
 	sed -i 's/^\(bind-address\s.*\)/# \1/' /etc/mysql/my.cnf
 	
-	wpm_mysql_database() {
+	wpm_mysql_create() {
 		mysql -u root -e "CREATE USER '$user'@'%' IDENTIFIED BY '$DB_PASSWORD'"
 		mysql -u root -e "CREATE DATABASE $user"
 		mysql -u root -e "GRANT ALL PRIVILEGES ON *.* TO '$user'@'%' WITH GRANT OPTION"
@@ -33,7 +33,7 @@ wpm_mysql_setup() {
 	echo -ne ", done\n"
 	
 	echo -ne "Creating MySQL Databases..."
-	while ! wpm_mysql_database true; do
+	while ! wpm_mysql_create true; do
 		echo -n '.' && sleep 1
 	done
 	echo -ne ", done\n"

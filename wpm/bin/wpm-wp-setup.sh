@@ -28,7 +28,10 @@ wpm_wp_setup() {
 	su -l $user -c "cd $wpm && composer install"
 	su -l $user -c "ln -s $web ~/"
 	
-	wpm_wp_install > /var/log/wp_core_install.log 2>&1
+	wpm_wp_install > /var/log/wp_core_install.log
+	
+	if [[  $? == 0  ]]; then echo -e "WordPress installed successfully"; fi
+	
 	wpm_ssl $HOSTNAME
 
 }

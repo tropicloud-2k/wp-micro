@@ -4,10 +4,10 @@
 
 wpm_env() {
 
-	export DB_HOST="127.0.0.1"
-	export DB_NAME="$user"
-	export DB_USER="$user"
-	export WP_SITEURL="${WP_HOME}/wp"
+	export DB_HOST=127.0.0.1
+	export DB_NAME=$user
+	export DB_USER=$user
+	export WP_SITEURL=${WP_HOME}/wp
 	
 	echo "" > /etc/.env && env | grep = >> /etc/.env
 
@@ -27,7 +27,10 @@ SECURE_AUTH_SALT="`openssl rand 48 -base64`"
 LOGGED_IN_SALT="`openssl rand 48 -base64`"
 NONCE_SALT="`openssl rand 48 -base64`"
 END
-	
+
+	echo "source /etc/.env" > $home/.profile
+	echo "source /etc/.env" > /root/.profile
+
 	chown $user:nginx /var/wpm/.env
 
 }

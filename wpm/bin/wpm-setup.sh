@@ -69,8 +69,6 @@ wpm_setup() {
 	
 	adduser -D -G nginx -s "/bin/sh" -h $home $user
 	
-	echo "source /etc/.env" > $home/.profile
-
 	mkdir -p /etc/wpm
 	mkdir -p /var/wpm
 	mkdir -p /var/ssl

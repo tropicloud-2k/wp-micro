@@ -23,6 +23,7 @@ wpm_start() {
 
 	else exec /usr/bin/supervisord -n -c /etc/supervisord.conf	
 	fi
+	echo ""
 }
 
 # ------------------------
@@ -41,6 +42,7 @@ wpm_stop() {
 		fi
 	
 	fi
+	echo ""
 }
 
 # ------------------------
@@ -60,6 +62,7 @@ wpm_restart() {
 		
 	else exec /usr/bin/supervisord -n -c /etc/supervisord.conf;
 	fi
+	echo ""
 }
 
 # ------------------------
@@ -73,6 +76,7 @@ wpm_reload() {
 	if [[  -f /tmp/supervisord.pid  ]];
 	then /usr/bin/supervisorctl reload;
 	fi
+	echo ""
 }
 
 # ------------------------
@@ -86,6 +90,7 @@ wpm_shutdown() {
 	if [[  -f /tmp/supervisord.pid  ]];
 	then /usr/bin/supervisorctl shutdown;
 	fi
+	echo ""
 }
 
 # ------------------------
@@ -104,6 +109,7 @@ wpm_status() {
 		fi
 	
 	fi
+	echo ""
 }
 
 # ------------------------
@@ -117,6 +123,7 @@ wpm_log() {
 	if [[  -f /tmp/supervisord.pid  ]];
 	then /usr/bin/supervisorctl maintail;
 	fi
+	echo ""
 }
 
 # ------------------------

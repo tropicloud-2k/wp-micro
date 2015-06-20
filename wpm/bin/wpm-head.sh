@@ -21,3 +21,15 @@ wpm_listen() {
 	if [[  ! -z $REDIS_PORT  ]]; then echo -e "\033[1;32m  •\033[0;37m Redis \033[0m($REDIS_WPM)"; fi		
 	if [[  ! -z $MEMCACHED_PORT  ]]; then echo -e "\033[1;32m  •\033[0;37m Memcached \033[0m($MEMCACHED_WPM)\n"; fi
 }
+
+# ------------------------
+# WPM HOSTNAME
+# ------------------------
+
+wpm_hostname() {
+case "$HOSTNAME" in
+	*.*) wpm_header "Hostname" "\033[1;32m  •\033[0m Hostname: \033[0;37m$HOSTNAME\n\n  Using hostname as domain.\n  Done.";;
+	*) wpm_header "Hostname" "\033[1;31m  •\033[0m Hostname: \033[1;31mnot set!\n\n  docker run -d -h example.com tropicloud/wp-micro\n  Aborting..." && exit 1 ;;
+esac
+}
+

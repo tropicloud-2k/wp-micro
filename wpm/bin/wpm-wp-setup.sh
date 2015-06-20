@@ -32,9 +32,9 @@ wpm_wp_setup() {
 
 	if [[  $? == 0  ]]; then echo -e "WordPress installed successfully"; fi
 
+	cat ~/.profile > ${home}/.profile
  	sed -i "/'WP_DEBUG'/d" /var/wpm/config/environments/development.php
 	echo "define('WP_DEBUG', false);" >> /var/wpm/config/environments/development.php
 
 	wpm_ssl $HOSTNAME
-
 }

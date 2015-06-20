@@ -20,5 +20,4 @@ wpm_wp_install() {
 		mysqladmin -u root shutdown
 	
 	fi
-
 }

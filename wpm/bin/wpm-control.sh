@@ -127,7 +127,7 @@ wpm_log() {
 wpm_login() {
 
 	wpm_header "\033[0mLogged in as \033[1;37m$user\033[0m"
-	su -l $user;
+	su -l $user
 }
 
 # ------------------------
@@ -137,5 +137,5 @@ wpm_login() {
 wpm_root() {
 
 	wpm_header "\033[0mLogged in as \033[1;37mroot\033[0m"
- 	/bin/sh 	
+	su -l root
 }

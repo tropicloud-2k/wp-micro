@@ -69,7 +69,7 @@ wpm_setup() {
 	
 	adduser -D -G nginx -s /bin/sh -h $home $user
 	
-	cat > ${home}/.profile <<"EOF"
+	cat > ~/.profile <<"EOF"
 for var in $(cat /etc/.env); do 
 	export $var
 done
@@ -85,7 +85,6 @@ EOF
 	
 	cat /wpm/etc/nginx/nginx.conf > /etc/wpm/nginx.conf
 	cat /wpm/etc/supervisord.conf > /etc/supervisord.conf
-	cat ${home}/.profile > ~/.profile
 
 	wpm_header "Image Built!"
 

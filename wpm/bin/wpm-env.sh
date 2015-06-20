@@ -9,7 +9,8 @@ wpm_env() {
 	export DB_USER=$user
 	export WP_SITEURL=${WP_HOME}/wp
 	
-	echo '' > /etc/.env && env | grep = >> /etc/.env
+	env | grep = >> /etc/.env
+	
 	for var in `cat /etc/.env`; do echo -e $var >> /var/wpm/.env; done
 	
 	cat >> /var/wpm/.env <<END
@@ -26,7 +27,7 @@ NONCE_SALT="`openssl rand 48 -base64`"
 END
 
 	cat >> /root/.profile <<"EOF"
-for var in `cat /etc/.env`; do
+for var in $(cat /etc/.env); do
 	export $var;
 done
 EOF

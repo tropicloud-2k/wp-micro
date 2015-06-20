@@ -83,6 +83,6 @@ wpm_setup() {
 	cat /wpm/etc/nginx/nginx.conf > /etc/wpm/nginx.conf
 	cat /wpm/etc/supervisord.conf > /etc/supervisord.conf
 
-	wpm_header "Build Completed!"
+	wpm_header "Image Ok!"
 
 }

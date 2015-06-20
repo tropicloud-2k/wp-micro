@@ -20,4 +20,8 @@ wpm_wp_install() {
 		mysqladmin -u root shutdown
 	
 	fi
+	
+	if [[  $? == 0  ]];
+	then echo -e "WordPress installed successfully"
+	fi
 }

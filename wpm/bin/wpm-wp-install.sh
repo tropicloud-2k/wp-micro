@@ -5,7 +5,7 @@
 wpm_wp_install() {
 
 # start mysql server
-mysqld_safe > /dev/null 2>&1
+mysqld_safe > /dev/null 2>&1 &
 while [[  ! -e /run/mysqld/mysqld.sock  ]]; do sleep 1; done
 	
 	cd $web && wpm_env

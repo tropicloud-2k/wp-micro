@@ -11,7 +11,7 @@ wpm_env() {
 	
 	env | grep = >> /etc/.env
 	
-	for var in `cat /etc/.env`; do echo -e $var >> /var/wpm/.env; done
+	for var in `cat /etc/.env`; do echo $var >> /var/wpm/.env; done
 	
 	cat >> /var/wpm/.env <<END
 
@@ -26,11 +26,11 @@ LOGGED_IN_SALT="`openssl rand 48 -base64`"
 NONCE_SALT="`openssl rand 48 -base64`"
 END
 
-	cat >> /root/.profile <<"EOF"
-for var in $(cat /etc/.env); do
-	export $var;
+	cat >> /root/.profile <<END
+for var in `cat /etc/.env`; do
+	export $var
 done
-EOF
+END
 
 	chown $user:nginx /var/wpm/.env
 

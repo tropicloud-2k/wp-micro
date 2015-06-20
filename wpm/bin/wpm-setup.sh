@@ -22,6 +22,7 @@ wpm_setup() {
 		php-json \
 		php-mcrypt \
 		php-memcache \
+		php-mysql \
 		php-opcache \
 		php-openssl \
 		php-phar \

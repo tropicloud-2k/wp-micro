@@ -18,9 +18,13 @@ wpm_header() {
 
 wpm_listen() {
 
-	if [[  ! -z $MEMCACHE_PORT || ! -z $REDIS_PORT  ]]; then
-		if [[  ! -z $REDIS_PORT  ]]; then echo -e "\033[1;32m  Listening:\033[0m Redis\033[1;37m @\033[0m $WPM_REDIS"; fi
-		if [[  ! -z $MEMCACHE_PORT  ]]; then echo -e "\033[1;32m  Listening:\033[0m Memcached\033[1;37m @\033[0m $WPM_MEMCACHE"; fi
+	if [[  ! -z $MEMCACHE_PORT  ]];
+	then echo -e "\033[1;32m  Listening:\033[0m Redis\033[1;37m @\033[0m $WPM_REDIS"
+	fi		
+
+	if [[  ! -z $REDIS_PORT  ]]; 
+	then echo -e "\033[1;32m  Listening:\033[0m Memcached\033[1;37m @\033[0m $WPM_MEMCACHE"
 	fi
+
 	echo ""
 }

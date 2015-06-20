@@ -38,11 +38,11 @@ wpm_wp_setup() {
 	# WORDPRESS
 	# ------------------------
 	
-	su -l $user -c "cd /var/wpm && git clone $WP_REPO ."
-	su -l $user -c "cd /var/wpm && composer install"
-	su -l $user -c "ln -s $wpm ~/"
+	su -l $user -c "cd $wpm && git clone $WP_REPO ."
+	su -l $user -c "cd $wpm && composer install"
+	su -l $user -c "ln -s $wpm/web ~/"
 	
-	if [[  ! -f /var/wpm/.env   ]]; then wpm_env; fi
+	if [[  ! -f $wpm/.env   ]]; then wpm_env; fi
 
 	if [[  -n "$WP_TITLE" && -n "$WP_USER" && -n "$WP_MAIL" && -n "$WP_PASS"  ]]; then wpm_wp_install; fi
 	
@@ -50,8 +50,8 @@ wpm_wp_setup() {
 		
 		wpm_header "Backing Services"
 		
-		if [[  -n $REDIS_PORT  ]]; then echo -e "\033[1;37m  Redis:\033[0m $WP_REDIS\033[0m"; fi
-		if [[  -n $MEMCACHE_PORT  ]]; then echo -e "\033[1;37m  Memcached:\033[0m $WP_MEMCACHE\033[0m"; fi
+		if [[  ! -z $REDIS_PORT  ]]; then echo -e "\033[1;37m  Redis:\033[0m $WP_REDIS\033[0m"; fi
+		if [[  ! -z $MEMCACHE_PORT  ]]; then echo -e "\033[1;37m  Memcached:\033[0m $WP_MEMCACHE\033[0m"; fi
 
 	fi
 

@@ -9,7 +9,8 @@
 
 user="wordpress"
 home="/home/$user"
- wpm="/var/wpm/web"
+wpm="/var/wpm"
+web="/var/wpm/web"
 
 # ------------------------------------
 # wpm functions

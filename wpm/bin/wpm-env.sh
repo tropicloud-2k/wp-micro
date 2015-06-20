@@ -11,9 +11,9 @@ wpm_env() {
 	
 	env | grep = >> /etc/.env
 	
-	for var in `cat /etc/.env`; do echo $var >> /var/wpm/.env; done
+	for var in `cat /etc/.env`; do echo $var >> $wpm/.env; done
 	
-	cat >> /var/wpm/.env <<END
+	cat >> $wpm/.env <<END
 
 # WP SALT
 AUTH_KEY="`openssl rand 48 -base64`"
@@ -32,6 +32,6 @@ END
 # done
 # END
 
-	chown $user:nginx /var/wpm/.env
+	chown $user:nginx $wpm/.env
 
 }

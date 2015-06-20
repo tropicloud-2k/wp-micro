@@ -22,13 +22,11 @@ wpm_setup() {
 		php-json \
 		php-mcrypt \
 		php-memcache \
-		php-mysql \
 		php-opcache \
 		php-openssl \
 		php-phar \
 		php-pear \
 		php-pdo \
-		php-pdo_mysql \
 		php-xml \
 		php-zlib \
 		php-zip \

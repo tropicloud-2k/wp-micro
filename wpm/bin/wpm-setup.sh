@@ -67,7 +67,7 @@ wpm_setup() {
 	# WP-MICRO
 	# ------------------------
 	
-	adduser -D -G nginx -s "/bin/sh" -h $home $user
+	adduser -D -G nginx -s /bin/sh -h $home $user
 	
 	mkdir -p /etc/wpm
 	mkdir -p /var/wpm

@@ -9,6 +9,11 @@ wpm_start() {
 
 	wpm_header "Startup"
 
+	if [[  ! -z $MEMCACHE_PORT || ! -z $REDIS_PORT  ]]; then
+		if [[  ! -z $REDIS_PORT  ]]; then echo -e "  Redis listening @ $WPM_REDIS"; fi
+		if [[  ! -z $MEMCACHE_PORT  ]]; then echo -e "  Memcached listening @ $WPM_MEMCACHE \n\n"; fi
+	fi
+	
 	if [[  -f /tmp/supervisord.pid  ]]; then
 	
 		if [[  -z $2  ]];

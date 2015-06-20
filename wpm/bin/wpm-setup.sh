@@ -39,14 +39,14 @@ wpm_setup() {
 	rm -rf /var/lib/apt/lists/*
 	
 	# ------------------------
-	# WP-CLI
+	# COMPOSER
 	# ------------------------
 	
-	wpm_header "WP-Cli"
+	wpm_header "Composer"
 
-	curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && chmod +x wp-cli.phar
-	mv wp-cli.phar /usr/local/bin/wp
-
+	curl -sS https://getcomposer.org/installer | php
+	mv composer.phar /usr/local/bin/composer
+	
 	# ------------------------
 	# PREDIS
 	# ------------------------
@@ -57,13 +57,22 @@ wpm_setup() {
 	pear install nrk/Predis
 	
 	# ------------------------
-	# COMPOSER
+	# WP-CLI
 	# ------------------------
 	
-	wpm_header "Composer"
+	wpm_header "WP-Cli"
+	
+	get_wp_cli() {
+		curl -sO https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+		mv wp-cli.phar /usr/local/bin/wp
+		chmod +x /usr/local/bin/wp
+	}
 
-	curl -sS https://getcomposer.org/installer | php
-	mv composer.phar /usr/local/bin/composer
+	echo -ne "Installing WP-Cli..."
+	while ! get_wp_cli true; do
+		echo -n '.' && sleep 1
+	done
+	echo -ne "done\n"
 	
 	# ------------------------
 	# WP-MICRO
@@ -71,7 +80,6 @@ wpm_setup() {
 	
 	adduser -D -G nginx -s "/bin/sh" -h $home $user
 
-	mkdir -p /etc/env
 	mkdir -p /etc/wpm
 	mkdir -p /var/wpm
 	mkdir -p /var/ssl

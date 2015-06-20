@@ -65,4 +65,13 @@ wpm_wp_setup() {
 	if [[  -n "$WP_TITLE" && -n "$WP_USER" && -n "$WP_MAIL" && -n "$WP_PASS"  ]]; then wpm_wp_install; fi
 	
 	wpm_ssl $HOSTNAME
+	
+	wpm_header "Backing Services"
+	
+	echo -e "
+\033[1;37m  Memcached:\033[0m $WP_MEMCACHE
+\033[1;37m  Redis:\033[0m $WP_REDIS
+\033[0;30m
+-----------------------------------------------------
+\033[0m"
 }

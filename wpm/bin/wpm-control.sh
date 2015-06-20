@@ -7,7 +7,7 @@ wpm_start() {
 	if [[  ! -d /var/lib/mysql  ]]; then wpm_mysql_setup; fi
 	if [[  ! -d /var/wpm/web  ]]; then wpm_wp_setup; fi
 
-	wpm_header "Service Startup"
+	wpm_header "Startup"
 
 	if [[  -f /tmp/supervisord.pid  ]]; then
 	
@@ -26,6 +26,8 @@ wpm_start() {
 
 wpm_stop() {
 
+	wpm_header "Stop"
+
 	if [[  -f /tmp/supervisord.pid  ]]; then
 	
 		if [[  -z $2  ]];
@@ -42,6 +44,8 @@ wpm_stop() {
 
 wpm_restart() {
 	
+	wpm_header "Restart"
+
 	if [[  -f /tmp/supervisord.pid  ]]; then
 	
 		if [[  -z $2  ]];
@@ -59,6 +63,8 @@ wpm_restart() {
 
 wpm_reload() {
 
+	wpm_header "Reload"
+
 	if [[  -f /tmp/supervisord.pid  ]];
 	then /usr/bin/supervisorctl reload;
 	fi
@@ -69,6 +75,8 @@ wpm_reload() {
 # ------------------------
 
 wpm_shutdown() {
+
+	wpm_header "Shutdown"
 
 	if [[  -f /tmp/supervisord.pid  ]];
 	then /usr/bin/supervisorctl shutdown;
@@ -81,6 +89,8 @@ wpm_shutdown() {
 
 wpm_status() {
 	
+	wpm_header "Status"
+
 	if [[  -f /tmp/supervisord.pid  ]]; then
 	
 		if [[  -z $2  ]];
@@ -97,6 +107,8 @@ wpm_status() {
 
 wpm_log() {
 
+	wpm_header "Log"
+	
 	if [[  -f /tmp/supervisord.pid  ]];
 	then /usr/bin/supervisorctl maintail;
 	fi
@@ -108,7 +120,7 @@ wpm_log() {
 
 wpm_login() {
 
-	wpm_header "Logged in as $user"
+	wpm_header "\033[0mLogged in as \033[1;37m$user\033[0m"
 	su -l $user;
 }
 
@@ -118,6 +130,6 @@ wpm_login() {
 
 wpm_root() {
 
-	wpm_header "Logged in as root"
+	wpm_header "\033[0mLogged in as \033[1;37mroot\033[0m"
  	/bin/sh 	
 }

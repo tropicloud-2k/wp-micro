@@ -33,7 +33,7 @@ wpm_wp_setup() {
 	while [[  ! -e /run/mysqld/mysqld.sock  ]]; do sleep 1; done
 		
 		echo -ne "Configuring environment..."
-		while ! wpm_wp_install > /dev/null 2>&1 true; do
+		while ! wpm_wp_install true; do
 			echo -n '.' && sleep 1
 		done && echo -ne ", done\n"
 	

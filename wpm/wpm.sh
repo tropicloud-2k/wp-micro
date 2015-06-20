@@ -24,7 +24,7 @@ done
 # wpm commands
 # ------------------------------------
 
-  if [[  $1 == 'run'  ]];       then wpm_run $@
+  if [[  $1 == 'setup'  ]];     then wpm_setup $@
 elif [[  $1 == 'start'  ]];     then wpm_start $@
 elif [[  $1 == 'stop'  ]];      then wpm_stop $@
 elif [[  $1 == 'restart'  ]];   then wpm_restart $@
@@ -55,7 +55,7 @@ else echo "
   wpm shutdown              # Stop the container
   wpm ps                    # List all container processes
   wpm log                   # Display last 1600 *bytes* of main log file
-  wpm login                 # Login as npstack user
+  wpm login                 # Login as wordpress user
   wpm root                  # Login as root
 
 ----------------------------------------------------  

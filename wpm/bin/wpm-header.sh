@@ -23,8 +23,7 @@ wpm_listen() {
 	fi		
 
 	if [[  ! -z $REDIS_PORT  ]]; 
-	then echo -e "\033[1;32m  Listening:\033[0m Memcached\033[1;37m @\033[0m $WPM_MEMCACHE"
+	then echo -e "\033[1;32m  Listening:\033[0m Memcached\033[1;37m @\033[0m $WPM_MEMCACHE\n"
 	fi
 
-	echo ""
 }

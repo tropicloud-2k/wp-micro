@@ -39,7 +39,7 @@ wpm_wp_setup() {
 	
 	su -l $user -c "cd /var/wpm && git clone $WP_REPO ."
 	su -l $user -c "cd /var/wpm && composer install"
-	su -l $user -c "ln -s /var/wpm/web ~/"
+	su -l $user -c "ln -s $wpm ~/"
 	
 	if [[  ! -f /var/wpm/.env   ]]; then wpm_env; fi
 
@@ -51,6 +51,7 @@ wpm_wp_setup() {
 		
 		if [[  -n $MEMCACHE_PORT  ]]; then echo -e "\033[1;37m  Memcached:\033[0m $WP_MEMCACHE\033[0m"; fi
 		if [[  -n $REDIS_PORT  ]]; then echo -e "\033[1;37m  Redis:\033[0m $WP_REDIS\033[0m"; fi
+
 	fi
 
 	wpm_ssl $HOSTNAME

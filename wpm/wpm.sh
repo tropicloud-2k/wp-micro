@@ -4,10 +4,12 @@
 # WP-MICRO
 # ------------------------------------
 # @author: admin@tropicloud.net
-# version: 0.2
+# version: 0.3
 # ------------------------------------
 
-user="wordpress" && home="/home/$user"
+user="wordpress"
+home="/home/$user"
+ wpm="/var/wpm/web"
 
 # ------------------------------------
 # wpm functions
@@ -31,8 +33,6 @@ elif [[  $1 == 'status'  ]];    then wpm_status $@
 elif [[  $1 == 'log'  ]];       then wpm_log $@
 elif [[  $1 == 'login'  ]];     then wpm_login $@
 elif [[  $1 == 'root'  ]];      then wpm_root $@
-
-
 
 else echo "
 ----------------------------------------------------

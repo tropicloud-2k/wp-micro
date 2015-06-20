@@ -8,13 +8,12 @@ wpm_wp_install() {
 	wp rewrite structure --allow-root '/%postname%/'
 	
 	if [[  -n $MEMCACHE_PORT  ]]; then 
-		su -l $user -c "cd /var/wpm/web && wp plugin install wp-ffpc"
+		su -l $user -c "cd /var/wpm/web && wp plugin install wp-ffpc -activate"
 		sed -i "s/127.0.0.1:11211/$WP_MEMCACHE/g" /var/wpm/web/app/plugins/wp-ffpc/wp-ffpc.php
 		sed -i "s/'memcached'/'memcache'/g" /var/wpm/web/app/plugins/wp-ffpc/wp-ffpc.php
-		su -l $user -c "cd /var/wpm/web && wp plugin activate wp-ffpc"
 	fi
 
-	if [[  -n $REDIS_PORT  ]]; then su -l $user -c "cd /var/wpm/web && wp plugin install redis-cache"; fi
+	if [[  -n $REDIS_PORT  ]]; then su -l $user -c "cd /var/wpm/web && wp plugin install redis-cache --activate"; fi
 	
 	sed -i '/DISALLOW_FILE_MODS/d' /var/wpm/config/environments/production.php
 	echo "define('WP_CACHE', true);" >> /var/wpm/config/environments/production.php

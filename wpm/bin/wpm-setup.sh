@@ -4,7 +4,7 @@ wpm_setup() {
 	# PACKGES
 	# ------------------------
 	
-	wpm_header "Alpine Packges"
+	wpm_header "Packages"
 
 	apk add --update \
 		libmemcached \

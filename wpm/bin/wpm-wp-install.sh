@@ -6,9 +6,9 @@ wp_ffpc() {
 	su -l $user -c "cd /var/wpm/web && wp plugin install wp-ffpc --activate"
 	sed -i "s/127.0.0.1:11211/$WP_MEMCACHE/g" /var/wpm/web/app/plugins/wp-ffpc/wp-ffpc.php
 	sed -i "s/'memcached'/'memcache'/g" /var/wpm/web/app/plugins/wp-ffpc/wp-ffpc.php
-	sed -i "s/'pingback_header'*/'pingback_header' => true,/g" /var/wpm/web/app/plugins/wp-ffpc/wp-ffpc.php
-	sed -i "s/'response_header'*/'response_header' => true,/g" /var/wpm/web/app/plugins/wp-ffpc/wp-ffpc.php
-	sed -i "s/'generate_time'*/'generate_time' => true,/g" /var/wpm/web/app/plugins/wp-ffpc/wp-ffpc.php
+	sed -i "s/'pingback_header'.*/'pingback_header' => true,/g" /var/wpm/web/app/plugins/wp-ffpc/wp-ffpc.php
+	sed -i "s/'response_header'.*/'response_header' => true,/g" /var/wpm/web/app/plugins/wp-ffpc/wp-ffpc.php
+	sed -i "s/'generate_time'.*/'generate_time' => true,/g" /var/wpm/web/app/plugins/wp-ffpc/wp-ffpc.php
 	echo "define('WP_CACHE', true);" >> /var/wpm/config/environments/production.php
 }
 

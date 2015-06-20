@@ -29,9 +29,10 @@ wpm_wp_setup() {
 	su -l $user -c "ln -s $web ~/"
 	
 	echo -ne "Configuring WordPress..."
-	while ! wpm_wp_install > /dev/null 2>&1 true; do
+	while ! wpm_wp_install > /dev/null 2>&1 & true; do
 		echo -n '.' && sleep 1
-	done && echo -ne ", done\n"
+	done
+	echo -ne ", done\n"
 	
 	wpm_ssl $HOSTNAME
 	wpm_back_serv

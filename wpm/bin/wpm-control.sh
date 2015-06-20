@@ -119,10 +119,5 @@ wpm_login() {
 wpm_root() {
 
 	wpm_header "Logged in as root"
- 	
- 	/bin/sh
- 	
- 	for var in `cat /etc/.env`; do 
- 		export $var
- 	done
+ 	/bin/sh 	
 }

@@ -119,5 +119,5 @@ wpm_login() {
 wpm_root() {
 
 	wpm_header "Logged in as root"
- 	/bin/sh -c "source /etc/.env" && /bin/sh
+ 	/bin/sh
 }

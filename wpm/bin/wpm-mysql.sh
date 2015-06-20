@@ -4,7 +4,7 @@
 
 wpm_mysql_setup() {
 	
-	wpm_header "MySQL Setup"
+	wpm_header "MariaDB Setup"
 	
 	export DB_PASSWORD=`openssl rand -hex 36`
 
@@ -26,30 +26,25 @@ wpm_mysql_setup() {
 	mysql_install_db --user=mysql > /dev/null 2>&1
 	mysqld_safe > /dev/null 2>&1 &
 	
-	echo -ne "Starting MariaDB Server..."
+	echo -ne "Starting MySQL Server..."
 	while [[  ! -e /run/mysqld/mysqld.sock  ]]; do
 		echo -n '.' && sleep 1
-	done
-	echo -ne "done\n"
+	done && echo -ne ", done\n"
 	
-	
-	echo -ne "Creating MariaDB database..."
+	echo -ne "Creating MySQL databases..."
 	while ! wpm_mysql_database true; do
 		echo -n '.' && sleep 1
-	done
-	echo -ne "done\n"
+	done && echo -ne ", done\n"
 	
-	echo -ne "Securing MariaDB installation..."
+	echo -ne "Securing MySQL installation..."
 	while ! wpm_mysql_secure true; do
 		echo -n '.' && sleep 1
-	done
-	echo -ne "done\n"
+	done && echo -ne ", done\n"
 	
-	echo -ne "Flusing privileges..."
+	echo -ne "Flushing MySQL privileges..."
 	while ! `mysql -u root -e "FLUSH PRIVILEGES"` true; do
 		echo -n '.' && sleep 1
-	done
-	echo -ne "done\n"
+	done && echo -ne ", done\n"
 	
 	mysqladmin -u root shutdown
 

@@ -27,5 +27,4 @@ wpm_wp_plugins() {
 		echo "define('WP_REDIS_PORT', getenv('REDIS_PORT_6379_TCP_PORT'));" >> $wpm/config/environments/production.php
 	
 	fi
-
 }

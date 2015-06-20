@@ -69,12 +69,6 @@ wpm_setup() {
 	
 	adduser -D -G nginx -s /bin/sh -h $home $user
 	
-	cat > ~/.profile <<"EOF"
-for var in $(cat /etc/.env); do 
-	export $var
-done
-EOF
-	
 	mkdir -p /etc/wpm
 	mkdir -p /var/wpm
 	mkdir -p /var/ssl
@@ -86,6 +80,12 @@ EOF
 	cat /wpm/etc/nginx/nginx.conf > /etc/wpm/nginx.conf
 	cat /wpm/etc/supervisord.conf > /etc/supervisord.conf
 
-	wpm_header "Image Built!"
+	wpm_header "Image Built"
+
+	cat > ~/.profile <<"EOF"
+for var in $(cat /etc/.env); do 
+	export $var
+done
+EOF
 
 }

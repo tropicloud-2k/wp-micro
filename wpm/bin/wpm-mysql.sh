@@ -47,5 +47,4 @@ wpm_mysql_setup() {
 	done && echo -ne "done\n"
 	
 	mysqladmin -u root shutdown
-
 }

@@ -37,5 +37,4 @@ NONCE_SALT="`openssl rand 48 -base64`"
 END
 
 	chown $user:nginx $wpm/.env
-
 }

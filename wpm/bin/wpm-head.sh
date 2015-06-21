@@ -28,7 +28,7 @@ wpm_listen() {
 wpm_hostname() {
 	case "$HOSTNAME" in
 		*.*) wpm_header "Hostname" && echo -e "  Using \033[0;37m${HOSTNAME}\033[0m as hostname (domain)\n  Proceeding...";;
-		*) wpm_header "Hostname" && echo -e "\033[1;31m  Use the \033[0;31m-h\033[1;31m flag to set hostname (domain)\n  Aborting...\033[0m" && exit 1;;
+		*) wpm_header "Hostname" && echo -e "\033[1;31m  Use the \033[0;31m-h\033[1;31m flag to set hostname (domain)\n  Aborting...\n\033[0m" && exit 1;;
 	esac
 }
 

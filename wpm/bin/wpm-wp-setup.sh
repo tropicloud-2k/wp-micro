@@ -35,8 +35,8 @@ wpm_wp_setup() {
 	
 	wpm_wp_install > /var/log/install.log 2>&1 &
 	
-	echo -ne "Configuring environment..."
-	while [[  ! -e /etc/wpm_wp_status  ]]; do echo -n '.' && sleep 1; done
-	echo -ne " done!\nWordPress installed successfully"
+	echo -ne "Initializing..."
+	while [[  ! -e /etc/wpm_wp_status  ]]; do 
+	echo -n '.' && sleep 1; done && echo -ne " done!\n"
 }
 

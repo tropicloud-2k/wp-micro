@@ -21,7 +21,6 @@ wpm_wp_install() {
 		# stop mysql server
 		mysqladmin -u root shutdown
 		
-		touch $home/.installed
-	else touch $home/.installed
 	fi
+	echo "WordPress installed successfully"
 }

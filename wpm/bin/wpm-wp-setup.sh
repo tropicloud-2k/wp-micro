@@ -34,11 +34,11 @@ wpm_wp_setup() {
 	su -l $user -c "ln -s $web ~/"
 	
 	wpm_wp_install > /var/log/install.log 2>&1 &
-	
-	echo -e "Installing WordPress..."
-	while [[  ! -e $home/.installed  ]]; do
-		echo -n '.' && sleep 1
-	done
-	echo -ne "\033[0;32m done!\n\033[0mWordPress installed successfully"
+	wpm_wp_status() { cat /var/log/install.log | grep "WordPress installed successfully"; }
+	while ! wpm_wp_status true; do echo -n '.' && sleep 1; done
+
+# 	if [[  $? == 0  ]]; 
+# 	then echo -e "WordPress installed successfully"
+# 	fi
 }
 

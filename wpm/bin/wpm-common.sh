@@ -12,7 +12,7 @@ wpm_header() {
 -----------------------------------------------------
 \033[0m"
 
-	if [[  $lorem == $2  ]]; then
+	if [[  $1 == '--links'  ]]; then
 		if [[  ! -z $REDIS_PORT  ]];
 		then echo -e "\033[1;32m  •\033[0;37m Redis\033[0m listening at `echo $REDIS_PORT | cut -d/ -f3`"		
 		else echo -e "\033[1;31m  •\033[0;37m Redis\033[0m not connected"

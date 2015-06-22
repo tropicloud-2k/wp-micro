@@ -35,12 +35,10 @@ wpm_wp_setup() {
 	
 	wpm_wp_install > /var/log/install.log 2>&1 &
 	
+	echo -e "Installing WordPress..."
 	while [[  ! -e $home/.installed  ]]; do
 		echo -n '.' && sleep 1
-	done && echo -ne "done\n"
-
-	if [[  $? == 0  ]]; 
-	then echo -e "WordPress installed successfully"
-	fi
+	done
+	echo -ne "\033[0;32m done!\n\033[0mWordPress installed successfully"
 }
 

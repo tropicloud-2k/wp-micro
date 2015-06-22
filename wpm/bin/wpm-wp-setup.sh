@@ -34,11 +34,9 @@ wpm_wp_setup() {
 	su -l $user -c "ln -s $web ~/"
 	
 	wpm_wp_install > /var/log/install.log 2>&1 &
-	wpm_wp_status() { cat /var/log/install.log | grep "WordPress installed successfully"; }
-	while ! wpm_wp_status true; do echo -n '.' && sleep 1; done
-
-# 	if [[  $? == 0  ]]; 
-# 	then echo -e "WordPress installed successfully"
-# 	fi
+	
+	echo -ne "Configuring environment..."
+	while [[  ! -e /etc/wpm_wp_status  ]]; do echo -n '.' && sleep 1; done
+	echo -ne " done!\nWordPress installed successfully"
 }
 

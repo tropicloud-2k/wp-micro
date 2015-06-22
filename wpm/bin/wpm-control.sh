@@ -4,12 +4,12 @@
 
 wpm_start() {
 
-	wpm_domain
+	wpm_hostname
 	
 	if [[  ! -d /var/lib/mysql  ]]; then wpm_mysql_setup; fi
 	if [[  ! -d /var/wpm/web  ]]; then wpm_wp_setup; fi
 
-	wpm_header "Start"
+	wpm_header --links "Start"
 	
 	if [[  -f /tmp/supervisord.pid  ]]; then
 	
@@ -139,7 +139,7 @@ wpm_ps() {
 
 wpm_login() {
 
-	wpm_header "\033[0mLogged in as \033[1;37m$user\033[0m"
+	wpm_header "\033[0mLogged as \033[1;37m$user\033[0m"
 	su -l $user
 }
 
@@ -149,6 +149,6 @@ wpm_login() {
 
 wpm_root() {
 
-	wpm_header "\033[0mLogged in as \033[1;37mroot\033[0m"
+	wpm_header "\033[0mLogged as \033[1;37mroot\033[0m"
 	su -l root
 }

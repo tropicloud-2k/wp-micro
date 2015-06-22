@@ -23,9 +23,16 @@ wpm_listen() {
 # WPM HOSTNAME
 # ------------------------
 
+wpm_hostname() {
+	case "$HOSTNAME" in
+		*.*) wpm_hostname_true;;
+		*) wpm_hostname_false;;
+	esac
+}
+
 wpm_hostname_true(){
 	wpm_header "Welcome to WP-MICRO"
-	echo -e "\033[0m  Using \033[0;37m${HOSTNAME}\033[0m as hostname (domain).";;
+	echo -e "\033[0m  Using \033[0;37m${HOSTNAME}\033[0m as hostname (domain)."
 	wpm_listen
 }
 
@@ -37,11 +44,3 @@ wpm_hostname_false(){
 	echo -e "\033[0m"	
 	exit 1;;
 }
-
-wpm_hostname() {
-	case "$HOSTNAME" in
-		*.*) wpm_hostname_true 
-		*) wpm_hostname_false
-	esac
-}
-

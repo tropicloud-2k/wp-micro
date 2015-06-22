@@ -42,5 +42,5 @@ wpm_hostname_false(){
 	echo -e "\033[1;31m  Example:\n"	
 	echo -e "\033[1;31m  docker run -it -p 80:80 -p 443:443 -e WP_SSL=true -h example.com tropicloud/wp-micro"	
 	echo -e "\033[0m"	
-	exit 1;;
+	exit 1
 }

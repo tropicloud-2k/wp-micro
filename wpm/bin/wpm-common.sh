@@ -7,7 +7,7 @@ wpm_header() {
 -----------------------------------------------------
 \033[1;33m  (wpm+) \033[0m|\033[1;37m $1 \033[0;30m
 -----------------------------------------------------"
-	echo -e "\033[0m  $2"
+	echo -e "\033[0m$2"
 }
 
 # ------------------------
@@ -16,12 +16,12 @@ wpm_header() {
 
 wpm_links() {
 	if [[  ! -z $REDIS_PORT  ]];
-	then echo -e "\n\033[1;32m  •\033[0;37m Redis\033[0m listening at `echo $REDIS_PORT | cut -d/ -f3`"		
-	else echo -e "\n\033[1;31m  •\033[0;37m Redis\033[0m not connected"
+	then echo -e "\033[1;32m  •\033[0;37m Redis\033[0m listening at `echo $REDIS_PORT | cut -d/ -f3`"		
+	else echo -e "\033[1;31m  •\033[0;37m Redis\033[0m not connected"
 	fi		
 	if [[  ! -z $MEMCACHED_PORT  ]];
-	then echo -e "\033[1;32m  •\033[0;37m Memcached\033[0m listening at `echo $MEMCACHED_PORT | cut -d/ -f3` \n"
-	else echo -e "\033[1;31m  •\033[0;37m Memcached\033[0m not connected \n"
+	then echo -e "\033[1;32m  •\033[0;37m Memcached\033[0m listening at `echo $MEMCACHED_PORT | cut -d/ -f3`"
+	else echo -e "\033[1;31m  •\033[0;37m Memcached\033[0m not connected"
 	fi
 }
 
@@ -37,7 +37,7 @@ wpm_hostname() {
 }
 
 wpm_domain_true(){
-	wpm_header "Welcome!" "\nUsing \033[0;37m${HOSTNAME}\033[0m as hostname (domain)."
+	wpm_header "Welcome!" "\n  Using \033[0;37m${HOSTNAME}\033[0m as hostname (domain).\n"
 	wpm_links
 }
 

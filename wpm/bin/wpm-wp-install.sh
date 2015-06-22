@@ -20,6 +20,8 @@ wpm_wp_install() {
 		
 		# stop mysql server
 		mysqladmin -u root shutdown
-	
+		
+		echo -n "initialized" > /etc/wpm_wp_status
+	else echo -n "installed" > /etc/wpm_wp_status
 	fi
 }

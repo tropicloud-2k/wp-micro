@@ -33,7 +33,14 @@ wpm_wp_setup() {
 	su -l $user -c "cd $wpm && composer install"
 	su -l $user -c "ln -s $web ~/"
 	
-	wpm_wp_install > /var/log/wpm_wp_install.log 2>&1
+	wpm_wp_install > /var/log/install.log 2>&1 &
+	
+	wpm_wp_status=$(cat /etc/wpm_wp_status)
+
+	echo -ne "Initializing WordPress..."
+	while [[  $wpm_wp_status != 'installed' || $wpm_wp_status != 'initialized'  ]]; do
+		echo -n '.' && sleep 1
+	done && echo -ne "done\n"
 
 	if [[  $? == 0  ]]; 
 	then echo -e "WordPress installed successfully"

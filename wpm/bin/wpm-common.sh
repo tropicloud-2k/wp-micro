@@ -6,8 +6,8 @@ wpm_header() {
 	echo -e "\033[0;30m
 -----------------------------------------------------
 \033[1;33m  (wpm+) \033[0m|\033[1;37m $1 \033[0;30m
------------------------------------------------------"
-	echo -e "\033[0m$2"
+-----------------------------------------------------\n\033[0m"
+if [[  ! -z $2  ]]; then echo -e "\033[0m$2\033[0m\n"; fi	
 }
 
 # ------------------------
@@ -23,7 +23,6 @@ wpm_links() {
 	then echo -e "\033[1;32m  •\033[0;37m Memcached\033[0m listening at `echo $MEMCACHED_PORT | cut -d/ -f3`"
 	else echo -e "\033[1;31m  •\033[0;37m Memcached\033[0m not connected"
 	fi
-	echo -e ""
 }
 
 # ------------------------
@@ -36,11 +35,14 @@ wpm_hostname() {
 		*) _domain_false;;
 	esac
 }
+_domain_true(){
+	wpm_header "Initial Setup" "  Using \033[0;37m${HOSTNAME}\033[0m as hostname (domain)."
+	wpm_links
+}
 _domain_false(){
 	wpm_header "Error! Hostname is not set."
 	echo -e "\033[1;31m  Use the \033[1;37m-h\033[1;31m flag to set the hostname (domain).\n\033[0m"
-	echo -e "  Ex: docker run -P -h example.com -d tropicloud/wp-micro\n"
+	echo -e "  Ex: docker run -P -h example.com -d tropicloud/wp-micro\n"	
 	echo -e "  Aborting script...\n\n" && exit 1
 }
-_domain_true(){ echo -e "\n\033[0;32mUsing \033[0;37m${HOSTNAME}\033[0;32m as hostname (domain)."; }
 

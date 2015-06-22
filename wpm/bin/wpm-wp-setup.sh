@@ -5,6 +5,7 @@
 wpm_wp_setup() {
 
 	wpm_header "WordPress Setup"
+	wpm_ssl
 	
 	# ------------------------
 	# NGINX
@@ -32,16 +33,10 @@ wpm_wp_setup() {
 	su -l $user -c "cd $wpm && composer install"
 	su -l $user -c "ln -s $web ~/"
 	
-	wpm_wp_install > /var/log/wpm-wp-install.log 2>&1 &	
-	wpm_ssl
-	
+	wpm_wp_install > /var/log/wpm-wp-install.log 2>&1 &		
 	wpm_wp_status() { cat /var/log/wpm-install.log | grep -q "WordPress installed successfully"; }
 	
 	echo -ne "Loading environment..."
 	while ! wpm_wp_status true; do echo -n '.' && sleep 1; done
 	echo -ne " done.\n"
-		
-# 	echo -ne "Loading environment..."
-# 	while [[  ! -e /etc/wpm_wp_status  ]];do echo -n '.' && sleep 1; done
-# 	echo -ne " done!\n"
 }

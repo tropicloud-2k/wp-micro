@@ -42,8 +42,6 @@ wpm_build() {
 	# COMPOSER
 	# ------------------------
 	
-	wpm_header "Composer"
-
 	curl -sS https://getcomposer.org/installer | php
 	mv composer.phar /usr/local/bin/composer
 	
@@ -51,8 +49,6 @@ wpm_build() {
 	# PREDIS
 	# ------------------------
 	
-	wpm_header "Predis"
-
 	pear channel-discover pear.nrk.io
 	pear install nrk/Predis
 	

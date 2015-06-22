@@ -21,7 +21,7 @@ wpm_wp_install() {
 		# stop mysql server
 		mysqladmin -u root shutdown
 		
-		echo "WP_STATUS = installed"
-	else echo "WP_STATUS = installed"
+		touch $home/.installed
+	else touch $home/.installed
 	fi
 }

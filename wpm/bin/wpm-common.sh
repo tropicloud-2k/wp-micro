@@ -18,7 +18,7 @@ wpm_header() {
 		else echo -e "\033[1;31m  •\033[0;37m Redis\033[0m not connected"
 		fi		
 		if [[  ! -z $MEMCACHED_PORT  ]];
-		then echo -e "\033[1;32m  •\033[0;37m Memcached\033[0m listening at `echo $MEMCACHED_PORT | cut -d/ -f3`)"
+		then echo -e "\033[1;32m  •\033[0;37m Memcached\033[0m listening at `echo $MEMCACHED_PORT | cut -d/ -f3`"
 		else echo -e "\033[1;31m  •\033[0;37m Memcached\033[0m not connected"
 		fi
 	fi	

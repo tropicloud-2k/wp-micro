@@ -1,4 +1,4 @@
-wpm_setup() {
+wpm_build() {
 
 	# ------------------------
 	# PACKGES
@@ -80,7 +80,7 @@ wpm_setup() {
 	cat /wpm/etc/nginx/nginx.conf > /etc/wpm/nginx.conf
 	cat /wpm/etc/supervisord.conf > /etc/supervisord.conf
 
-	wpm_header "Image Built"
+	wpm_header "Image successfully built"
 
 	cat > ~/.profile <<"EOF"
 for var in $(cat /etc/.env); do 

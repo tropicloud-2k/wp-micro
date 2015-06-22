@@ -11,10 +11,10 @@ wpm_header() {
 }
 
 # ------------------------
-# WPM LISTEN
+# WPM LINKS
 # ------------------------
 
-wpm_listen() {
+wpm_links() {
 	if [[  ! -z $REDIS_PORT  ]]; then echo -e "\033[1;32m  •\033[0;37m Redis \033[0m(`echo $REDIS_PORT | cut -d/ -f3`)"; fi		
 	if [[  ! -z $MEMCACHED_PORT  ]]; then echo -e "\033[1;32m  •\033[0;37m Memcached \033[0m(`echo $MEMCACHED_PORT | cut -d/ -f3`)\n"; fi
 }
@@ -23,7 +23,7 @@ wpm_listen() {
 # WPM HOSTNAME
 # ------------------------
 
-wpm_hostname() {
+wpm_hostname_check() {
 	case "$HOSTNAME" in
 		*.*) wpm_hostname_true;;
 		*) wpm_hostname_false;;
@@ -33,7 +33,7 @@ wpm_hostname() {
 wpm_hostname_true(){
 	wpm_header "Welcome to WP-MICRO"
 	echo -e "\033[0m  Using \033[0;37m${HOSTNAME}\033[0m as hostname (domain)."
-	wpm_listen
+	wpm_links
 }
 
 wpm_hostname_false(){

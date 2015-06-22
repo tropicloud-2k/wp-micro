@@ -1,13 +1,11 @@
 FROM alpine:3.2
-MAINTAINER "Tropicloud" <admin@tropicloud.net>
 
 ADD wpm /wpm
-RUN /wpm/wpm.sh setup
+RUN /wpm/wpm.sh build
 
-ENV WP_REPO=https://github.com/roots/bedrock.git \
-	WP_ENV=development \
-	WP_SSL=false
+ENV WP_ENV=development \
+	WP_SSL=false \
+	WP_REPO=https://github.com/roots/bedrock.git
 
 EXPOSE 80 443
-ENTRYPOINT ["wpm"]
-CMD ["start"]
+CMD ["wpm start"]

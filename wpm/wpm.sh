@@ -24,17 +24,17 @@ done
 # wpm commands
 # ------------------------------------
 
-  if [[  $1 == 'setup'  ]];     then wpm_setup $@
-elif [[  $1 == 'start'  ]];     then wpm_start $@
-elif [[  $1 == 'stop'  ]];      then wpm_stop $@
-elif [[  $1 == 'restart'  ]];   then wpm_restart $@
-elif [[  $1 == 'reload'  ]];    then wpm_reload $@
-elif [[  $1 == 'shutdown'  ]];  then wpm_shutdown $@
-elif [[  $1 == 'status'  ]];    then wpm_status $@
-elif [[  $1 == 'log'  ]];       then wpm_log $@
-elif [[  $1 == 'ps'  ]];        then wpm_ps $@
-elif [[  $1 == 'login'  ]];     then wpm_login $@
-elif [[  $1 == 'root'  ]];      then wpm_root $@
+  if [[  $1 == 'build'  ]];     then wpm_build
+elif [[  $1 == 'start'  ]];     then wpm_start
+elif [[  $1 == 'stop'  ]];      then wpm_stop
+elif [[  $1 == 'restart'  ]];   then wpm_restart
+elif [[  $1 == 'reload'  ]];    then wpm_reload
+elif [[  $1 == 'shutdown'  ]];  then wpm_shutdown
+elif [[  $1 == 'status'  ]];    then wpm_status
+elif [[  $1 == 'log'  ]];       then wpm_log
+elif [[  $1 == 'ps'  ]];        then wpm_ps
+elif [[  $1 == 'login'  ]];     then wpm_login
+elif [[  $1 == 'root'  ]];      then wpm_root
 
 else echo "
 ----------------------------------------------------

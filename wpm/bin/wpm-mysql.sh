@@ -28,22 +28,22 @@ wpm_mysql_setup() {
 	echo -ne "Starting mysql server..."
 	while [[  ! -e /run/mysqld/mysqld.sock  ]]; do
 		echo -n '.' && sleep 1
-	done && echo -ne " done!\n"
+	done && echo -ne " done.\n"
 	
 	echo -ne "Creating mysql database..."
 	while ! wpm_mysql_create true; do
 		echo -n '.' && sleep 1
-	done && echo -ne " done!\n"
+	done && echo -ne " done.\n"
 	
 	echo -ne "Securing mysql installation..."
 	while ! wpm_mysql_secure true; do
 		echo -n '.' && sleep 1
-	done && echo -ne " done!\n"
+	done && echo -ne " done.\n"
 	
 	echo -ne "Flushing mysql privileges..."
 	while ! `mysql -u root -e "FLUSH PRIVILEGES"` true; do
 		echo -n '.' && sleep 1
-	done && echo -ne " done!\n"
+	done && echo -ne " done.\n"
 	
 	mysqladmin -u root shutdown
 }

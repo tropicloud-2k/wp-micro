@@ -37,7 +37,7 @@ wpm_hostname() {
 }
 
 wpm_domain_true(){
-	wpm_header "Welcome!" "\n  Using \033[0;37m${HOSTNAME}\033[0m as hostname (domain).\n"
+	wpm_header "Initial Setup" "\n  Using \033[0;37m${HOSTNAME}\033[0m as hostname (domain).\n"
 	wpm_links
 }
 

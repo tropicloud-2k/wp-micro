@@ -83,5 +83,5 @@ wpm_build() {
 	chown -R $user:nginx /var/wpm
 	chmod +x /wpm/wpm.sh && ln -s /wpm/wpm.sh /usr/bin/wpm
 	
-	wpm_header "\033[0;32mDocker image successfully built"
+	wpm_header "Docker image successfully built"
 }

@@ -4,7 +4,7 @@ wpm_build() {
 	# PACKGES
 	# ------------------------
 	
-	wpm_header "Packages"
+	wpm_header "Builder"
 
 	apk add --update \
 		mariadb \

@@ -37,8 +37,7 @@ wpm_hostname() {
 }
 
 wpm_domain_true(){
-	wpm_header "Welcome!" "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-	echo -e "\033[0m  Using \033[0;37m${HOSTNAME}\033[0m as hostname (domain).\n"
+	wpm_header "Welcome!" "\nUsing \033[0;37m${HOSTNAME}\033[0m as hostname (domain)."
 	wpm_links
 }
 

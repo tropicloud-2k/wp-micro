@@ -80,7 +80,7 @@ wpm_build() {
 	cat /wpm/etc/nginx/nginx.conf > /etc/wpm/nginx.conf
 	cat /wpm/etc/supervisord.conf > /etc/supervisord.conf
 
-	chmod +x /wpm/wpm.sh && ln -s /wpm/wpm.sh /usr/bin/wpm
 	chown -R $user:nginx /var/wpm
-	
+	chmod +x /wpm/wpm.sh && ln -s /wpm/wpm.sh /usr/bin/wpm
+	echo -e "\n\033[0;32mDocker image successfully built \033[0m\n"
 }

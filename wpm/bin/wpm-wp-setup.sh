@@ -1,5 +1,10 @@
+# ------------------------
+# WORDPRESS SETUP
+# ------------------------
+
 wpm_wp_setup() {
 
+	wpm_ssl $HOSTNAME
 	wpm_header "WordPress Setup"
 	
 	# ------------------------
@@ -30,7 +35,7 @@ wpm_wp_setup() {
 	
 	wpm_wp_install > /var/log/wpm_wp_install.log 2>&1
 
-	if [[  $? == 0  ]]; then echo -e "WordPress installed successfully"; fi
-
-	wpm_ssl $HOSTNAME
+	if [[  $? == 0  ]]; 
+	then echo -e "WordPress installed successfully"
+	fi
 }

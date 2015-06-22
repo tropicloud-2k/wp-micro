@@ -2,7 +2,7 @@
 # WPM ENV.
 # ------------------------
 
-wpm_env() {
+wpm_environment() {
 
 	if [[  $WP_SSL == 'true'  ]];
 	then export WP_HOME="https://${HOSTNAME}"

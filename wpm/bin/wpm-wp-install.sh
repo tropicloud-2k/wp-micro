@@ -4,7 +4,9 @@
 
 wpm_wp_install() {
 
-	cd $web && wpm_env
+	wpm_environment
+	
+	cd $web
 	
 	if [[  ! -z "$WP_TITLE" && ! -z "$WP_USER" && ! -z "$WP_MAIL" && ! -z "$WP_PASS"  ]]; then 
 	

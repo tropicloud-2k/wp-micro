@@ -6,8 +6,8 @@ wpm_header() {
 	echo -e "\033[0;30m
 -----------------------------------------------------
 \033[1;33m  (wpm+) \033[0m|\033[1;37m $1 \033[0;30m
------------------------------------------------------\n\033[0m"
-if [[  ! -z $2  ]]; then echo -e "\033[0m$2\033[0m\n"; fi	
+-----------------------------------------------------"
+	echo -e "\033[0m$2\033[0m"
 }
 
 # ------------------------
@@ -36,7 +36,7 @@ wpm_hostname() {
 	esac
 }
 _domain_true(){
-	wpm_header "Initial Setup" "  Using \033[0;37m${HOSTNAME}\033[0m as hostname (domain)."
+	wpm_header "Initial Setup" "\n  Using \033[0;37m${HOSTNAME}\033[0m as hostname (domain). \n"
 	wpm_links
 }
 _domain_false(){
@@ -45,4 +45,3 @@ _domain_false(){
 	echo -e "  Ex: docker run -P -h example.com -d tropicloud/wp-micro\n"	
 	echo -e "  Aborting script...\n\n" && exit 1
 }
-

@@ -8,7 +8,7 @@ wpm_header() {
 \033[1;33m  (wpm+) \033[0m|\033[1;37m $1 \033[0;30m
 -----------------------------------------------------
 \033[0m"
-if [[  $@ == *'--links'*  ]]; then
+if [[  ! -z $2 && $2 == '--links'  ]]; then
 	if [[  ! -z $REDIS_PORT  ]];
 	then echo -e "\033[1;32m  •\033[0;37m Redis\033[0m listening at `echo $REDIS_PORT | cut -d/ -f3`"		
 	else echo -e "\033[1;31m  •\033[0;37m Redis\033[0m not connected"
@@ -32,7 +32,7 @@ wpm_hostname() {
 }
 
 wpm_hostname_true(){
-	wpm_header --links "Welcome!"
+	wpm_header "Welcome!" --links
 	echo -e "\033[0m  Using \033[0;37m${HOSTNAME}\033[0m as hostname (domain).\n"
 }
 

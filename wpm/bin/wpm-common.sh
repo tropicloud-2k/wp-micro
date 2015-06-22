@@ -4,7 +4,7 @@
 
 wpm_header() {
 
-	if [[  $1 == '--links'  ]]; then lorem="$2"; else lorem="$1"; fi	
+# 	if [[  $1 == '--links'  ]]; then lorem="$2"; else lorem="$1"; fi	
 
 	echo -e "\033[0;30m
 -----------------------------------------------------
@@ -36,7 +36,7 @@ wpm_hostname() {
 }
 
 wpm_hostname_true(){
-	wpm_header --links "Welcome!"
+	wpm_header "Welcome!"
 	echo -e "\033[0m  Using \033[0;37m${HOSTNAME}\033[0m as hostname (domain).\n"
 }
 

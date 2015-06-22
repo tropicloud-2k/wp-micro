@@ -4,12 +4,12 @@
 
 wpm_start() {
 
-	wpm_hostname
+	wpm_domain
 	
 	if [[  ! -d /var/lib/mysql  ]]; then wpm_mysql_setup; fi
 	if [[  ! -d /var/wpm/web  ]]; then wpm_wp_setup; fi
 
-	wpm_header --links "Start" 
+	wpm_header "Start" 
 	
 	if [[  -f /tmp/supervisord.pid  ]]; then
 	

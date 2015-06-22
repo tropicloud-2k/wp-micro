@@ -35,14 +35,13 @@ wpm_wp_setup() {
 	
 	wpm_wp_install > /var/log/install.log 2>&1 &
 	
-	wpm_wp_status=$(cat /etc/wpm_wp_status)
-
-	echo -ne "Initializing WordPress..."
-	while [[  $wpm_wp_status != 'installed' || $wpm_wp_status != 'initialized'  ]]; do
-		echo -n '.' && sleep 1
-	done && echo -ne "done\n"
+wpm_wp_status() { cat /var/log/install.log | grep "WP_STATUS = installed"; }
+while ! wpm_wp_status true; do
+	echo -n '.' && sleep 1
+done
 
 	if [[  $? == 0  ]]; 
 	then echo -e "WordPress installed successfully"
 	fi
 }
+

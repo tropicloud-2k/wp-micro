@@ -43,10 +43,8 @@ wpm_domain_true(){
 }
 
 wpm_domain_false(){
-	wpm_header "Hostname not set!"
-	echo -e "\033[1;31m  Use the \033[1;37m-h\033[1;31m flag to set the container hostname (domain).\n"
-	echo -e "\033[0m  Ex:\033[1;37m docker run -P -h example.com -d tropicloud/wp-micro\n"	
-	echo -e "\033[0m  Aborting script...\n"	
-	echo -e "\033[0m"	
-	exit 1
+	wpm_header "Error! Hostname is not set."
+	echo -e "\033[1;31m  Use the \033[1;37m-h\033[1;31m flag to set the hostname (domain).\n\033[0m"
+	echo -e "  Ex: docker run -P -h example.com -d tropicloud/wp-micro\n"	
+	echo -e "  Aborting script...\n\n" && exit 1
 }

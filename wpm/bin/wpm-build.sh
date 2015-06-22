@@ -7,7 +7,6 @@ wpm_build() {
 	wpm_header "Packages"
 
 	apk add --update \
-		libmemcached \
 		mariadb \
 		mariadb-client \
 		nginx \
@@ -33,6 +32,7 @@ wpm_build() {
 		php-zlib \
 		php-zip \
 		supervisor \
+		libmemcached \
 		nano curl git zip
 	                 
 	rm -rf /var/cache/apk/*
@@ -67,6 +67,7 @@ wpm_build() {
 	# WP-MICRO
 	# ------------------------
 	
+	chmod +x /wpm/wpm.sh && ln -s /wpm/wpm.sh /usr/bin/wpm	
 	adduser -D -G nginx -s /bin/sh -h $home $user
 	
 	mkdir -p /etc/wpm
@@ -74,18 +75,11 @@ wpm_build() {
 	mkdir -p /var/ssl
 	mkdir -p /var/log/php
 	
-	chmod +x /wpm/wpm.sh && ln -s /wpm/wpm.sh /usr/bin/wpm
-	chown -R $user:nginx /var/wpm
-	
 	cat /wpm/etc/nginx/nginx.conf > /etc/wpm/nginx.conf
 	cat /wpm/etc/supervisord.conf > /etc/supervisord.conf
-
-	wpm_header "Image successfully built"
-
 	cat > ~/.profile <<"EOF"
 for var in $(cat /etc/.env); do 
 	export $var
 done
 EOF
-
 }

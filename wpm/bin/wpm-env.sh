@@ -15,10 +15,10 @@ wpm_environment() {
 	else export WP_HOME="http://${HOSTNAME}"
 	fi
 	
-	export WP_SITEURL=${WP_HOME}/wp
-	export DB_HOST=127.0.0.1
-	export DB_NAME=$user
-	export DB_USER=$user
+	export WP_SITEURL="${WP_HOME}/wp"
+	export DB_HOST="127.0.0.1"
+	export DB_NAME="$user"
+	export DB_USER="$user"
 	
 	export AUTH_KEY="`openssl rand 48 -base64`"
 	export SECURE_AUTH_KEY="`openssl rand 48 -base64`"

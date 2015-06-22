@@ -11,19 +11,10 @@ wpm_header() {
 }
 
 # ------------------------
-# WPM HOSTNAME
+# WPM LINKS
 # ------------------------
 
-wpm_hostname() {
-	case "$HOSTNAME" in
-		*.*) wpm_hostname_true;;
-		*) wpm_hostname_false;;
-	esac
-}
-
-wpm_hostname_true(){
-	wpm_header "Welcome to WP-MICRO"
-	echo -e "\033[0m  Using \033[0;37m${HOSTNAME}\033[0m as hostname (domain).\n"
+wpm_links() {
 	if [[  ! -z $REDIS_PORT  ]];
 	then echo -e "\033[1;32m  •\033[0;37m Redis \033[0m(`echo $REDIS_PORT | cut -d/ -f3`)"		
 	else echo -e "\033[1;31m  •\033[0;37m Redis \033[0m(not connected)"
@@ -34,7 +25,24 @@ wpm_hostname_true(){
 	fi		
 }
 
-wpm_hostname_false(){
+# ------------------------
+# WPM DOMAIN
+# ------------------------
+
+wpm_domain() {
+	case "$HOSTNAME" in
+		*.*) wpm_domain_true;;
+		*) wpm_domain_false;;
+	esac
+}
+
+wpm_domain_true(){
+	wpm_header "Welcome to WP-MICRO"
+	echo -e "\033[0m  Using \033[0;37m${HOSTNAME}\033[0m as hostname (domain).\n"
+	wpm_links
+}
+
+wpm_domain_false(){
 	wpm_header "\033[1;31m(Error)\033[1;37m Hostname not set!"
 	echo -e "\033[1;31m  HOSTNAME NOT SET!\n"
 	echo -e "\033[1;31m  Use the \033[0;31m-h\033[1;31m flag to set the container hostname (domain).\n"

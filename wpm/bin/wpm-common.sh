@@ -3,22 +3,25 @@
 # ------------------------
 
 wpm_header() {
-	$lorem=`echo $@ | sed "s/--links//g"`
+
+	if [[  $1 == '--links'  ]]; then lorem="$2"; else lorem="$1"; fi	
+
 	echo -e "\033[0;30m
 -----------------------------------------------------
 \033[1;33m  (wpm+) \033[0m|\033[1;37m $lorem \033[0;30m
 -----------------------------------------------------
 \033[0m"
-if [[  $@ == *'--links'*  ]]; then
-	if [[  ! -z $REDIS_PORT  ]];
-	then echo -e "\033[1;32m  •\033[0;37m Redis\033[0m listening at `echo $REDIS_PORT | cut -d/ -f3`"		
-	else echo -e "\033[1;31m  •\033[0;37m Redis\033[0m not connected"
-	fi		
-	if [[  ! -z $MEMCACHED_PORT  ]];
-	then echo -e "\033[1;32m  •\033[0;37m Memcached\033[0m listening at `echo $MEMCACHED_PORT | cut -d/ -f3`)"
-	else echo -e "\033[1;31m  •\033[0;37m Memcached\033[0m not connected"
-	fi
-fi	
+
+	if [[  $@ == *'--links'*  ]]; then
+		if [[  ! -z $REDIS_PORT  ]];
+		then echo -e "\033[1;32m  •\033[0;37m Redis\033[0m listening at `echo $REDIS_PORT | cut -d/ -f3`"		
+		else echo -e "\033[1;31m  •\033[0;37m Redis\033[0m not connected"
+		fi		
+		if [[  ! -z $MEMCACHED_PORT  ]];
+		then echo -e "\033[1;32m  •\033[0;37m Memcached\033[0m listening at `echo $MEMCACHED_PORT | cut -d/ -f3`)"
+		else echo -e "\033[1;31m  •\033[0;37m Memcached\033[0m not connected"
+		fi
+	fi	
 }
 
 # ------------------------

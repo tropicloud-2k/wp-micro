@@ -32,6 +32,5 @@ wpm_environment() {
 	echo "" > /etc/.env && env | grep = >> /etc/.env
 	for var in `cat /etc/.env`; do echo $var >> $wpm/.env; done
 	
-	cat ~/.profile > ${home}/.profile
 	chown $user:nginx $wpm/.env
 }

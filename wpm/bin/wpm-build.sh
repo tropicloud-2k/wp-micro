@@ -67,7 +67,6 @@ wpm_build() {
 	# WP-MICRO
 	# ------------------------
 	
-	chmod +x /wpm/wpm.sh && ln -s /wpm/wpm.sh /usr/bin/wpm	
 	adduser -D -G nginx -s /bin/sh -h $home $user
 	
 	mkdir -p /etc/wpm
@@ -75,11 +74,13 @@ wpm_build() {
 	mkdir -p /var/ssl
 	mkdir -p /var/log/php
 	
+	cat /wpm/etc/.profile > /root/.profile
+	cat /wpm/etc/.profile > $home/.profile
+	
 	cat /wpm/etc/nginx/nginx.conf > /etc/wpm/nginx.conf
 	cat /wpm/etc/supervisord.conf > /etc/supervisord.conf
-	cat > ~/.profile <<"EOF"
-for var in $(cat /etc/.env); do 
-	export $var
-done
-EOF
+
+	chmod +x /wpm/wpm.sh && ln -s /wpm/wpm.sh /usr/bin/wpm
+	chown -R $user:nginx /var/wpm
+	
 }

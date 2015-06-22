@@ -4,8 +4,8 @@
 
 wpm_wp_setup() {
 
-	wpm_header "WordPress Setup"
 	wpm_ssl
+	wpm_header "WordPress Setup"
 	
 	# ------------------------
 	# NGINX

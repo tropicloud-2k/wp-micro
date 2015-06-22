@@ -4,7 +4,7 @@
 
 wpm_ssl() {
 
-# 	wpm_header "SSL Cert."
+ 	wpm_header "SSL Cert."
 
 	cd /var/ssl
 	
@@ -13,5 +13,4 @@ wpm_ssl() {
 	openssl rsa -in $HOSTNAME.key -out $HOSTNAME.key
 	openssl x509 -req -days 365 -sha256 -in $HOSTNAME.csr -signkey $HOSTNAME.key -out $HOSTNAME.crt	
 	rm -f openssl.conf
-
 }

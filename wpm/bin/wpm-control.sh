@@ -9,7 +9,8 @@ wpm_start() {
 	if [[  ! -d /var/lib/mysql  ]]; then wpm_mysql_setup; fi
 	if [[  ! -d /var/wpm/web  ]]; then wpm_wp_setup; fi
 
-	wpm_header "Start" "\n$(wpm_links)\n"
+	wpm_header "Start"
+	wpm_links
 	
 	if [[  -f /tmp/supervisord.pid  ]]; then
 	

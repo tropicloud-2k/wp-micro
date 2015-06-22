@@ -39,18 +39,18 @@ wpm_build() {
 	rm -rf /var/lib/apt/lists/*
 	
 	# ------------------------
-	# PREDIS
-	# ------------------------
-	
-	pear channel-discover pear.nrk.io
-	pear install nrk/Predis
-	
-	# ------------------------
 	# COMPOSER
 	# ------------------------
 	
 	curl -sS https://getcomposer.org/installer | php
 	mv composer.phar /usr/local/bin/composer
+	
+	# ------------------------
+	# PREDIS
+	# ------------------------
+	
+	pear channel-discover pear.nrk.io
+	pear install nrk/Predis
 	
 	# ------------------------
 	# WP-CLI

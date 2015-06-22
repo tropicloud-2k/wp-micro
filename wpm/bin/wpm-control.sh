@@ -10,6 +10,7 @@ wpm_start() {
 	if [[  ! -d /var/wpm/web  ]]; then wpm_wp_setup; fi
 
 	wpm_header "Start"
+	wpm_links
 	
 	if [[  -f /tmp/supervisord.pid  ]]; then
 	

@@ -30,8 +30,8 @@ wpm_header() {
 
 wpm_hostname() {
 	case "$HOSTNAME" in
-		*.*) wpm_domain_true;;
-		*) wpm_domain_false;;
+		*.*) wpm_hostname_true;;
+		*) wpm_hostname_false;;
 	esac
 }
 

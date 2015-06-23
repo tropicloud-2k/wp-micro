@@ -44,8 +44,8 @@ wpm_mysql_setup() {
 	while ! `mysql -u root -e "FLUSH PRIVILEGES"` true; do
 		echo -n '.' && sleep 1
 	done && echo -ne " done.\n"
-
-	echo -e "$(date +%Y-%m-%d\ %T) - MySQL installed successfully." >> /var/log/wpm-install.log
 	
 	mysqladmin -u root shutdown
+
+	echo -e "$(date +%Y-%m-%d\ %T) - MySQL setup completed." >> /var/log/wpm-install.log
 }

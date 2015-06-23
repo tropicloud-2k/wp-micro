@@ -36,7 +36,7 @@ wpm_hostname() {
 	esac
 }
 _domain_true(){
-	wpm_header "Initial Setup"
+	wpm_header "Welcome to wp-micro"
 	echo -e "\033[0m  Using \033[0;37m${HOSTNAME}\033[0m as hostname (domain). \n"
 	wpm_links
 }

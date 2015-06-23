@@ -6,7 +6,8 @@ RUN /wpm/wpm.sh build
 
 ENV WP_ENV=development \
 	WP_SSL=false \
-	WP_REPO=https://github.com/roots/bedrock.git
+	WP_REPO=https://github.com/roots/bedrock.git \
+	VIRTUAL_HOST=$HOSTNAME
 
 EXPOSE 80 443
 ENTRYPOINT ["wpm"]

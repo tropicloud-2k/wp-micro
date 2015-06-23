@@ -6,8 +6,11 @@ wpm_ssl() {
 
 	wpm_header "SSL Setup"
 
-	cd /var/ssl
-	
+	if [[  -d /var/ssl  ]];
+	then cd /var/ssl
+	else mkdir -l /var/ssl && cd /var/ssl
+	fi
+
 	cat /wpm/etc/nginx/openssl.conf | sed -e "s/example.com/$HOSTNAME/g" > openssl.conf
 	
 	openssl req -nodes -sha256 -newkey rsa:2048 -keyout $HOSTNAME.key -out $HOSTNAME.csr -config openssl.conf -batch

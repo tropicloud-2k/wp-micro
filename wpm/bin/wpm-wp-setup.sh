@@ -29,7 +29,7 @@ wpm_wp_setup() {
 	wpm_header "WordPress Setup"
 
 	su -l $user -c "cd $wpm && git clone $WP_REPO ."
-	su -l $user -c "cd $wpm && composer install"
+	su -l $user -c "cd $wpm && composer update && composer install"
 	su -l $user -c "ln -s $web ~/"
 	
 	wpm_wp_install > /var/log/wpm-wp-install.log 2>&1 &		

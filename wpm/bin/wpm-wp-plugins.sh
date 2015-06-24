@@ -10,7 +10,6 @@ wpm_wp_plugins() {
 		sed -i "s/127.0.0.1:11211/$MEMCACHED/g" /etc/wpm/nginx.conf		
 		curl https://raw.githubusercontent.com/petermolnar/wp-ffpc/master/wp-ffpc.php \
 		| sed "s/127.0.0.1:11211/$MEMCACHED/g" \
-		| sed "s/300,/3600,/g" \
 		| sed "s/'memcached'/'memcache'/g" \
 		| sed "s/'pingback_header'.*/'pingback_header' => true,/g" \
 		| sed "s/'response_header'.*/'response_header' => true,/g" \

@@ -5,7 +5,7 @@
 wpm_wp_version() {
 
 	if [[  ! -z $WP_VERSION  ]];
-	then sed -i "s|\"johnpbloch/wordpress\"|\"johnpbloch/wordpress\": \"$WP_VER\"|g" $wpm/composer.json
+	then sed -i "s|\"johnpbloch/wordpress\".*|\"johnpbloch/wordpress\": \"$WP_VERSION\"|g" $wpm/composer.json
 	fi
 }
 

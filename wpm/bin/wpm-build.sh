@@ -9,6 +9,7 @@ wpm_build() {
 	apk add --update \
 		mariadb \
 		mariadb-client \
+		mutt \
 		msmtp \
 		nginx \
 		openssl \
@@ -77,7 +78,8 @@ wpm_build() {
 	cat /wpm/etc/nginx/nginx.conf > /etc/wpm/nginx.conf
 	cat /wpm/etc/supervisord.conf > /etc/supervisord.conf
 
-	chown -R $user:nginx /var/wpm
+	chown -R $user:nginx $wpm
+	chmod -R 750 $wpm
 	
-	wpm_header "Successfully built!"
+	wpm_header "Build Completed!"
 }

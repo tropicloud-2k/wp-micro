@@ -31,16 +31,18 @@ wpm_links() {
 
 wpm_hostname() {
 	case "$HOSTNAME" in
-		*.*) _domain_true;;
-		*) _domain_false;;
+		*.*) wpm_hostname_true;;
+		*) wpm_hostname_false;;
 	esac
 }
-_domain_true(){
+
+wpm_hostname_true(){
 	wpm_header "Welcome to wp-micro"
 	echo -e "\033[0m  Using \033[0;37m${HOSTNAME}\033[0m as hostname (domain). \n"
 	wpm_links
 }
-_domain_false(){
+
+wpm_hostname_false(){
 	wpm_header "Error! Hostname is not set."
 	echo -e "\033[1;31m  Use the \033[1;37m-h\033[1;31m flag to set the hostname (domain).\n
 \033[0m  Ex: docker run -P -h example.com -d tropicloud/wp-micro \n

@@ -8,7 +8,7 @@ wpm_wp_setup() {
 	# NGINX
 	# ------------------------
 
-	if [[  $WP_SSL == 'true'  ]];
+	if [[  -z $VIRTUAL_PROTO && $WP_SSL == 'true'  ]];
 	then cat /wpm/etc/nginx/wpssl.conf | sed -e "s/example.com/$HOSTNAME/g" > /etc/wpm/wordpress.conf && wpm_ssl
 	else cat /wpm/etc/nginx/wp.conf | sed -e "s/example.com/$HOSTNAME/g" > /etc/wpm/wordpress.conf
 	fi

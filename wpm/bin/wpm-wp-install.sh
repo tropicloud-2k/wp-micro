@@ -22,5 +22,5 @@ wpm_wp_install() {
 		mysqladmin -u root shutdown
 		
 	fi
-	echo -e "$(date +%Y-%m-%d\ %T) - WordPress setup completed." >> /var/log/wpm-install.log
+	echo -e "$(date +%Y-%m-%d\ %T) WordPress setup completed" >> /var/log/wpm-install.log
 }

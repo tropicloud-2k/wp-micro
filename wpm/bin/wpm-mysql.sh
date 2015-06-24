@@ -47,5 +47,5 @@ wpm_mysql_setup() {
 	
 	mysqladmin -u root shutdown
 
-	echo -e "$(date +%Y-%m-%d\ %T) - MySQL setup completed." >> /var/log/wpm-install.log
+	echo -e "$(date +%Y-%m-%d\ %T) MySQL setup completed" >> /var/log/wpm-install.log
 }

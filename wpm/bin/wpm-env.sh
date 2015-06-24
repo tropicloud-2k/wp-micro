@@ -33,5 +33,5 @@ wpm_environment() {
 	for var in `cat /etc/.env`; do echo $var >> $wpm/.env; done	
 	chown $user:nginx $wpm/.env
 
-	echo -e "$(date +%Y-%m-%d\ %T) - Environment setup completed." >> /var/log/wpm-install.log
+	echo -e "$(date +%Y-%m-%d\ %T) Environment setup completed" >> /var/log/wpm-install.log
 }

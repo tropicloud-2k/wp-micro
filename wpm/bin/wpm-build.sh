@@ -56,7 +56,7 @@ wpm_build() {
 	# WP-CLI
 	# ------------------------
 
-	curl -L https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar > /usr/local/bin/wp
+	curl -sL https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar > /usr/local/bin/wp
 	chmod +x /usr/local/bin/wp
 
 	# ------------------------
@@ -78,6 +78,4 @@ wpm_build() {
 
 	chown -R $user:nginx /var/wpm
 	chmod +x /wpm/wpm.sh && ln -s /wpm/wpm.sh /usr/bin/wpm
-	
-	wpm_header "Successfully built"
 }

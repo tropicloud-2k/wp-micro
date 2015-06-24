@@ -9,6 +9,7 @@ wpm_build() {
 	apk add --update \
 		mariadb \
 		mariadb-client \
+		msmtp \
 		nginx \
 		openssl \
 		php-cli \
@@ -32,12 +33,13 @@ wpm_build() {
 		php-zlib \
 		php-zip \
 		supervisor \
-		libmemcached \
 		nano curl git zip
 	                 
+	ln -s /usr/bin/msmtp /usr/bin/sendmail
+
 	rm -rf /var/cache/apk/*
 	rm -rf /var/lib/apt/lists/*
-	
+
 	# ------------------------
 	# COMPOSER
 	# ------------------------
@@ -63,21 +65,19 @@ wpm_build() {
 	# WP-MICRO
 	# ------------------------
 	
+	chmod +x /wpm/wpm.sh && ln -s /wpm/wpm.sh /usr/bin/wpm
 	adduser -D -G nginx -s /bin/sh -h $home $user
 	
 	mkdir -p /etc/wpm
 	mkdir -p /var/wpm
-	mkdir -p /var/ssl
 	mkdir -p /var/log/php
 	
 	cat /wpm/etc/.profile > /root/.profile
 	cat /wpm/etc/.profile > $home/.profile
-	
 	cat /wpm/etc/nginx/nginx.conf > /etc/wpm/nginx.conf
 	cat /wpm/etc/supervisord.conf > /etc/supervisord.conf
 
 	chown -R $user:nginx /var/wpm
-	chmod +x /wpm/wpm.sh && ln -s /wpm/wpm.sh /usr/bin/wpm
 	
 	wpm_header "Successfully built!"
 }

@@ -56,8 +56,8 @@ wpm_build() {
 	# WP-CLI
 	# ------------------------
 
-	curl -sO https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
-	chmod +x wp-cli.phar && mv wp-cli.phar /usr/local/bin/wp
+	curl -L https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar > /usr/local/bin/wp
+	chmod +x /usr/local/bin/wp
 
 	# ------------------------
 	# WP-MICRO

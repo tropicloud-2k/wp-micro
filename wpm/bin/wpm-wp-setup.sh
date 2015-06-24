@@ -2,6 +2,13 @@
 # WORDPRESS SETUP
 # ------------------------
 
+wpm_wp_version() {
+
+	if [[  ! -z $WP_VERSION  ]];
+	then sed -i "s|\"johnpbloch/wordpress\"|\"johnpbloch/wordpress\": \"$WP_VER\"|g" $wpm/composer.json
+	fi
+}
+
 wpm_wp_setup() {
 
 	# ------------------------
@@ -28,7 +35,7 @@ wpm_wp_setup() {
 	
 	wpm_header "WordPress Setup"
 
-	su -l $user -c "cd $wpm && git clone $WP_REPO ."
+	su -l $user -c "cd $wpm && git clone $WP_REPO ." && wpm_wp_version
 	su -l $user -c "cd $wpm && composer install"
 	su -l $user -c "ln -s $web ~/"
 	
@@ -39,3 +46,4 @@ wpm_wp_setup() {
 	while ! wpm_wp_status true; do echo -n '.' && sleep 1; done
 	echo -ne " done.\n"
 }
+

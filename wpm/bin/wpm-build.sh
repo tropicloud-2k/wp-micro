@@ -72,12 +72,12 @@ wpm_build() {
 	mkdir -p /var/ssl
 	mkdir -p /var/log/php
 	
+	chown -R $user:nginx $wpm
+
 	cat /wpm/etc/.profile > /root/.profile
 	cat /wpm/etc/.profile > $home/.profile
 	cat /wpm/etc/nginx/nginx.conf > /etc/wpm/nginx.conf
 	cat /wpm/etc/supervisord.conf > /etc/supervisord.conf
-	
-	chown -R $user:nginx $wpm
-		
+
 	wpm_header "Build completed."
 }

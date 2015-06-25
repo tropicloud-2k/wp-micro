@@ -35,7 +35,7 @@ wpm_build() {
 		php-zip \
 		supervisor \
 		libmemcached \
-		curl git zip
+		curl git nano zip
 	                 
 	rm -rf /var/cache/apk/*
 	rm -rf /var/lib/apt/lists/*

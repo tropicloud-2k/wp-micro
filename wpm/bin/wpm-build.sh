@@ -78,7 +78,6 @@ wpm_build() {
 	cat /wpm/etc/supervisord.conf > /etc/supervisord.conf
 	
 	chown -R $user:nginx /var/wpm
-	chmod -R 770 /var/wpm
 	
 	wpm_header "Build completed."
 }

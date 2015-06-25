@@ -7,7 +7,6 @@ wpm_build() {
 	wpm_header "Build"
 
 	apk add --update \
-		mariadb \
 		mariadb-client \
 		msmtp \
 		nginx \

@@ -9,6 +9,7 @@ wpm_environment() {
 
 	if [[  ! -z $MEMCACHED_PORT  ]]; then export MEMCACHED=`echo $MEMCACHED_PORT | cut -d/ -f3`; fi		
 	if [[  ! -z $REDIS_PORT  ]]; then export REDIS=`echo $REDIS_PORT | cut -d/ -f3`; fi
+	if [[  ! -z $MYSQL_PORT  ]]; then export MYSQL=`echo $MYSQL_PORT | cut -d/ -f3`; fi
 	
 	if [[  $WP_SSL == 'true'  ]];
 	then export WP_HOME="https://${HOSTNAME}"
@@ -16,10 +17,7 @@ wpm_environment() {
 	fi
 	
 	export WP_SITEURL="${WP_HOME}/wp"
-	export DB_HOST="127.0.0.1"
-	export DB_NAME="$user"
-	export DB_USER="$user"
-	export VISUAL=nano
+	export VISUAL="nano"
 	
 	export AUTH_KEY="`openssl rand 48 -base64`"
 	export SECURE_AUTH_KEY="`openssl rand 48 -base64`"

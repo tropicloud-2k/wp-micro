@@ -16,7 +16,7 @@ wpm_environment() {
 	else export WP_HOME="http://${HOSTNAME}"
 	fi
 	
-	export WP_SITEURL="${WP_HOME}/wp"	
+	export WP_SITEURL="${WP_HOME}/wp"
 	export AUTH_KEY="`openssl rand 48 -base64`"
 	export SECURE_AUTH_KEY="`openssl rand 48 -base64`"
 	export LOGGED_IN_KEY="`openssl rand 48 -base64`"
@@ -25,6 +25,7 @@ wpm_environment() {
 	export SECURE_AUTH_SALT="`openssl rand 48 -base64`"
 	export LOGGED_IN_SALT="`openssl rand 48 -base64`"
 	export NONCE_SALT="`openssl rand 48 -base64`"
+	export VISUAL="nano"
 
 	echo "" > /etc/.env && env | grep = >> /etc/.env
 	for var in `cat /etc/.env`; do echo $var >> $wpm/.env; done	

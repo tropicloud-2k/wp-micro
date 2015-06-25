@@ -16,15 +16,15 @@ wpm_header() {
 
 wpm_links() {
 	if [[  ! -z $MYSQL_PORT  ]];
-	then echo -e "\033[1;32m  •\033[0;37m MySQL\033[0m --link: `echo $MYSQL_PORT | cut -d/ -f3 | cut -d: -f1`"
+	then echo -e "\033[1;32m  •\033[0;37m MySQL\033[0m --> `echo $MYSQL_PORT | cut -d/ -f3 `"
 	else echo -e "\033[1;31m  •\033[0;37m MySQL\033[0m (not linked)"
 	fi	
 	if [[  ! -z $REDIS_PORT  ]];
-	then echo -e "\033[1;32m  •\033[0;37m Redis\033[0m --link: `echo $REDIS_PORT | cut -d/ -f3 | cut -d: -f1`"		
+	then echo -e "\033[1;32m  •\033[0;37m Redis\033[0m --> `echo $REDIS_PORT | cut -d/ -f3 `"		
 	else echo -e "\033[1;31m  •\033[0;37m Redis\033[0m (not linked)"
 	fi		
 	if [[  ! -z $MEMCACHED_PORT  ]];
-	then echo -e "\033[1;32m  •\033[0;37m Memcached\033[0m --link: `echo $MEMCACHED_PORT | cut -d/ -f3 | cut -d: -f1`"
+	then echo -e "\033[1;32m  •\033[0;37m Memcached\033[0m --> `echo $MEMCACHED_PORT | cut -d/ -f3 `"
 	else echo -e "\033[1;31m  •\033[0;37m Memcached\033[0m (not linked)"
 	fi
 }

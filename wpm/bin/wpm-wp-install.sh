@@ -4,8 +4,13 @@
 
 wpm_wp_core() {
 
-	wp core install --allow-root --url=$WP_HOME --title=$WP_TITLE --admin_name=$WP_USER --admin_email=$WP_MAIL --admin_password=$WP_PASS
-	wp rewrite structure --allow-root '/%postname%/'
+	su -l $user -c "cd $web && wp core install \
+--url=$WP_HOME \
+--title=$WP_TITLE \
+--admin_name=$WP_USER \
+--admin_email=$WP_MAIL \
+--admin_password=$WP_PASS"
+	su -l $user -c "cd $web && wp rewrite structure '/%postname%/'"
 	wpm_wp_plugins
 }
 

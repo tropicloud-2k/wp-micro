@@ -26,7 +26,7 @@ wpm_wp_setup() {
 	# MSMTP
 	# ------------------------
 
-	cat /wpm/etc/msmtp.conf | sed -e "s/example.com/$HOSTNAME/g" > /etc/msmtprc && chmod 644 /etc/msmtprc
+	cat /wpm/etc/msmtprc | sed -e "s/example.com/$HOSTNAME/g" > /etc/msmtprc
 	echo "sendmail_path = /usr/bin/msmtp -t" > /etc/php/conf.d/sendmail.ini
 	
 	# ------------------------

@@ -66,17 +66,20 @@ wpm_build() {
 	chmod +x /wpm/wpm.sh && ln -s /wpm/wpm.sh /usr/bin/wpm
 	adduser -D -G nginx -s /bin/sh -h $home $user
 	
-	mkdir -p /etc/wpm
 	mkdir -p /var/wpm
-	mkdir -p /var/ssl
+	mkdir -p /etc/wpm/run
 	mkdir -p /var/log/php
-	
-	chown -R $user:nginx $wpm
 
-	cat /wpm/etc/.profile > /root/.profile
 	cat /wpm/etc/.profile > $home/.profile
-	cat /wpm/etc/nginx/nginx.conf > /etc/wpm/nginx.conf && chmod 644 /etc/wpm/nginx.conf
-	cat /wpm/etc/supervisord.conf > /etc/supervisord.conf && chmod 644 /etc/supervisord.conf
-
+	cat /wpm/etc/.profile > /root/.profile
+	
+	cat /wpm/etc/nginx/nginx.conf > /etc/wpm/nginx.conf
+	cat /wpm/etc/supervisord.conf > /etc/supervisord.conf
+	cat /wpm/etc/run/php-fpm.ini  > /etc/wpm/run/php-fpm.ini
+	cat /wpm/etc/run/nginx.ini    > /etc/wpm/run/nginx.ini
+	
+	chmod 644 /etc/supervisord.conf
+	chown -R $user:nginx $wpm	
+	
 	wpm_header "Build completed."
 }

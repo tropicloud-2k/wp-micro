@@ -22,6 +22,7 @@ wpm_mysql_setup() {
 		wpm_header "MySQL Setup"
 
 		apk add --update mariadb && rm -rf /var/cache/apk/* && rm -rf /var/lib/apt/lists/*
+		cat /wpm/etc/run/mariadb.ini > /etc/wpm/run/mariadb.ini
 		sed -i 's/^\(bind-address\s.*\)/# \1/' /etc/mysql/my.cnf
 		
 		export DB_HOST="127.0.0.1"

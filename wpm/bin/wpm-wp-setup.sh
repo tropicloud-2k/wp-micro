@@ -41,13 +41,12 @@ wpm_wp_setup() {
 	su -l $user -c "ln -s $web ~/"
 	
 	wpm_wp_install		
-	wpm_wp_status() { cat /var/log/wpm-install.log | grep -q "WordPress setup completed"; }
 	
 # 	wpm_wp_install > /var/log/wpm-wp-install.log 2>&1 &		
 # 	wpm_wp_status() { cat /var/log/wpm-install.log | grep -q "WordPress setup completed"; }
-	
-	echo -ne "Initializing..."
-	while ! wpm_wp_status true; do echo -n '.' && sleep 1; done
-	echo -ne " done.\n"
+# 	
+# 	echo -ne "Initializing..."
+# 	while ! wpm_wp_status true; do echo -n '.' && sleep 1; done
+# 	echo -ne " done.\n"
 }
 

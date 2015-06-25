@@ -7,14 +7,14 @@ wpm_wp_plugins() {
 	cd $web
 
 	# Autoptimize
-	if [[  $WP_ENV == 'production'  ]]; then
-		wp --allow-root plugin install autoptimize  --activate
-		wp --allow-root option update autoptimize_html 'on'
-		wp --allow-root option update autoptimize_html_keepcomments 'on'
-		wp --allow-root option update autoptimize_js 'on'
-		wp --allow-root option update autoptimize_css 'on'
-		wp --allow-root option update autoptimize_css_datauris 'on'
-	fi
+# 	if [[  $WP_ENV == 'production'  ]]; then
+# 		wp --allow-root plugin install autoptimize  --activate
+# 		wp --allow-root option update autoptimize_html 'on'
+# 		wp --allow-root option update autoptimize_html_keepcomments 'on'
+# 		wp --allow-root option update autoptimize_js 'on'
+# 		wp --allow-root option update autoptimize_css 'on'
+# 		wp --allow-root option update autoptimize_css_datauris 'on'
+# 	fi
 		
 	# Memcached full-page cache
 	if [[  ! -z $MEMCACHED_PORT  ]]; then

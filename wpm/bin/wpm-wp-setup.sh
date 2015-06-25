@@ -43,15 +43,6 @@ wpm_wp_setup() {
 	cat /wpm/etc/msmtprc | sed -e "s/example.com/$HOSTNAME/g" > /etc/msmtprc
 	echo "sendmail_path = /usr/bin/msmtp -t" > /etc/php/conf.d/sendmail.ini
 	touch /var/log/msmtp.log && chmod 777 /var/log/msmtp.log
-	
-	# ------------------------
-	# SUPERVISORD
-	# ------------------------
-	
-	cat /wpm/etc/supervisord.conf \
-	| sed -e "s/example.com/$HOSTNAME/g" \
-	| sed -e "s/WPM_ENV_HTTP_SHA1/$WPM_ENV_HTTP_SHA1" \
-	> /etc/supervisord.conf && chmod 644 /etc/supervisord.conf
 
 	# ------------------------
 	# WORDPRESS
@@ -63,14 +54,14 @@ wpm_wp_setup() {
 	su -l $user -c "cd $wpm && composer install"
 	su -l $user -c "ln -s $web ~/"
 	
- 	wpm_wp_install > /var/log/wpm-wp-install.log 2>&1 & 			
- 	wpm_wp_status() { cat /var/log/wpm-install.log | grep -q "WordPress setup completed"; }
- 	
- 	echo -ne "Installing WordPress..."
- 	while ! wpm_wp_status true; do echo -n '.' && sleep 1; done
- 	echo -ne " done.\n"
- 	
- 	if [[  `cat /var/log/wpm-wp-install.log | grep -q "WordPress installed successfully"` true  ]]; then echo "WordPress installed successfully."; fi
- 	if [[  `cat /var/log/wpm-wp-install.log | grep -q "Plugin 'wp-ffpc' activated"` true  ]]; then echo "Plugin 'wp-ffpc' activated."; fi
- 	if [[  `cat /var/log/wpm-wp-install.log | grep -q "Plugin 'redis-cache' activated"` true  ]]; then echo "Plugin 'redis-cache' activated."; fi
+	wpm_wp_install > /var/log/wpm-wp-install.log 2>&1 & 			
+	wpm_wp_status() { cat /var/log/wpm-install.log | grep -q "WordPress setup completed"; }
+	
+	echo -ne "Installing WordPress..."
+	while ! wpm_wp_status true; do echo -n '.' && sleep 1; done
+	echo -ne " done.\n"
+	
+	if [[  `cat /var/log/wpm-wp-install.log | grep -q "WordPress installed successfully"` true  ]]; then echo "WordPress installed successfully."; fi
+	if [[  `cat /var/log/wpm-wp-install.log | grep -q "Plugin 'wp-ffpc' activated"` true  ]]; then echo "Plugin 'wp-ffpc' activated."; fi
+	if [[  `cat /var/log/wpm-wp-install.log | grep -q "Plugin 'redis-cache' activated"` true  ]]; then echo "Plugin 'redis-cache' activated."; fi	
 }

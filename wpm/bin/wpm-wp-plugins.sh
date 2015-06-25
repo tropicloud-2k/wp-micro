@@ -4,6 +4,9 @@
 
 wpm_wp_plugins() {
 
+wpm="/var/wpm"
+web="/var/wpm/web"
+
 	cd $web
 	
 	# Autoptimize

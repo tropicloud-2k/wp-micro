@@ -19,6 +19,7 @@ wpm_build() {
 		php-opcache \
 		php-openssl \
 		php-phar \
+		php-pear \
 		php-pdo \
 		php-pdo_mysql \
 		supervisor \

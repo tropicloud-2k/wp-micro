@@ -2,6 +2,15 @@
 # WORDPRESS SETUP
 # ------------------------
 
+wpm_wp_version(){
+
+	WP_VER=`cat $wpm/composer.json | grep 'johnpbloch/wordpress' | cut -d: -f2 | sed "s/\"//g"`
+
+	if [[  ! -z $WP_VERSION  ]];
+	then sed -i "s/$WP_VER/$WP_VERSION/g" $wpm/composer.json $wpm/composer.lock
+	fi
+}
+
 wpm_wp_setup() {
 
 	# ------------------------
@@ -35,8 +44,8 @@ wpm_wp_setup() {
 	# ------------------------
 	
 	wpm_header "WordPress Setup"
-
-	su -l $user -c "cd $wpm && git clone $WP_REPO ."
+	
+	su -l $user -c "cd $wpm && git clone $WP_REPO ." && wpm_wp_version
 	su -l $user -c "cd $wpm && composer install"
 	su -l $user -c "ln -s $web ~/"
 	

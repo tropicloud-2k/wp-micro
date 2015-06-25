@@ -68,7 +68,7 @@ wpm_mysql_setup() {
 		if [[  ! -z $MYSQL_ENV_MYSQL_DATABASE && -z $DB_NAME  ]]; then export DB_NAME="$MYSQL_ENV_MYSQL_DATABASE"; fi
 		if [[  ! -z $MYSQL_ENV_MYSQL_USER && -z $DB_USER  ]]; then export DB_USER="$MYSQL_ENV_MYSQL_USER"; fi
 		if [[  ! -z $MYSQL_ENV_MYSQL_PASSWORD && -z $DB_PASSWORD  ]]; then export DB_PASSWORD="$MYSQL_ENV_MYSQL_PASSWORD"; fi
-		if [[    -z $MYSQL_ENV_MYSQL_DATABASE  ]]; then
+		if [[  -z $MYSQL_ENV_MYSQL_DATABASE  ]]; then
 		
 			export DB_NAME=`echo ${HOSTNAME//./_} | cut -c 1-16`
 			export DB_USER=$DB_NAME

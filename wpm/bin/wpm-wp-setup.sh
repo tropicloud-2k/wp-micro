@@ -5,7 +5,6 @@
 wpm_wp_version(){
 
 	WP_VER=`cat $wpm/composer.json | grep 'johnpbloch/wordpress' | cut -d: -f2 | sed "s/\"//g"`
-
 	if [[  ! -z $WP_VERSION  ]];
 	then sed -i "s/$WP_VER/$WP_VERSION/g" $wpm/composer.json $wpm/composer.lock
 	fi

@@ -7,11 +7,11 @@ wpm_wp_plugins() {
 	# Autoptimize
 	if [[  $WP_ENV == 'production'  ]]; then
 		su -l $user -c "cd $web && \
-		wp plugin install autoptimize --activate \
-		wp option update autoptimize_html 'on' \
-		wp option update autoptimize_html_keepcomments 'on' \
-		wp option update autoptimize_js 'on' \
-		wp option update autoptimize_css 'on' \
+		wp plugin install autoptimize --activate && \
+		wp option update autoptimize_html 'on' && \
+		wp option update autoptimize_html_keepcomments 'on' && \
+		wp option update autoptimize_js 'on' && \
+		wp option update autoptimize_css 'on' && \
 		wp option update autoptimize_css_datauris 'on'"
 	fi
 		

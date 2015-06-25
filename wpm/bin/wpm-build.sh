@@ -19,6 +19,7 @@ wpm_build() {
 		php-json \
 		php-mcrypt \
 		php-memcache \
+		php-mysql \
 		php-mysqli \
 		php-opcache \
 		php-openssl \
@@ -33,7 +34,7 @@ wpm_build() {
 		php-zip \
 		supervisor \
 		libmemcached \
-		nano curl git zip
+		curl git zip
 	                 
 	rm -rf /var/cache/apk/*
 	rm -rf /var/lib/apt/lists/*

@@ -16,9 +16,7 @@ wpm_environment() {
 	else export WP_HOME="http://${HOSTNAME}"
 	fi
 	
-	export WP_SITEURL="${WP_HOME}/wp"
-	export VISUAL="nano"
-	
+	export WP_SITEURL="${WP_HOME}/wp"	
 	export AUTH_KEY="`openssl rand 48 -base64`"
 	export SECURE_AUTH_KEY="`openssl rand 48 -base64`"
 	export LOGGED_IN_KEY="`openssl rand 48 -base64`"

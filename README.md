@@ -20,7 +20,7 @@ A Dockerfile for deploying [Bedrock](https://roots.io/bedrock/) based [WordPress
 * A domain  pointing to your Docker host
 
 
-### Install
+### Installation
 
 ```shell
 git clone https://github.com/tropicloud/wp-micro.git

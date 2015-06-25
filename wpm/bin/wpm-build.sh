@@ -76,8 +76,8 @@ wpm_build() {
 
 	cat /wpm/etc/.profile > /root/.profile
 	cat /wpm/etc/.profile > $home/.profile
-	cat /wpm/etc/nginx/nginx.conf > /etc/wpm/nginx.conf
-	cat /wpm/etc/supervisord.conf > /etc/supervisord.conf
+	cat /wpm/etc/nginx/nginx.conf > /etc/wpm/nginx.conf && chmod 644 /etc/wpm/nginx.conf
+	cat /wpm/etc/supervisord.conf > /etc/supervisord.conf && chmod 644 /etc/supervisord.conf
 
 	wpm_header "Build completed."
 }

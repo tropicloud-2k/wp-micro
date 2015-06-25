@@ -26,6 +26,5 @@ wpm_wp_install() {
 		else wpm_wp_core_install
 		fi
 	fi
-
 	echo -e "$(date +%Y-%m-%d\ %T) WordPress setup completed" >> /var/log/wpm-install.log
 }

@@ -19,7 +19,7 @@ wpm_wp_plugins() {
 	if [[  ! -z $MEMCACHED_PORT  ]]; then
 		su -l $user -c "cd $web && wp plugin install wp-ffpc --activate"
 		sed -i "s/127.0.0.1:11211/$MEMCACHED/g" /etc/wpm/nginx.conf		
-		curl https://raw.githubusercontent.com/petermolnar/wp-ffpc/master/wp-ffpc.php \
+		curl -sL https://raw.githubusercontent.com/petermolnar/wp-ffpc/master/wp-ffpc.php \
 		| sed "s/127.0.0.1:11211/$MEMCACHED/g" \
 		| sed "s/'memcached'/'memcache'/g" \
 		| sed "s/'pingback_header'.*/'pingback_header' => true,/g" \

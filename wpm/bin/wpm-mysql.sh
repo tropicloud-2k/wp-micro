@@ -63,6 +63,5 @@ wpm_mysql_setup() {
 		export DB_PASSWORD="$MYSQL_ENV_MYSQL_PASSWORD"		
 		
 	fi
-	
 	echo -e "$(date +%Y-%m-%d\ %T) MySQL setup completed" >> /var/log/wpm-install.log	
 }

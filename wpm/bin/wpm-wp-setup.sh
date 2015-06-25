@@ -23,6 +23,13 @@ wpm_wp_setup() {
 	fi
 	
 	# ------------------------
+	# SSMTP
+	# ------------------------
+
+	cat /wpm/etc/ssmtp.conf  | sed -e "s/example.com/$HOSTNAME/g" > /etc/ssmtp/ssmtp.conf
+	echo "sendmail_path = /usr/sbin/ssmtp -t" > /etc/php/conf.d/ssmtp.ini
+	
+	# ------------------------
 	# WORDPRESS
 	# ------------------------
 	

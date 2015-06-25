@@ -4,11 +4,14 @@
 
 wpm_wp_version(){
 
-	WP_VER=`cat $wpm/composer.json | grep 'johnpbloch/wordpress' | cut -d: -f2 | sed "s/\"//g"`
+	WP_ENV_VER=`cat $wpm/composer.json | grep 'johnpbloch/wordpress' | cut -d: -f2` && echo $WP_VER
+	
 	if [[  ! -z $WP_VERSION  ]];
-	then sed -i "s/$WP_VER/$WP_VERSION/g" $wpm/composer.json $wpm/composer.lock
+	then sed -i "s/$WP_ENV_VER/\"$WP_VERSION\"/g" $wpm/composer.json $wpm/composer.lock
 	fi
 }
+
+# cat $wpm/composer.json | sed "s/$WP_VER/\"$WP_VERSION\"/g"
 
 wpm_wp_setup() {
 

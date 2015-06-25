@@ -16,10 +16,10 @@ wpm_mariadb_secure() {
 }
 
 wpm_mysql_create() {
-	mysql -u root -p$MYSQL_ENV_MYSQL_ROOT_PASSWORD -e "CREATE USER '$DB_USER'@'%' IDENTIFIED BY '$DB_PASSWORD'"
-	mysql -u root -p$MYSQL_ENV_MYSQL_ROOT_PASSWORD -e "CREATE DATABASE $DB_NAME"
-	mysql -u root -p$MYSQL_ENV_MYSQL_ROOT_PASSWORD -e "GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$DB_USER'@'%' WITH GRANT OPTION"
-	mysql -u root -p$MYSQL_ENV_MYSQL_ROOT_PASSWORD -e "FLUSH PRIVILEGES"
+	mysql -h $MYSQL_PORT_3306_TCP_ADDR -u root -p$MYSQL_ENV_MYSQL_ROOT_PASSWORD -e "CREATE USER '$DB_USER'@'%' IDENTIFIED BY '$DB_PASSWORD'"
+	mysql -h $MYSQL_PORT_3306_TCP_ADDR -u root -p$MYSQL_ENV_MYSQL_ROOT_PASSWORD -e "CREATE DATABASE $DB_NAME"
+	mysql -h $MYSQL_PORT_3306_TCP_ADDR -u root -p$MYSQL_ENV_MYSQL_ROOT_PASSWORD -e "GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$DB_USER'@'%' WITH GRANT OPTION"
+	mysql -h $MYSQL_PORT_3306_TCP_ADDR -u root -p$MYSQL_ENV_MYSQL_ROOT_PASSWORD -e "FLUSH PRIVILEGES"
 }
 
 wpm_mysql_setup() {
@@ -64,21 +64,21 @@ wpm_mysql_setup() {
 				
 	else
 	
-		if [[  -z $MYSQL_ENV_MYSQL_DATABASE  ]]; then
+		if [[  ! -z $MYSQL_ENV_MYSQL_DATABASE  ]]; then
 		
+			export DB_HOST="$MYSQL_PORT_3306_TCP_ADDR"
+			export DB_NAME="$MYSQL_ENV_MYSQL_DATABASE"
+			export DB_USER="$MYSQL_ENV_MYSQL_USER"
+			export DB_PASSWORD="$MYSQL_ENV_MYSQL_PASSWORD"
+								
+		else
+			
 			export DB_HOST="$MYSQL_PORT_3306_TCP_ADDR"
 			export DB_NAME=`echo ${HOSTNAME//./_} | cut -c 1-16`
 			export DB_USER=$DB_NAME
 			export DB_PASSWORD=`openssl rand -hex 36`
 			wpm_mysql_create
 			
-		else
-		
-			export DB_HOST="$MYSQL_PORT_3306_TCP_ADDR"
-			export DB_NAME="$MYSQL_ENV_MYSQL_DATABASE"
-			export DB_USER="$MYSQL_ENV_MYSQL_USER"
-			export DB_PASSWORD="$MYSQL_ENV_MYSQL_PASSWORD"
-					
 		fi
 	fi
 	

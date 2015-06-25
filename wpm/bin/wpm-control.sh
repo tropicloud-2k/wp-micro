@@ -15,8 +15,8 @@ wpm_start() {
 	if [[  -f /tmp/supervisord.pid  ]]; then
 	
 		if [[  -z $2  ]];
-		then /usr/bin/supervisorctl start all;
-		else /usr/bin/supervisorctl start $2;
+		then /usr/bin/supervisorctl -u $HOSTNAME -p $WPM_ENV_HTTP_PASS start all;
+		else /usr/bin/supervisorctl -u $HOSTNAME -p $WPM_ENV_HTTP_PASS start $2;
 		fi
 
 	else exec /usr/bin/supervisord -n -c /etc/supervisord.conf
@@ -34,8 +34,8 @@ wpm_stop() {
 	if [[  -f /tmp/supervisord.pid  ]]; then
 	
 		if [[  -z $2  ]];
-		then /usr/bin/supervisorctl stop all;
-		else /usr/bin/supervisorctl stop $2;
+		then /usr/bin/supervisorctl -u $HOSTNAME -p $WPM_ENV_HTTP_PASS stop all;
+		else /usr/bin/supervisorctl -u $HOSTNAME -p $WPM_ENV_HTTP_PASS stop $2;
 		fi
 	
 	fi
@@ -53,8 +53,8 @@ wpm_restart() {
 	if [[  -f /tmp/supervisord.pid  ]]; then
 	
 		if [[  -z $2  ]];
-		then /usr/bin/supervisorctl restart all;
-		else /usr/bin/supervisorctl restart $2;
+		then /usr/bin/supervisorctl -u $HOSTNAME -p $WPM_ENV_HTTP_PASS restart all;
+		else /usr/bin/supervisorctl -u $HOSTNAME -p $WPM_ENV_HTTP_PASS restart $2;
 		fi
 		
 	else exec /usr/bin/supervisord -n -c /etc/supervisord.conf;
@@ -71,7 +71,7 @@ wpm_reload() {
 	wpm_header "Reload"
 
 	if [[  -f /tmp/supervisord.pid  ]];
-	then /usr/bin/supervisorctl reload;
+	then /usr/bin/supervisorctl -u $HOSTNAME -p $WPM_ENV_HTTP_PASS reload;
 	fi
 	echo ""
 }
@@ -85,7 +85,7 @@ wpm_shutdown() {
 	wpm_header "Shutdown"
 
 	if [[  -f /tmp/supervisord.pid  ]];
-	then /usr/bin/supervisorctl shutdown;
+	then /usr/bin/supervisorctl -u $HOSTNAME -p $WPM_ENV_HTTP_PASS shutdown;
 	fi
 	echo ""
 }
@@ -101,8 +101,8 @@ wpm_status() {
 	if [[  -f /tmp/supervisord.pid  ]]; then
 	
 		if [[  -z $2  ]];
-		then /usr/bin/supervisorctl status all;
-		else /usr/bin/supervisorctl status $2;
+		then /usr/bin/supervisorctl -u $HOSTNAME -p $WPM_ENV_HTTP_PASS status all;
+		else /usr/bin/supervisorctl -u $HOSTNAME -p $WPM_ENV_HTTP_PASS status $2;
 		fi
 	
 	fi
@@ -118,7 +118,7 @@ wpm_log() {
 	wpm_header "Log"
 	
 	if [[  -f /tmp/supervisord.pid  ]];
-	then /usr/bin/supervisorctl maintail;
+	then /usr/bin/supervisorctl -u $HOSTNAME -p $WPM_ENV_HTTP_PASS maintail;
 	fi
 	echo ""
 }

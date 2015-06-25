@@ -64,11 +64,11 @@ wpm_mysql_setup() {
 				
 	else
 			
-		if [[  -n $MYSQL_PORT_3306_TCP_ADDR  ]]; then export DB_HOST="$MYSQL_PORT_3306_TCP_ADDR"; fi
-		if [[  -n $MYSQL_ENV_MYSQL_DATABASE  ]]; then export DB_NAME="$MYSQL_ENV_MYSQL_DATABASE"; fi
-		if [[  -n $MYSQL_ENV_MYSQL_USER      ]]; then export DB_USER="$MYSQL_ENV_MYSQL_USER"; fi
-		if [[  -n $MYSQL_ENV_MYSQL_PASSWORD  ]]; then export DB_PASSWORD="$MYSQL_ENV_MYSQL_PASSWORD"; fi
-		if [[  -z $MYSQL_ENV_MYSQL_DATABASE  ]]; then
+		if [[  ! -z $MYSQL_PORT_3306_TCP_ADDR  ]]; then export DB_HOST="$MYSQL_PORT_3306_TCP_ADDR"; fi
+		if [[  ! -z $MYSQL_ENV_MYSQL_DATABASE  ]]; then export DB_NAME="$MYSQL_ENV_MYSQL_DATABASE"; fi
+		if [[  ! -z $MYSQL_ENV_MYSQL_USER      ]]; then export DB_USER="$MYSQL_ENV_MYSQL_USER"; fi
+		if [[  ! -z $MYSQL_ENV_MYSQL_PASSWORD  ]]; then export DB_PASSWORD="$MYSQL_ENV_MYSQL_PASSWORD"; fi
+		if [[    -z $MYSQL_ENV_MYSQL_DATABASE  ]]; then
 		
 			export DB_NAME=`echo ${HOSTNAME//./_} | cut -c 1-16`
 			export DB_USER=$DB_NAME

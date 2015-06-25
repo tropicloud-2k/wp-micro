@@ -28,6 +28,8 @@ wpm_build() {
 		php-pear \
 		php-pdo \
 		php-pdo_mysql \
+		php-pdo_pgsql \
+		php-pdo_sqlite \
 		php-xml \
 		php-zlib \
 		php-zip \

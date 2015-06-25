@@ -11,8 +11,6 @@ wpm_wp_version(){
 	fi
 }
 
-# cat $wpm/composer.json | sed "s/$WP_VER/\"$WP_VERSION\"/g"
-
 wpm_wp_setup() {
 
 	# ------------------------

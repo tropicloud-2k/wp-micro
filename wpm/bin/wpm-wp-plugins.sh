@@ -4,8 +4,6 @@
 
 wpm_wp_plugins() {
 
-	cd $web
-
 	# Autoptimize
 	if [[  $WP_ENV == 'production'  ]]; then
 		su -l $user -c "cd $web && wp plugin install autoptimize --activate"

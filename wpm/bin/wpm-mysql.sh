@@ -19,7 +19,7 @@ wpm_mysql_setup() {
 
 	if [[  -z $MYSQL_PORT  ]]; then
 		
-		wpm_header "MySQL Setup"
+		wpm_header "MariaDB Setup"
 
 		export DB_HOST="127.0.0.1"
 		export DB_NAME="$user"

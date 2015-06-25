@@ -9,6 +9,7 @@ wpm_build() {
 	apk add --update \
 		mariadb \
 		mariadb-client \
+		msmtp \
 		nginx \
 		openssl \
 		php-cli \
@@ -31,7 +32,6 @@ wpm_build() {
 		php-xml \
 		php-zlib \
 		php-zip \
-		ssmtp \
 		supervisor \
 		libmemcached \
 		nano curl git zip

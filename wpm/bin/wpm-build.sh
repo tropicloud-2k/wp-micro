@@ -64,6 +64,7 @@ wpm_build() {
 	# WP-MICRO
 	# ------------------------
 	
+	chmod +x /wpm/wpm.sh && ln -s /wpm/wpm.sh /usr/bin/wpm
 	adduser -D -G nginx -s /bin/sh -h $home $user
 	
 	mkdir -p /etc/wpm
@@ -77,7 +78,7 @@ wpm_build() {
 	cat /wpm/etc/supervisord.conf > /etc/supervisord.conf
 	
 	chown -R $user:nginx /var/wpm
-	chmod +x /wpm/wpm.sh && ln -s /wpm/wpm.sh /usr/bin/wpm
+	chmod -R 770 /var/wpm
 	
 	wpm_header "Build completed."
 }

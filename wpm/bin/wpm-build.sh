@@ -16,6 +16,7 @@ wpm_build() {
 		php-fpm \
 		php-gd \
 		php-gettext \
+		php-iconv \
 		php-json \
 		php-mcrypt \
 		php-memcache \

@@ -45,12 +45,10 @@ wpm_wp_setup() {
  	
  	echo -ne "Installing WordPress..."
  	while ! wpm_wp_status true; do echo -n '.' && sleep 1; done
- 	echo -ne " done.\n"
+ 	echo -ne " done.\nInstall log: /var/log/wpm-wp-install.log"
  	
- 	if [[  `cat /var/log/wpm-wp-install.log | grep -q "Plugin 'wp-ffpc' activated"` true  ]]; then echo "Plugin 'wp-ffpc' activated"; fi
- 	if [[  `cat /var/log/wpm-wp-install.log | grep -q "Plugin 'redis-cache' activated"` true  ]]; then echo "Plugin 'redis-cache' activated"; fi
- 	
-	echo -e "More info at: /var/log/wpm-wp-install.log"
-	echo -e "WordPress installed successfully"
+ 	if [[  `cat /var/log/wpm-wp-install.log | grep -q "WordPress installed successfully"` true  ]]; then echo "WordPress installed successfully."; fi
+ 	if [[  `cat /var/log/wpm-wp-install.log | grep -q "Plugin 'wp-ffpc' activated"` true  ]]; then echo "Plugin 'wp-ffpc' activated."; fi
+ 	if [[  `cat /var/log/wpm-wp-install.log | grep -q "Plugin 'redis-cache' activated"` true  ]]; then echo "Plugin 'redis-cache' activated."; fi
 }
 

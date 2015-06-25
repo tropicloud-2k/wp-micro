@@ -11,8 +11,26 @@ wpm_build() {
 		msmtp \
 		nginx \
 		openssl \
-		php-common \
+		php-cli \
+		php-curl \
+		php-fpm \
+		php-gd \
+		php-gettext \
+		php-json \
+		php-mcrypt \
 		php-memcache \
+		php-mysqli \
+		php-opcache \
+		php-openssl \
+		php-phar \
+		php-pear \
+		php-pdo \
+		php-pdo_mysql \
+		php-pdo_pgsql \
+		php-pdo_sqlite \
+		php-xml \
+		php-zlib \
+		php-zip \
 		supervisor \
 		libmemcached \
 		nano curl git zip

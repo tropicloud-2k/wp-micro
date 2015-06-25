@@ -16,15 +16,15 @@ wpm_header() {
 
 wpm_links() {
 	if [[  ! -z $MYSQL_PORT  ]];
-	then echo -e "\033[1;32m  •\033[0;37m MySQL\033[0m linked at `echo $MYSQL_PORT | cut -d/ -f3`"
+	then echo -e "\033[1;32m  •\033[0;37m MySQL\033[0m linked @ `echo $MYSQL_PORT | cut -d/ -f3`"
 	else echo -e "\033[1;31m  •\033[0;37m MySQL\033[0m not linked"
 	fi	
 	if [[  ! -z $REDIS_PORT  ]];
-	then echo -e "\033[1;32m  •\033[0;37m Redis\033[0m linked at `echo $REDIS_PORT | cut -d/ -f3`"		
+	then echo -e "\033[1;32m  •\033[0;37m Redis\033[0m linked @ `echo $REDIS_PORT | cut -d/ -f3`"		
 	else echo -e "\033[1;31m  •\033[0;37m Redis\033[0m not linked"
 	fi		
 	if [[  ! -z $MEMCACHED_PORT  ]];
-	then echo -e "\033[1;32m  •\033[0;37m Memcached\033[0m linked at `echo $MEMCACHED_PORT | cut -d/ -f3`"
+	then echo -e "\033[1;32m  •\033[0;37m Memcached\033[0m linked @ `echo $MEMCACHED_PORT | cut -d/ -f3`"
 	else echo -e "\033[1;31m  •\033[0;37m Memcached\033[0m not linked"
 	fi
 }
@@ -41,7 +41,7 @@ wpm_hostname() {
 }
 
 wpm_hostname_true(){
-	wpm_header "Welcome to WP-Mini"
+	wpm_header "Welcome to WP-MICRO"
 	echo -e "\033[0m  Using \033[0;37m${HOSTNAME}\033[0m as hostname (domain)\n"
 	wpm_links
 }

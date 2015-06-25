@@ -2,17 +2,24 @@
 # MARIADB SETUP
 # ------------------------
 
-wpm_mysql_create() {
+wpm_mariadb_create() {
 	mysql -u root -e "CREATE USER '$user'@'%' IDENTIFIED BY '$DB_PASSWORD'"
 	mysql -u root -e "CREATE DATABASE $user"
 	mysql -u root -e "GRANT ALL PRIVILEGES ON *.* TO '$user'@'%' WITH GRANT OPTION"
 }
 
-wpm_mysql_secure() {
+wpm_mariadb_secure() {
 	mysql -u root -e "DELETE FROM mysql.user WHERE User='';"
 	mysql -u root -e "DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');"
 	mysql -u root -e "DROP DATABASE test;"
 	mysql -u root -e "DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%'"
+}
+
+wpm_mysql_create() {
+	mysql -u root -p$MYSQL_ENV_MYSQL_ROOT_PASSWORD -e "CREATE USER '$DB_USER'@'%' IDENTIFIED BY '$DB_PASSWORD'"
+	mysql -u root -p$MYSQL_ENV_MYSQL_ROOT_PASSWORD -e "CREATE DATABASE $DB_NAME"
+	mysql -u root -p$MYSQL_ENV_MYSQL_ROOT_PASSWORD -e "GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$DB_USER'@'%' WITH GRANT OPTION"
+	mysql -u root -p$MYSQL_ENV_MYSQL_ROOT_PASSWORD -e "FLUSH PRIVILEGES"
 }
 
 wpm_mysql_setup() {
@@ -39,12 +46,12 @@ wpm_mysql_setup() {
 		done && echo -ne " done.\n"
 		
 		echo -ne "Creating mysql database..."
-		while ! wpm_mysql_create true; do
+		while ! wpm_mariadb_create true; do
 			echo -n '.' && sleep 1
 		done && echo -ne " done.\n"
 		
 		echo -ne "Securing mysql installation..."
-		while ! wpm_mysql_secure true; do
+		while ! wpm_mariadb_secure true; do
 			echo -n '.' && sleep 1
 		done && echo -ne " done.\n"
 		
@@ -57,11 +64,21 @@ wpm_mysql_setup() {
 				
 	else
 	
-		export DB_HOST="$MYSQL_PORT_3306_TCP_ADDR"
-		export DB_NAME="$MYSQL_ENV_MYSQL_DATABASE"
-		export DB_USER="$MYSQL_ENV_MYSQL_USER"
-		export DB_PASSWORD="$MYSQL_ENV_MYSQL_PASSWORD"		
-		
+		if [[  -z $MYSQL_ENV_MYSQL_DATABASE || -z $MYSQL_ENV_MYSQL_USER || -z $MYSQL_ENV_MYSQL_PASSWORD  ]]; then
+			if [[  ! -z $MYSQL_ENV_MYSQL_ROOT_PASSWORD  ]]; then 
+				export DB_HOST="$MYSQL_PORT_3306_TCP_ADDR"
+				export DB_NAME=`echo ${HOSTNAME//./_} | cut -c 1-16`
+				export DB_USER=$DB_NAME
+				export DB_PASSWORD=`openssl rand -hex 36`
+				wpm_mysql_create
+			fi
+		else
+			export DB_HOST="$MYSQL_PORT_3306_TCP_ADDR"
+			export DB_NAME="$MYSQL_ENV_MYSQL_DATABASE"
+			export DB_USER="$MYSQL_ENV_MYSQL_USER"
+			export DB_PASSWORD="$MYSQL_ENV_MYSQL_PASSWORD"		
+		fi
+
 	fi
 	echo -e "$(date +%Y-%m-%d\ %T) MySQL setup completed" >> /var/log/wpm-install.log	
 }

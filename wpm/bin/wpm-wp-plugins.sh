@@ -4,16 +4,6 @@
 
 wpm_wp_plugins() {
 
-	# Autoptimize
-	if [[  $WP_ENV == 'production'  ]]; then
-		su -l $user -c "cd $web && wp plugin install autoptimize --activate"
-		wp --allow-root option update autoptimize_html 'on'
-		wp --allow-root option update autoptimize_html_keepcomments 'on'
-		wp --allow-root option update autoptimize_js 'on'
-		wp --allow-root option update autoptimize_css 'on'
-		wp --allow-root option update autoptimize_css_datauris 'on'
-	fi
-		
 	# Memcached full-page cache
 	if [[  ! -z $MEMCACHED_PORT  ]]; then
 		su -l $user -c "cd $web && wp plugin install wp-ffpc --activate"
@@ -34,5 +24,15 @@ wpm_wp_plugins() {
 		sed -i "s/127.0.0.1:11211/$REDIS/g" /etc/wpm/nginx.conf
 		echo "define('WP_REDIS_HOST', getenv('REDIS_PORT_6379_TCP_ADDR'));" >> $wpm/config/environments/production.php
 		echo "define('WP_REDIS_PORT', getenv('REDIS_PORT_6379_TCP_PORT'));" >> $wpm/config/environments/production.php
+	fi
+	
+	# Autoptimize
+	if [[  $WP_ENV == 'production'  ]]; then
+		su -l $user -c "cd $web && wp plugin install autoptimize --activate"
+		wp --allow-root option update autoptimize_html 'on'
+		wp --allow-root option update autoptimize_html_keepcomments 'on'
+		wp --allow-root option update autoptimize_js 'on'
+		wp --allow-root option update autoptimize_css 'on'
+		wp --allow-root option update autoptimize_css_datauris 'on'
 	fi
 }

@@ -28,6 +28,7 @@ wpm_wp_setup() {
 
 	cat /wpm/etc/msmtprc | sed -e "s/example.com/$HOSTNAME/g" > /etc/msmtprc
 	echo "sendmail_path = /usr/bin/msmtp -t" > /etc/php/conf.d/sendmail.ini
+	touch /var/log/msmtp.log && chmod 777 /var/log/msmtp.log
 	
 	# ------------------------
 	# WORDPRESS
@@ -42,7 +43,7 @@ wpm_wp_setup() {
 	wpm_wp_install > /var/log/wpm-wp-install.log 2>&1 &		
 	wpm_wp_status() { cat /var/log/wpm-install.log | grep -q "WordPress setup completed"; }
 	
-	echo -ne "Installing wordpress..."
+	echo -ne "Installing app..."
 	while ! wpm_wp_status true; do echo -n '.' && sleep 1; done
 	echo -ne " done.\n"
 }

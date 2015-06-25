@@ -2,7 +2,7 @@
 # WORDPRESS INSTALL
 # ------------------------
 
-wpm_wp_core() {
+wpm_wp_core_install() {
 
 	su -l $user -c "cd $web && wp core install \
 --url=$WP_HOME \
@@ -23,8 +23,9 @@ wpm_wp_install() {
 			mysqld_safe > /dev/null 2>&1 &
 			while [[  ! -e /run/mysqld/mysqld.sock  ]]; do sleep 1; done && wpm_wp_core			
 			mysqladmin -u root shutdown
-		else wpm_wp_core
+		else wpm_wp_core_install
 		fi
 	fi
+
 	echo -e "$(date +%Y-%m-%d\ %T) WordPress setup completed" >> /var/log/wpm-install.log
 }

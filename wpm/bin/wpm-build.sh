@@ -71,13 +71,10 @@ wpm_build() {
 	mkdir -p /var/wpm
 	mkdir -p /etc/wpm/init.d
 	mkdir -p /var/log/php
-	mkdir -p $home/adminer
 	
 	cat /wpm/etc/.profile > /root/.profile
 	cat /wpm/etc/.profile > $home/.profile
 	
-	chown -R $user:nginx $home
-	chown -R $user:nginx $wpm
-	
 	wpm_header "Build completed."
 }
+

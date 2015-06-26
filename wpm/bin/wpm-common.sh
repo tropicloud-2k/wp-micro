@@ -52,3 +52,20 @@ wpm_hostname_false(){
 \033[0m  Ex: docker run -P -h example.com -d tropicloud/wp-micro \n
 \033[0m  Aborting script...\n\n" && exit 1
 }
+
+# ------------------------
+# WPM WP CHMOD
+# ------------------------
+
+wpm_wp_chmod() {
+	
+	chown -R $user:nginx $home
+	chown -R $user:nginx $wpm
+	
+	find $home -type f -exec chmod 644 {} \;
+	find $home -type d -exec chmod 755 {} \;
+
+	find $web -type f -exec chmod 644 {} \;
+	find $web -type d -exec chmod 755 {} \;
+}
+

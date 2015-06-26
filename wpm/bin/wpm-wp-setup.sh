@@ -18,7 +18,6 @@ wpm_wp_setup() {
 	# ------------------------
 
 	cat /wpm/etc/nginx/nginx.conf > /etc/wpm/nginx.conf
-	cat /wpm/etc/run/nginx.ini    > /etc/wpm/run/nginx.ini
 	
 	if [[  $WP_SSL == 'true'  ]];
 	then cat /wpm/etc/nginx/wpssl.conf | sed -e "s/example.com/$HOSTNAME/g" > /etc/wpm/wordpress.conf && wpm_ssl
@@ -28,8 +27,6 @@ wpm_wp_setup() {
 	# ------------------------
 	# PHP-FPM
 	# ------------------------
-	
-	cat /wpm/etc/run/php-fpm.ini  > /etc/wpm/run/php-fpm.ini
 	
 	if [[  $(free -m | grep 'Mem' | awk '{print $2}') -gt 1800  ]];
 	then cat /wpm/etc/php/php-fpm.conf | sed -e "s/example.com/$HOSTNAME/g" > /etc/wpm/php-fpm.conf

@@ -18,7 +18,7 @@ wpm_environment() {
 	
 	export WP_SITEURL="${WP_HOME}/wp"
 	export WPM_ENV_HTTP_PASS="`openssl rand 12 -base64`"
-	export WPM_ENV_HTTP_SHA1="`echo "$WPM_ENV_HTTP_PASS" | openssl dgst -sha1`"
+	export WPM_ENV_HTTP_SHA1="`echo -n "$WPM_ENV_HTTP_PASS" | openssl dgst -sha1`"
 	export AUTH_KEY="`openssl rand 48 -base64`"
 	export SECURE_AUTH_KEY="`openssl rand 48 -base64`"
 	export LOGGED_IN_KEY="`openssl rand 48 -base64`"
@@ -37,7 +37,7 @@ wpm_environment() {
 	
 	cat /wpm/etc/supervisord.conf \
 	| sed -e "s/example.com/$HOSTNAME/g" \
-	| sed -e "s/WPM_ENV_HTTP_PASS/$WPM_ENV_HTTP_PASS/g" \
+	| sed -e "s/WPM_ENV_HTTP_PASS/{SHA}$WPM_ENV_HTTP_SHA1/g" \
 	> /etc/supervisord.conf && chmod 644 /etc/supervisord.conf
 
 	echo -e "$(date +%Y-%m-%d\ %T) Environment setup completed" >> /var/log/wpm-install.log

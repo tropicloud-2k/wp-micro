@@ -59,13 +59,17 @@ wpm_hostname_false(){
 
 wpm_wp_chmod() {
 	
-	chown -R $user:nginx $home
-	chown -R $user:nginx $wpm
+	chown -LR $user:nginx $home
+	chown -LR $user:nginx $wpm
+	chown -LR $user:nginx $www
 	
 	find $home -type f -exec chmod 644 {} \;
 	find $home -type d -exec chmod 755 {} \;
 
 	find $web -type f -exec chmod 644 {} \;
 	find $web -type d -exec chmod 755 {} \;
+	
+	find $www -type f -exec chmod 644 {} \;
+	find $www -type d -exec chmod 755 {} \;
 }
 

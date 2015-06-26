@@ -51,8 +51,11 @@ wpm_wp_setup() {
 	wpm_header "WordPress Setup"
 	
 	su -l $user -c "cd $wpm && git clone $WP_REPO ." && wpm_wp_version
-	su -l $user -c "cd $wpm && composer install && ln -s $web ~/ && mkdir -p $web/adminer"
-	su -l $user -c "curl -sL http://www.adminer.org/latest-mysql-en.php > $web/adminer/index.php"
+	su -l $user -c "cd $wpm && composer install"
+	su -l $user -c "curl -sL http://www.adminer.org/latest-mysql-en.php > $www/adminer/index.php"
+	
+	ln -s $web ~/
+	ln -s $www ~/
 	
 	wpm_wp_install > /var/log/wpm-wp-install.log 2>&1 & 			
 	wpm_wp_status() { cat /var/log/wpm-install.log | grep -q "WordPress setup completed"; }

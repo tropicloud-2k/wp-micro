@@ -69,7 +69,7 @@ wpm_build() {
 	adduser -D -G nginx -s /bin/sh -h $home $user
 	
 	mkdir -p /var/wpm
-	mkdir -p /etc/wpm/run
+	mkdir -p /etc/wpm/init.d
 	mkdir -p /var/log/php
 	mkdir -p $home/adminer
 	

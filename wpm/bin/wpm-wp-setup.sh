@@ -18,6 +18,7 @@ wpm_wp_setup() {
 	# ------------------------
 
 	cat /wpm/etc/nginx/nginx.conf > /etc/wpm/nginx.conf
+	cat /wpm/etc/init.d/nginx.ini > /etc/wpm/init.d/nginx.ini
 	
 	if [[  $WP_SSL == 'true'  ]];
 	then cat /wpm/etc/nginx/wpssl.conf | sed -e "s/example.com/$HOSTNAME/g" > /etc/wpm/wordpress.conf && wpm_ssl
@@ -28,6 +29,8 @@ wpm_wp_setup() {
 	# PHP-FPM
 	# ------------------------
 	
+	cat /wpm/etc/init.d/php-fpm.ini > /etc/wpm/init.d/php-fpm.ini
+
 	if [[  $(free -m | grep 'Mem' | awk '{print $2}') -gt 1800  ]];
 	then cat /wpm/etc/php/php-fpm.conf | sed -e "s/example.com/$HOSTNAME/g" > /etc/wpm/php-fpm.conf
 	else cat /wpm/etc/php/php-fpm-min.conf | sed -e "s/example.com/$HOSTNAME/g" > /etc/wpm/php-fpm.conf
@@ -37,7 +40,7 @@ wpm_wp_setup() {
 	# MSMTP
 	# ------------------------
 
-	cat /wpm/etc/msmtprc | sed -e "s/example.com/$HOSTNAME/g" > /etc/msmtprc
+	cat /wpm/etc/smtp/msmtprc | sed -e "s/example.com/$HOSTNAME/g" > /etc/msmtprc
 	echo "sendmail_path = /usr/bin/msmtp -t" > /etc/php/conf.d/sendmail.ini
 	touch /var/log/msmtp.log && chmod 777 /var/log/msmtp.log
 

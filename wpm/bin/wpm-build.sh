@@ -76,9 +76,9 @@ wpm_build() {
 	cat /wpm/etc/.profile > /root/.profile
 	cat /wpm/etc/.profile > $home/.profile
 	
-	curl -sL http://www.adminer.org/latest-mysql-en.php > $home/adminer/db.php && chmod 644 $home/adminer/db.php
+	curl -sL http://www.adminer.org/latest-mysql-en.php > $home/adminer/index.php
 	
-	chown -f $user:nginx $home/.profile
+	chown -R $user:nginx $home
 	chown -R $user:nginx $wpm
 	
 	wpm_header "Build completed."

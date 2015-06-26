@@ -9,5 +9,7 @@ ENV WP_ENV=development \
 	WP_REPO=https://github.com/roots/bedrock.git
 
 EXPOSE 80 443
+VOLUME ["/var/www", "/var/wpm", "/etc/wpm", "/home/wordpress"]
+
 ENTRYPOINT ["wpm"]
 CMD ["start"]

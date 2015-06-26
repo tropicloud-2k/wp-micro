@@ -31,6 +31,8 @@ wpm_environment() {
 
 	echo "" > /etc/.env && env | grep = >> /etc/.env
 	for var in `cat /etc/.env`; do echo $var >> $wpm/.env; done	
+	echo -e "${HOSTNAME}:${WPM_ENV_HTTP_PASS}" > $home/.htpasswd
+
 	chown $user:nginx $wpm/.env
 	
 	cat /wpm/etc/supervisord.conf \

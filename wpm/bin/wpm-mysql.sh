@@ -34,7 +34,7 @@ wpm_mysql_setup() {
 		export DB_PASSWORD=`openssl rand -hex 36`
 		
 		apk add --update mariadb && rm -rf /var/cache/apk/* && rm -rf /var/lib/apt/lists/*
-		cat /wpm/etc/run/mariadb.ini > /etc/wpm/run/mariadb.ini
+		cat /wpm/etc/run/mariadb.ini > /etc/wpm/init.d/mariadb.ini
 		sed -i 's/^\(bind-address\s.*\)/# \1/' /etc/mysql/my.cnf
 
 		mysql_install_db --user=mysql > /dev/null 2>&1

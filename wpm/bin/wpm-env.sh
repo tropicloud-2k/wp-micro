@@ -35,7 +35,7 @@ wpm_environment() {
 	
 	cat /wpm/etc/supervisord.conf \
 	| sed -e "s/example.com/$HOSTNAME/g" \
-	| sed -e "s/WPM_ENV_HTTP_SHA1/$WPM_ENV_HTTP_SHA1" \
+	| sed -e "s/WPM_ENV_HTTP_SHA1/$WPM_ENV_HTTP_SHA1/g" \
 	> /etc/supervisord.conf && chmod 644 /etc/supervisord.conf
 
 	echo -e "$(date +%Y-%m-%d\ %T) Environment setup completed" >> /var/log/wpm-install.log

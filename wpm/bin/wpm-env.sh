@@ -32,13 +32,12 @@ wpm_environment() {
 	echo "" > /etc/.env && env | grep = >> /etc/.env
 	for var in `cat /etc/.env`; do echo $var >> $wpm/.env; done	
 	chown $user:nginx $wpm/.env
-
 	
 	cat /wpm/etc/supervisord.conf \
 	| sed -e "s/example.com/$HOSTNAME/g" \
 	| sed -e "s/WPM_ENV_HTTP_PASS/{SHA}$WPM_ENV_HTTP_SHA1/g" \
 	> /etc/supervisord.conf && chmod 644 /etc/supervisord.conf
 
-	echo -e "$user:`openssl passwd -crypt $WPM_ENV_HTTP_PASS`\n" > $home/.htpasswd
+	echo -e "$user:`openssl passwd -crypt $WPM_ENV_HTTP_PASS`" > $home/.htpasswd
 	echo -e "$(date +%Y-%m-%d\ %T) Environment setup completed" >> /var/log/wpm-install.log
 }

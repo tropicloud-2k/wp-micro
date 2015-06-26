@@ -76,8 +76,6 @@ wpm_build() {
 	cat /wpm/etc/.profile > /root/.profile
 	cat /wpm/etc/.profile > $home/.profile
 	
-	curl -sL http://www.adminer.org/latest-mysql-en.php > $home/adminer/index.php
-	
 	chown -R $user:nginx $home
 	chown -R $user:nginx $wpm
 	

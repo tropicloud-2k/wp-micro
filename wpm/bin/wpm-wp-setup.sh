@@ -40,8 +40,8 @@ wpm_wp_setup() {
 	# MSMTP
 	# ------------------------
 
-	cat /wpm/etc/smtp/msmtprc | sed -e "s/example.com/$HOSTNAME/g" > /etc/msmtprc
 	echo "sendmail_path = /usr/bin/msmtp -t" > /etc/php/conf.d/sendmail.ini
+	cat /wpm/etc/smtp/msmtprc | sed -e "s/example.com/$HOSTNAME/g" > /etc/msmtprc
 	touch /var/log/msmtp.log && chmod 777 /var/log/msmtp.log
 
 	# ------------------------
@@ -51,14 +51,12 @@ wpm_wp_setup() {
 	wpm_header "WordPress Setup"
 	
 	su -l $user -c "cd $wpm && git clone $WP_REPO ." && wpm_wp_version
-	su -l $user -c "cd $wpm && composer install"
-	su -l $user -c "ln -s $web ~/"
-	su -l $user -c "cd $web && mkdir -p adminer && ln -s $web ~/"
-	su -l $user -c "cd $web/adminer && curl -sL http://www.adminer.org/latest-mysql-en.php > index.php"
+	su -l $user -c "cd $wpm && composer install && ln -s $web ~/ && mkdir -p $web/adminer"
+	su -l $user -c "curl -sL http://www.adminer.org/latest-mysql-en.php > $web/adminer/index.php"
 	
 	wpm_wp_install > /var/log/wpm-wp-install.log 2>&1 & 			
 	wpm_wp_status() { cat /var/log/wpm-install.log | grep -q "WordPress setup completed"; }
-	
+		
 	echo -ne "Installing WordPress..."
 	while ! wpm_wp_status true; do echo -n '.' && sleep 1; done
 	echo -ne " done.\n"

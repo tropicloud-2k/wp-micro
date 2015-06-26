@@ -71,15 +71,13 @@ wpm_build() {
 	mkdir -p /var/wpm
 	mkdir -p /etc/wpm/run
 	mkdir -p /var/log/php
+	mkdir -p $home/adminer
 	
-	cat /wpm/etc/supervisord.conf > /etc/supervisord.conf
-	cat /wpm/etc/nginx/nginx.conf > /etc/wpm/nginx.conf
-	cat /wpm/etc/run/nginx.ini    > /etc/wpm/run/nginx.ini
-	cat /wpm/etc/run/php-fpm.ini  > /etc/wpm/run/php-fpm.ini
 	cat /wpm/etc/.profile > /root/.profile
-	cat /wpm/etc/.profile > $home/.profile 
+	cat /wpm/etc/.profile > $home/.profile
 	
-	chmod 644 /etc/supervisord.conf
+	curl -sL http://www.adminer.org/latest-mysql-en.php > $home/adminer/db.php && chmod 644 $home/adminer/db.php
+	
 	chown -f $user:nginx $home/.profile
 	chown -R $user:nginx $wpm
 	

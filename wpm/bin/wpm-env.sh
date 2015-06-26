@@ -17,7 +17,7 @@ wpm_environment() {
 	fi
 	
 	export WP_SITEURL="${WP_HOME}/wp"
-	export WPM_ENV_HTTP_PASS="`openssl rand 12 -base64`"
+	export WPM_ENV_HTTP_PASS="`openssl rand 12 -hex`"
 	export WPM_ENV_HTTP_SHA1="`echo -ne "$WPM_ENV_HTTP_PASS" | sha1sum | awk '{print $1}'`"
 	export AUTH_KEY="`openssl rand 48 -base64`"
 	export SECURE_AUTH_KEY="`openssl rand 48 -base64`"

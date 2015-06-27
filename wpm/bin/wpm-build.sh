@@ -44,7 +44,7 @@ wpm_build() {
 	# SFTP
 	# ------------------------
 
-	cat /wpm/etc/ssh/sshd_config > /etc/ssh/sshd_config
+# 	cat /wpm/etc/ssh/sshd_config > /etc/ssh/sshd_config
 	/usr/bin/ssh-keygen -A
 	
 	# ------------------------

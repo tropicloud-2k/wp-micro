@@ -49,5 +49,6 @@ wpm_chmod() {
 
 wpm_adminer() { 
 	wpm_header "Adminer (mysql admin)"
+	echo -e "  Password: $WPM_ENV_HTTP_PASS\n"
 	php -S 0.0.0.0:8080 -t /usr/local/adminer
 }

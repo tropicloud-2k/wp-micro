@@ -21,7 +21,6 @@ wpm_build() {
 		php-mcrypt \
 		php-memcache \
 		php-mysql \
-		php-mysqli \
 		php-opcache \
 		php-openssl \
 		php-phar \

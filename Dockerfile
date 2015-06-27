@@ -11,4 +11,4 @@ ENV WP_ENV=development \
 EXPOSE 80 443
 VOLUME ["/home/wordpress"]
 ENTRYPOINT ["wpm"]
-CMD        ["start"]
+CMD ["start"]

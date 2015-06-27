@@ -72,7 +72,7 @@ wpm_mysql_setup() {
 		
 			export DB_NAME=`echo ${HOSTNAME//./_} | cut -c 1-16`
 			export DB_USER=$DB_NAME
-			export DB_PASSWORD=`openssl rand -hex 36`
+			export DB_PASSWORD=`openssl rand -hex 12`
 			
 			wpm_mysql_create
 			

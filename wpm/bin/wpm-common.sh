@@ -5,7 +5,7 @@
 wpm_header() {
 	echo -e "\033[0;30m
 -----------------------------------------------------
-\033[1;37m  wp\033[0m-\033[0;34mSubmarine\033[0m | \033[1;37m$1\033[0;30m
+\033[1;37m  (\033[0;34mwpm\033[1;37m)\033[0m | \033[1;37m$1\033[0;30m
 -----------------------------------------------------
 \033[0m"
 }
@@ -41,7 +41,7 @@ wpm_hostname() {
 }
 
 wpm_hostname_true(){
-	wpm_header "Welcome to wp\033[0m-\033[0;34mSubmarine"
+	wpm_header "Welcome to wp\033[0;34mSubmarine"
 	echo -e "\033[0m  Using \033[0;37m${HOSTNAME}\033[0m as hostname (domain)\n"
 	wpm_links
 }

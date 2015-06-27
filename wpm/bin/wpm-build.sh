@@ -73,7 +73,8 @@ wpm_build() {
 	mkdir -p $home/_db
 	mkdir -p $home/conf.d
 	mkdir -p $home/init.d
-	mkdir -p $home/log
+	mkdir -p $home/log/nginx
+	mkdir -p $home/log/php
 	mkdir -p $home/ssl
 	mkdir -p /var/log/php
 	

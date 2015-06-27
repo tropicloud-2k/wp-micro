@@ -1,36 +1,3 @@
-wpm_chmod() { chown -LR $user:nginx $home && find $home -type f -exec chmod 644 {} \; && find $home -type d -exec chmod 755 {} \;; }
-
-# ------------------------
-# WPM HEADER
-# ------------------------
-
-wpm_header() {
-echo -e "\033[0;30m
------------------------------------------------------
-\033[0;34m  (wpm)\033[0m | \033[1;37m$1\033[0;30m
------------------------------------------------------
-\033[0m"
-}
-
-# ------------------------
-# WPM LINKS
-# ------------------------
-
-wpm_links() {
-if [[  ! -z $MYSQL_PORT  ]];
-then echo -e "\033[1;32m  •\033[0;37m MySQL\033[0m --> `echo $MYSQL_PORT | cut -d/ -f3 | cut -d: -f1`"
-else echo -e "\033[1;31m  •\033[0;37m MySQL\033[0m (not linked)"
-fi	
-if [[  ! -z $REDIS_PORT  ]];
-then echo -e "\033[1;32m  •\033[0;37m Redis\033[0m --> `echo $REDIS_PORT | cut -d/ -f3 | cut -d: -f1`"		
-else echo -e "\033[1;31m  •\033[0;37m Redis\033[0m (not linked)"
-fi		
-if [[  ! -z $MEMCACHED_PORT  ]];
-then echo -e "\033[1;32m  •\033[0;37m Memcached\033[0m --> `echo $MEMCACHED_PORT | cut -d/ -f3 | cut -d: -f1`"
-else echo -e "\033[1;31m  •\033[0;37m Memcached\033[0m (not linked)"
-fi
-}
-
 # ------------------------
 # WPM CHECK
 # ------------------------
@@ -53,4 +20,46 @@ wpm_check_false() {
 \033[0m  Ex: docker run -P -h example.com -d tropicloud/wp-micro \n
 \033[0m  Aborting script...\n\n"
 	exit 1;
+}
+
+# ------------------------
+# WPM HEADER
+# ------------------------
+
+wpm_header() {
+	echo -e "\033[0;30m
+-----------------------------------------------------
+\033[0;34m  (wpm)\033[0m | \033[1;37m$1\033[0;30m
+-----------------------------------------------------
+\033[0m"
+}
+
+# ------------------------
+# WPM LINKS
+# ------------------------
+
+wpm_links() {
+	if [[  ! -z $MYSQL_PORT  ]];
+	then echo -e "\033[1;32m  •\033[0;37m MySQL\033[0m --> `echo $MYSQL_PORT | cut -d/ -f3 | cut -d: -f1`"
+	else echo -e "\033[1;31m  •\033[0;37m MySQL\033[0m (not linked)"
+	fi	
+	if [[  ! -z $REDIS_PORT  ]];
+	then echo -e "\033[1;32m  •\033[0;37m Redis\033[0m --> `echo $REDIS_PORT | cut -d/ -f3 | cut -d: -f1`"		
+	else echo -e "\033[1;31m  •\033[0;37m Redis\033[0m (not linked)"
+	fi		
+	if [[  ! -z $MEMCACHED_PORT  ]];
+	then echo -e "\033[1;32m  •\033[0;37m Memcached\033[0m --> `echo $MEMCACHED_PORT | cut -d/ -f3 | cut -d: -f1`"
+	else echo -e "\033[1;31m  •\033[0;37m Memcached\033[0m (not linked)"
+	fi
+}
+
+# ------------------------
+# WPM CHMOD
+# ------------------------
+
+wpm_chmod() { 
+	touch $home/.adminer_off
+	chown -LR $user:nginx $home
+	find $home -type f -exec chmod 644 {} \;
+	find $home -type d -exec chmod 755 {} \;
 }

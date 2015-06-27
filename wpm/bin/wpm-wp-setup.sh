@@ -17,7 +17,7 @@ wpm_wp_setup() {
 	# NGINX
 	# ------------------------
 
-	cat /wpm/etc/nginx/nginx.conf > $home/conf.d/nginx.conf
+	cat /wpm/etc/nginx/nginx.conf > /etc/nginx/nginx.conf
 	cat /wpm/etc/init.d/nginx.ini > $home/init.d/nginx.ini
 	
 	if [[  $WP_SSL == 'true'  ]];
@@ -45,7 +45,6 @@ wpm_wp_setup() {
 	su -l $user -c "git clone $WP_REPO wpm" && wpm_wp_version
 	su -l $user -c "cd $wpm && composer install"
 	su -l $user -c "cd $web && mkdir adminer && curl -sL http://www.adminer.org/latest-mysql-en.php > adminer/index.php"
-	su -l $user -c "touch .adminer"
 
 	wpm_wp_install > $home/log/wpm-wordpress.log 2>&1 & 			
 	wpm_wp_status() { cat $home/log/wpm-install.log | grep -q "WordPress setup completed"; }

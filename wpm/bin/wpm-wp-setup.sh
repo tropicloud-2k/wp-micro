@@ -51,7 +51,7 @@ wpm_wp_setup() {
 	wpm_header "WordPress Setup"
 	
 	su -l $user -c "git clone $WP_REPO wpm" && wpm_wp_version
-	su -l $user -c "composer install"
+	su -l $user -c "cd $wpm && composer install"
 
 	wpm_wp_install > $home/log/wpm-wp-install.log 2>&1 & 			
 	wpm_wp_status() { cat $home/log/wpm-install.log | grep -q "WordPress setup completed"; }
@@ -61,7 +61,7 @@ wpm_wp_setup() {
 	echo -ne " done.\n"
 	
 	echo -ne "Changing file permissions..."
-	while ! wpm_wp_chmod true; do echo -n '.' && sleep 1; done
+	while ! wpm_chmod true; do echo -n '.' && sleep 1; done
 	echo -ne " done.\n"
 	
 	if [[  `cat $home/log/wpm-wp-install.log | grep -q "Plugin 'wp-ffpc' activated"` true  ]]; then echo "Plugin 'wp-ffpc' activated."; fi

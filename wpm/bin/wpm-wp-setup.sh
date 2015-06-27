@@ -47,18 +47,14 @@ wpm_wp_setup() {
 	su -l $user -c "cd $web && mkdir adminer && curl -sL http://www.adminer.org/latest-mysql-en.php > adminer/index.php"
 	su -l $user -c "touch .adminer"
 
-	wpm_wp_install > $home/log/wpm-wp-install.log 2>&1 & 			
+	wpm_wp_install > $home/log/wpm-wordpress.log 2>&1 & 			
 	wpm_wp_status() { cat $home/log/wpm-install.log | grep -q "WordPress setup completed"; }
 		
 	echo -ne "Installing WordPress..."
 	while ! wpm_wp_status true; do echo -n '.' && sleep 1; done
 	echo -ne " done.\n"
 	
-	echo -ne "Changing file permissions..."
-	while ! wpm_chmod true; do echo -n '.' && sleep 1; done
-	echo -ne " done.\n"
-	
-	if [[  `cat $home/log/wpm-wp-install.log | grep -q "Plugin 'wp-ffpc' activated"` true  ]]; then echo "Plugin 'wp-ffpc' activated."; fi
-	if [[  `cat $home/log/wpm-wp-install.log | grep -q "Plugin 'redis-cache' activated"` true  ]]; then echo "Plugin 'redis-cache' activated."; fi	
-	if [[  `cat $home/log/wpm-wp-install.log | grep -q "WordPress installed successfully"` true  ]]; then echo "WordPress installed successfully."; fi
+	if [[  `cat $home/log/wpm-wordpress.log | grep -q "Plugin 'wp-ffpc' activated"` true  ]]; then echo "Plugin 'wp-ffpc' activated."; fi
+	if [[  `cat $home/log/wpm-wordpress.log | grep -q "Plugin 'redis-cache' activated"` true  ]]; then echo "Plugin 'redis-cache' activated."; fi	
+	if [[  `cat $home/log/wpm-wordpress.log | grep -q "WordPress installed successfully"` true  ]]; then echo "WordPress installed successfully."; fi
 }

@@ -4,11 +4,7 @@
 
 wpm_start() {
 
-	wpm_hostname
-	
-	if [[  ! -d /var/lib/mysql  ]]; then wpm_mysql_setup; fi
-	if [[  ! -d /var/wpm/web  ]]; then wpm_wp_setup; fi
-
+	wpm_check	
 	wpm_header "Start"
 	wpm_links && echo ""
 	
@@ -19,7 +15,7 @@ wpm_start() {
 		else /usr/bin/supervisorctl -u $HOSTNAME -p $WPM_ENV_HTTP_PASS start $2;
 		fi
 
-	else exec /usr/bin/supervisord -n -c /etc/supervisord.conf
+	else wpm_chmod && exec /usr/bin/supervisord -n -c /etc/supervisord.conf
 	fi
 }
 

@@ -36,6 +36,10 @@ wpm_env() {
 	# php dotenv
 	for var in `cat /etc/.env`; do echo $var >> $wpm/.env; done	
 	
+	echo -e "set \$MYSQL_HOST $DB_HOST;" >  $home/.adminer
+	echo -e "set \$MYSQL_NAME $DB_NAME;" >> $home/.adminer
+	echo -e "set \$MYSQL_USER $DB_USER;" >> $home/.adminer
+	
 	cat /wpm/etc/supervisord.conf \
 	| sed -e "s/example.com/$HOSTNAME/g" \
 	| sed -e "s/WPM_ENV_HTTP_PASS/{SHA}$WPM_ENV_HTTP_SHA1/g" \

@@ -73,6 +73,7 @@ wpm_build() {
 	mkdir -p $home/log/nginx
 	mkdir -p $home/log/php
 	mkdir -p $home/ssl
+	mkdir -p /usr/local/adminer
 	
 	cat /wpm/etc/.profile > /root/.profile
 	cat /wpm/etc/.profile > $home/.profile

@@ -1,7 +1,3 @@
-# ------------------------
-# WPM CHECK
-# ------------------------
-
 wpm_check() {
 	case "$HOSTNAME" in
 		*.*) wpm_check_true;;
@@ -22,10 +18,6 @@ wpm_check_false() {
 	exit 1;
 }
 
-# ------------------------
-# WPM HEADER
-# ------------------------
-
 wpm_header() {
 	echo -e "\033[0;30m
 -----------------------------------------------------
@@ -33,10 +25,6 @@ wpm_header() {
 -----------------------------------------------------
 \033[0m"
 }
-
-# ------------------------
-# WPM LINKS
-# ------------------------
 
 wpm_links() {
 	if [[  ! -z $MYSQL_PORT  ]];
@@ -53,13 +41,13 @@ wpm_links() {
 	fi
 }
 
-# ------------------------
-# WPM CHMOD
-# ------------------------
-
 wpm_chmod() { 
-	touch $home/.adminer_off
 	chown -LR $user:nginx $home
 	find $home -type f -exec chmod 644 {} \;
 	find $home -type d -exec chmod 755 {} \;
+}
+
+wpm_adminer() { 
+	wpm_header "Adminer (mysql admin)"
+	php -S 0.0.0.0:8080 -t /usr/local/adminer
 }

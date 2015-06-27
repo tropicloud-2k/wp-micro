@@ -17,12 +17,12 @@ wpm_wp_setup() {
 	# NGINX
 	# ------------------------
 
-	cat /wpm/etc/nginx/nginx.conf > /etc/nginx/nginx.conf
-	cat /wpm/etc/init.d/nginx.ini > $home/init.d/nginx.ini
+	cat /wpm/etc/nginx/nginx.conf   > /etc/nginx/nginx.conf
+	cat /wpm/etc/init.d/nginx.ini   > $home/init.d/nginx.ini
 	
 	if [[  $WP_SSL == 'true'  ]];
-	then cat /wpm/etc/nginx/wpssl.conf | sed -e "s/example.com/$HOSTNAME/g" > $home/conf.d/wp.conf && wpm_ssl
-	else cat /wpm/etc/nginx/wp.conf | sed -e "s/example.com/$HOSTNAME/g" > $home/conf.d/wp.conf
+	then cat /wpm/etc/nginx/wpssl.conf | sed -e "s/example.com/$HOSTNAME/g" > $home/conf.d/wordpress.conf && wpm_ssl
+	else cat /wpm/etc/nginx/wp.conf | sed -e "s/example.com/$HOSTNAME/g" > $home/conf.d/wordpress.conf
 	fi
 	
 	# ------------------------

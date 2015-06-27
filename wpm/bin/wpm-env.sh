@@ -41,6 +41,12 @@ wpm_env() {
 	| sed -e "s/WPM_ENV_HTTP_PASS/{SHA}$WPM_ENV_HTTP_SHA1/g" \
 	> /etc/supervisord.conf && chmod 644 /etc/supervisord.conf
 
+	cat /wpm/etc/nginx/adminer.conf \
+	| sed -e "s/DB_HOST/$DB_HOST/g" \
+	| sed -e "s/DB_NAME/$DB_NAME/g" \
+	| sed -e "s/DB_USER/$DB_USER/g" \
+	> /home/wordpress/conf.d/adminer.conf
+	
 	echo -e "$user:`openssl passwd -crypt $WPM_ENV_HTTP_PASS`\n" > $home/.htpasswd
 	echo -e "$(date +%Y-%m-%d\ %T) Environment setup completed" >> $home/log/wpm-install.log
 }

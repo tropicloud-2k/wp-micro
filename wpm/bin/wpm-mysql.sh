@@ -35,7 +35,7 @@ wpm_mysql_setup() {
 		
 		apk add --update mariadb && rm -rf /var/cache/apk/* && rm -rf /var/lib/apt/lists/*
 		sed -i 's/^\(bind-address\s.*\)/# \1/' /etc/mysql/my.cnf
-		cat /wpm/etc/run/mariadb.ini > $home/init.d/mariadb.ini
+		cat /wpm/etc/init.d/mariadb.ini > $home/init.d/mariadb.ini
 
 		mysql_install_db --user=mysql > /dev/null 2>&1
 		mysqld_safe > /dev/null 2>&1 &

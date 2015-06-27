@@ -36,6 +36,7 @@ elif [[  $1 == 'ps'  ]];        then wpm_ps $@
 elif [[  $1 == 'login'  ]];     then wpm_login $@
 elif [[  $1 == 'root'  ]];      then wpm_root $@
 elif [[  $1 == 'adminer'  ]];   then wpm_adminer $@
+elif [[  $1 == 'sftp'  ]];      then wpm_sftp $@
 
 else echo "
 ----------------------------------------------------

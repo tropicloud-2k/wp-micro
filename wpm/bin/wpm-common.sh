@@ -52,3 +52,12 @@ wpm_adminer() {
 	echo -e "  Password: $WPM_ENV_HTTP_PASS\n"
 	php -S 0.0.0.0:8080 -t /usr/local/adminer
 }
+
+wpm_sftp() { 
+	wpm_header "SFTP"
+	echo -e "  Password: $WPM_ENV_HTTP_PASS\n"
+	echo -e "Starting sshd server... done."
+	echo -e "Listening on port 22"
+	echo -e "Press Ctrl-C to quit."
+	/usr/sbin/sshd -D
+}

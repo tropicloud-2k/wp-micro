@@ -55,6 +55,13 @@ wpm_build() {
 	pear install nrk/Predis
 	
 	# ------------------------
+	# ADMINER
+	# ------------------------
+	
+	mkdir -p /usr/local/adminer
+	curl -sL http://www.adminer.org/latest-en.php > /usr/local/adminer/index.php
+	
+	# ------------------------
 	# WP-CLI
 	# ------------------------
 
@@ -73,7 +80,6 @@ wpm_build() {
 	mkdir -p $home/log/nginx
 	mkdir -p $home/log/php
 	mkdir -p $home/ssl
-	mkdir -p /usr/local/adminer
 	
 	cat /wpm/etc/.profile > /root/.profile
 	cat /wpm/etc/.profile > $home/.profile

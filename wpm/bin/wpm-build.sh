@@ -41,6 +41,13 @@ wpm_build() {
 	rm -rf /var/lib/apt/lists/*
 	
 	# ------------------------
+	# ADMINER
+	# ------------------------
+	
+	mkdir -p /usr/local/adminer
+	curl -sL http://www.adminer.org/latest-en.php > /usr/local/adminer/index.php
+	
+	# ------------------------
 	# COMPOSER
 	# ------------------------
 	
@@ -53,13 +60,6 @@ wpm_build() {
 	
 	pear channel-discover pear.nrk.io
 	pear install nrk/Predis
-	
-	# ------------------------
-	# ADMINER
-	# ------------------------
-	
-	mkdir -p /usr/local/adminer
-	curl -sL http://www.adminer.org/latest-en.php > /usr/local/adminer/index.php
 	
 	# ------------------------
 	# WP-CLI

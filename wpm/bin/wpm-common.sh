@@ -1,3 +1,7 @@
+# ------------------------
+# WPM CHECK	
+# ------------------------
+
 wpm_check() {
 	case "$HOSTNAME" in
 		*.*) wpm_check_true;;
@@ -18,6 +22,10 @@ wpm_check_false() {
 	exit 1;
 }
 
+# ------------------------
+# WPM HEADER
+# ------------------------
+
 wpm_header() {
 	echo -e "\033[0;30m
 -----------------------------------------------------
@@ -25,6 +33,10 @@ wpm_header() {
 -----------------------------------------------------
 \033[0m"
 }
+
+# ------------------------
+# WPM LINKS
+# ------------------------
 
 wpm_links() {
 	if [[  ! -z $MYSQL_PORT  ]];
@@ -41,6 +53,10 @@ wpm_links() {
 	fi
 }
 
+# ------------------------
+# WPM CHMOD
+# ------------------------
+
 wpm_chmod() { 
 	chown -LR $user:nginx $home
 	find $home -type f -exec chmod 644 {} \;
@@ -51,13 +67,4 @@ wpm_adminer() {
 	wpm_header "Adminer (mysql admin)"
 	echo -e "  Password: $WPM_ENV_HTTP_PASS\n"
 	php -S 0.0.0.0:8080 -t /usr/local/adminer
-}
-
-wpm_sftp() { 
-	wpm_header "SFTP"
-	echo -e "  Password: $WPM_ENV_HTTP_PASS\n"
-	echo -e "Starting sshd server... done."
-	echo -e "Listening on port 22"
-	echo -e "Press Ctrl-C to quit."
-	/usr/sbin/sshd -D
 }

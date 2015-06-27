@@ -36,7 +36,6 @@ wpm_env() {
 	# php dotenv
 	for var in `cat /etc/.env`; do echo $var >> $wpm/.env; done	
 	
-	echo -e "$user:$WPM_ENV_HTTP_PASS" | chpasswd
 	echo -e "set \$MYSQL_HOST $DB_HOST;" >  $home/.adminer
 	echo -e "set \$MYSQL_NAME $DB_NAME;" >> $home/.adminer
 	echo -e "set \$MYSQL_USER $DB_USER;" >> $home/.adminer

@@ -41,13 +41,6 @@ wpm_build() {
 	rm -rf /var/lib/apt/lists/*
 	
 	# ------------------------
-	# SFTP
-	# ------------------------
-
-# 	cat /wpm/etc/ssh/sshd_config > /etc/ssh/sshd_config
-	/usr/bin/ssh-keygen -A
-	
-	# ------------------------
 	# COMPOSER
 	# ------------------------
 	

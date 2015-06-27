@@ -6,7 +6,7 @@ wpm_ssl() {
 
 	wpm_header "SSL Setup"
 
-	cd $home/ssl && rm -f $home/ssl/$HOSTNAME.*
+	cd $HOME/ssl && rm -f $HOME/ssl/$HOSTNAME.*
 	
 	cat /wpm/etc/nginx/openssl.conf | sed -e "s/example.com/$HOSTNAME/g" > openssl.conf
 

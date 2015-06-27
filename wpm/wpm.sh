@@ -7,9 +7,7 @@
 # version: 0.3
 # ------------------------------------
 
-user="wordpress"
-home="/home/$user"
-wpm="$home/wpm"
+wpm="$HOME/wpm"
 web="$wpm/web"
 
 # ------------------------------------

@@ -58,9 +58,9 @@ wpm_links() {
 # ------------------------
 
 wpm_chmod() { 
-	chown -LR $user:nginx $home
-	find $home -type f -exec chmod 644 {} \;
-	find $home -type d -exec chmod 755 {} \;
+	chown -LR $USER:nginx $HOME
+	find $HOME -type f -exec chmod 644 {} \;
+	find $HOME -type d -exec chmod 755 {} \;
 }
 
 wpm_adminer() { 

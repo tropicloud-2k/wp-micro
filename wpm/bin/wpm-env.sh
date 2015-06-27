@@ -27,7 +27,6 @@ wpm_env() {
 	export SECURE_AUTH_SALT="`openssl rand 48 -base64`"
 	export LOGGED_IN_SALT="`openssl rand 48 -base64`"
 	export NONCE_SALT="`openssl rand 48 -base64`"
-	export HOME="/home/wordpress"
 	export VISUAL="nano"
 
 	# environment dump
@@ -36,15 +35,15 @@ wpm_env() {
 	# php dotenv
 	for var in `cat /etc/.env`; do echo $var >> $wpm/.env; done	
 	
-	echo -e "set \$MYSQL_HOST $DB_HOST;" >  $home/.adminer
-	echo -e "set \$MYSQL_NAME $DB_NAME;" >> $home/.adminer
-	echo -e "set \$MYSQL_USER $DB_USER;" >> $home/.adminer
+	echo -e "set \$MYSQL_HOST $DB_HOST;" >  $HOME/.adminer
+	echo -e "set \$MYSQL_NAME $DB_NAME;" >> $HOME/.adminer
+	echo -e "set \$MYSQL_USER $DB_USER;" >> $HOME/.adminer
 	
 	cat /wpm/etc/supervisord.conf \
 	| sed -e "s/example.com/$HOSTNAME/g" \
 	| sed -e "s/WPM_ENV_HTTP_PASS/{SHA}$WPM_ENV_HTTP_SHA1/g" \
 	> /etc/supervisord.conf && chmod 644 /etc/supervisord.conf
 
-	echo -e "$user:`openssl passwd -crypt $WPM_ENV_HTTP_PASS`\n" > $home/.htpasswd
-	echo -e "$(date +%Y-%m-%d\ %T) Environment setup completed" >> $home/log/wpm-install.log
+	echo -e "$USER:`openssl passwd -crypt $WPM_ENV_HTTP_PASS`\n" > $HOME/.htpasswd
+	echo -e "$(date +%Y-%m-%d\ %T) Environment setup completed" >> $HOME/log/wpm-install.log
 }

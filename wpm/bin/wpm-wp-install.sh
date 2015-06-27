@@ -4,13 +4,13 @@
 
 wpm_core_install() {
 
-	su -l $user -c "cd $web && wp core install \
+	su -l $USER -c "cd $web && wp core install \
 	--url=$WP_HOME \
 	--title=$WP_TITLE \
 	--admin_name=$WP_USER \
 	--admin_email=$WP_MAIL \
 	--admin_password=$WP_PASS"
-	su -l $user -c "cd $web && wp rewrite structure '/%postname%/'"
+	su -l $USER -c "cd $web && wp rewrite structure '/%postname%/'"
 	wpm_wp_plugins
 }
 
@@ -27,5 +27,5 @@ wpm_wp_install() {
 		else wpm_core_install
 		fi
 	fi
-	echo -e "$(date +%Y-%m-%d\ %T) WordPress setup completed" >> $home/log/wpm-install.log
+	echo -e "$(date +%Y-%m-%d\ %T) WordPress setup completed" >> $HOME/log/wpm-install.log
 }

@@ -6,6 +6,8 @@ wpm_build() {
 	
 	wpm_header "Build"
 
+	chmod +x /wpm/wpm.sh && ln -s /wpm/wpm.sh /usr/bin/wpm
+
 	apk add --update \
 		mariadb-client \
 		msmtp \
@@ -67,23 +69,5 @@ wpm_build() {
 	curl -sL https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar > /usr/local/bin/wp
 	chmod +x /usr/local/bin/wp
 	
-	# ------------------------
-	# WP-MICRO
-	# ------------------------
-	
-	chmod +x /wpm/wpm.sh && ln -s /wpm/wpm.sh /usr/bin/wpm
-	adduser -D -G nginx -s /bin/sh -h $home $user
-	
-	mkdir -p $home/conf.d
-	mkdir -p $home/init.d
-	mkdir -p $home/log/nginx
-	mkdir -p $home/log/php
-	mkdir -p $home/ssl
-	
-	cat /wpm/etc/.profile > /root/.profile
-	cat /wpm/etc/.profile > $home/.profile
-		
-	wpm_chmod
 	wpm_header "Build completed"
 }
-

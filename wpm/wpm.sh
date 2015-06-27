@@ -7,6 +7,9 @@
 # version: 0.3
 # ------------------------------------
 
+export USER="$HOSTNAME"
+export HOME="/home/$HOSTNAME"
+
 wpm="$HOME/wpm"
 web="$wpm/web"
 

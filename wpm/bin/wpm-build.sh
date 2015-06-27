@@ -11,7 +11,6 @@ wpm_build() {
 		msmtp \
 		nginx \
 		openssl \
-		openssh \
 		php-cli \
 		php-curl \
 		php-fpm \
@@ -35,7 +34,7 @@ wpm_build() {
 		php-zip \
 		supervisor \
 		libmemcached \
-		curl git nano zip
+		curl git nano
 	                 
 	rm -rf /var/cache/apk/*
 	rm -rf /var/lib/apt/lists/*

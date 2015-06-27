@@ -31,7 +31,7 @@ wpm_mysql_setup() {
 		export DB_HOST="127.0.0.1"
 		export DB_NAME="$user"
 		export DB_USER="$user"
-		export DB_PASSWORD=`openssl rand -hex 36`
+		export DB_PASSWORD=`openssl rand -hex 12`
 		
 		apk add --update mariadb && rm -rf /var/cache/apk/* && rm -rf /var/lib/apt/lists/*
 		sed -i 's/^\(bind-address\s.*\)/# \1/' /etc/mysql/my.cnf

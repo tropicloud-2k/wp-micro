@@ -1,4 +1,4 @@
-wpm_chmod() { chown -LR $user:nginx $home && find $home -type f -exec chmod 644 {} \; && find $home -type d -exec chmod 755 {} \; }
+wpm_chmod() { chown -LR $user:nginx $home && find $home -type f -exec chmod 644 {} \; && find $home -type d -exec chmod 755 {} \;; }
 
 # ------------------------
 # WPM HEADER
@@ -36,21 +36,21 @@ fi
 # ------------------------
 
 wpm_check() {
-case "$HOSTNAME" in
-	*.*) wpm_check_true;;
-	*) wpm_check_false;;
-esac
+	case "$HOSTNAME" in
+		*.*) wpm_check_true;;
+		*) wpm_check_false;;
+	esac
 }
 
-wpm_check_true(){
-if [[  ! -d /var/lib/mysql  ]]; then wpm_mysql_setup; fi
-if [[  ! -d $web  ]]; then wpm_wp_setup; fi
+wpm_check_true() {
+	if [[  ! -d /var/lib/mysql  ]]; then wpm_mysql_setup; fi
+	if [[  ! -d $web  ]]; then wpm_wp_setup; fi
 }
 
-wpm_check_false(){
-wpm_header "Error! Hostname is not set."
-echo -e "\033[1;31m  Use the \033[1;37m-h\033[1;31m flag to set the hostname (domain)\n
+wpm_check_false() {
+	wpm_header "(error) hostname is not set!"
+	echo -e "\033[1;31m  Use the \033[1;37m-h\033[1;31m flag to set the hostname (domain)\n
 \033[0m  Ex: docker run -P -h example.com -d tropicloud/wp-micro \n
 \033[0m  Aborting script...\n\n"
-exit 1;
+	exit 1;
 }

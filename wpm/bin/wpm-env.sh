@@ -2,7 +2,7 @@
 # WPM ENV.
 # ------------------------
 
-wpm_environment() {
+wpm_env() {
 
 	# hide "The mysql extension is deprecated and will be removed in the future: use mysqli or PDO"
 	sed -i "s/define('WP_DEBUG'.*/define('WP_DEBUG', false);/g" $wpm/config/environments/development.php
@@ -29,15 +29,19 @@ wpm_environment() {
 	export NONCE_SALT="`openssl rand 48 -base64`"
 	export VISUAL="nano"
 
+	# environment dump
 	echo "" > /etc/.env && env | grep = >> /etc/.env
+	
+	# php dotenv
 	for var in `cat /etc/.env`; do echo $var >> $wpm/.env; done	
-	chown $user:nginx $wpm/.env
 	
 	cat /wpm/etc/supervisord.conf \
 	| sed -e "s/example.com/$HOSTNAME/g" \
 	| sed -e "s/WPM_ENV_HTTP_PASS/{SHA}$WPM_ENV_HTTP_SHA1/g" \
 	> /etc/supervisord.conf && chmod 644 /etc/supervisord.conf
 
+	wpm_chmod
+	
 	echo -e "$user:`openssl passwd -crypt $WPM_ENV_HTTP_PASS`\n" > $home/.htpasswd
-	echo -e "$(date +%Y-%m-%d\ %T) Environment setup completed" >> /var/log/wpm-install.log
+	echo -e "$(date +%Y-%m-%d\ %T) Environment setup completed" >> $home/log/wpm-install.log
 }

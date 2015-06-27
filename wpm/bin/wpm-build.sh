@@ -69,18 +69,18 @@ wpm_build() {
 	adduser -D -G nginx -s /bin/sh -h $home $user
 	
 	rm -rf /var/www/*
-
-	mkdir -p /var/wpm
-	mkdir -p /etc/wpm/init.d
+	
+	mkdir -p $home/_db
+	mkdir -p $home/conf.d
+	mkdir -p $home/init.d
+	mkdir -p $home/log
+	mkdir -p $home/ssl
 	mkdir -p /var/log/php
-	mkdir -p /var/www/adminer
 	
 	cat /wpm/etc/.profile > /root/.profile
 	cat /wpm/etc/.profile > $home/.profile
-	
-	chown -LR $user:nginx $home
-	chown -LR $user:nginx $wpm
-	chown -LR $user:nginx $www
+		
+	wpm_chmod
 	
 	wpm_header "Build completed."
 }

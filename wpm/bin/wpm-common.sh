@@ -5,7 +5,7 @@
 wpm_header() {
 	echo -e "\033[0;30m
 -----------------------------------------------------
-\033[1;33m  (wpm+) \033[0m|\033[1;37m $1 \033[0;30m
+\033[0m  (\033[1;33mwp-\033[0;34Submarine\033[0m)\033[1;37m $1 \033[0;30m
 -----------------------------------------------------
 \033[0m"
 }
@@ -41,7 +41,7 @@ wpm_hostname() {
 }
 
 wpm_hostname_true(){
-	wpm_header "Welcome to WP-MICRO"
+	wpm_header "Welcome to \033[1;33mwp-\033[0;34Submarine"
 	echo -e "\033[0m  Using \033[0;37m${HOSTNAME}\033[0m as hostname (domain)\n"
 	wpm_links
 }
@@ -54,22 +54,14 @@ wpm_hostname_false(){
 }
 
 # ------------------------
-# WPM WP CHMOD
+# WPM CHMOD
 # ------------------------
 
-wpm_wp_chmod() {
+wpm_chmod() {
 	
 	chown -LR $user:nginx $home
-	chown -LR $user:nginx $wpm
-	chown -LR $user:nginx $www
 	
 	find $home -type f -exec chmod 644 {} \;
 	find $home -type d -exec chmod 755 {} \;
-
-	find $web -type f -exec chmod 644 {} \;
-	find $web -type d -exec chmod 755 {} \;
-	
-	find $www -type f -exec chmod 644 {} \;
-	find $www -type d -exec chmod 755 {} \;
 }
 

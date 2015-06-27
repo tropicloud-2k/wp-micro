@@ -2,29 +2,30 @@
 # WORDPRESS INSTALL
 # ------------------------
 
-wpm_wp_core_install() {
+wpm_core_install() {
 
 	su -l $user -c "cd $web && wp core install \
---url=$WP_HOME \
---title=$WP_TITLE \
---admin_name=$WP_USER \
---admin_email=$WP_MAIL \
---admin_password=$WP_PASS"
+	--url=$WP_HOME \
+	--title=$WP_TITLE \
+	--admin_name=$WP_USER \
+	--admin_email=$WP_MAIL \
+	--admin_password=$WP_PASS"
 	su -l $user -c "cd $web && wp rewrite structure '/%postname%/'"
 	wpm_wp_plugins
 }
 
 wpm_wp_install() {
 
-	wpm_environment && cd $web
+	wpm_env
+	cd $web
 	
 	if [[  ! -z "$WP_TITLE" && ! -z "$WP_USER" && ! -z "$WP_MAIL" && ! -z "$WP_PASS"  ]]; then 
 		if [[  -z $MYSQL_PORT  ]]; then
 			mysqld_safe > /dev/null 2>&1 &
 			while [[  ! -e /run/mysqld/mysqld.sock  ]]; do sleep 1; done && wpm_wp_core_install			
 			mysqladmin -u root shutdown
-		else wpm_wp_core_install
+		else wpm_core_install
 		fi
 	fi
-	echo -e "$(date +%Y-%m-%d\ %T) WordPress setup completed" >> /var/log/wpm-install.log
+	echo -e "$(date +%Y-%m-%d\ %T) WordPress setup completed" >> $home/log/wpm-install.log
 }

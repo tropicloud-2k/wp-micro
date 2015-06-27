@@ -8,8 +8,7 @@ ENV WP_ENV=development \
 	WP_SSL=false \
 	WP_REPO=https://github.com/roots/bedrock.git
 
-EXPOSE 80 443
-VOLUME ["/var/www", "/var/wpm", "/etc/wpm", "/home/wordpress"]
-
+EXPOSE     80 360 443
+VOLUME     ["/home/wordpress"]
 ENTRYPOINT ["wpm"]
-CMD ["start"]
+CMD        ["start"]

@@ -59,10 +59,10 @@ wpm_links() {
 
 wpm_chmod() { 
 	
-	chown -R ${WPS_UID}:${WPS_GID} $wpm
+	chown -R ${WPS_UID}:${WPS_GID} $home
 	
-	find $wpm -type f -exec chmod 644 {} \;
-	find $wpm -type d -exec chmod 755 {} \;
+	find $home -type f -exec chmod 644 {} \;
+	find $home -type d -exec chmod 755 {} \;
 }
 
 wpm_adminer() { 

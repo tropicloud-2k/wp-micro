@@ -4,6 +4,8 @@
 
 wpm_core_install() {
 
+	echo -e "su -l $HOSTNAME -c "
+	
 	su -l $HOSTNAME -c "cd $WPS_WEB && wp core install \
 	--url=$WP_HOME \
 	--title=$WP_TITLE \

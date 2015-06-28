@@ -22,7 +22,7 @@ wpm_wp_setup() {
 	export WPS_WWW="/home/${HOSTNAME}/www"
 	export WPS_WEB="/home/${HOSTNAME}/www/web"
 	
-	wpm_header "WordPress Setup"
+	wpm_header "WP Setup"
 	
 	adduser -D -G nginx -s /bin/sh -h $WPS_HOME $WPS_USER
 	
@@ -75,7 +75,7 @@ wpm_wp_setup() {
 	# WP INSTALL
 	# ------------------------
 	
-	wpm_header "WordPress Install"
+	wpm_header "WP Install"
 	wpm_wp_install		
 #	wpm_wp_install > $WPS_HOME/log/wpm-wordpress.log 2>&1 & 			
 	wpm_wp_status() { cat $WPS_HOME/log/wpm-install.log | grep -q "WordPress setup completed"; }

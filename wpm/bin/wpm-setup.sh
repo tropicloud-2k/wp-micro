@@ -11,30 +11,46 @@ wpm_wp_version(){
 	fi
 }
 
-wpm_wp_setup() {
+wpm_setup() {
+
+	# ------------------------
+	# MSMTP
+	# ------------------------
+
+	cat /wpm/etc/smtp/msmtprc | sed -e "s/example.com/$HOSTNAME/g" > /etc/msmtprc
+	echo "sendmail_path = /usr/bin/msmtp -t" > /etc/php/conf.d/sendmail.ini
+	touch /var/log/msmtp.log && chmod 777 /var/log/msmtp.log
 
 	# ------------------------
 	# NGINX
 	# ------------------------
 
-	cat /wpm/etc/nginx/nginx.conf > /etc/nginx/nginx.conf
-	cat /wpm/etc/init.d/nginx.ini > $home/init.d/nginx.ini
+	cat /wpm/etc/init.d/nginx.ini | sed -e "s/example.com/$HOSTNAME/g" > $home/init.d/nginx.ini
+	cat /wpm/etc/nginx/nginx.conf | sed -e "s/example.com/$HOSTNAME/g" > /etc/nginx/nginx.conf
 	
 	if [[  $WP_SSL == 'true'  ]];
-	then cat /wpm/etc/nginx/wpssl.conf | sed -e "s/example.com/$HOSTNAME/g" > $home/conf.d/wordpress.conf && wpm_ssl
-	else cat /wpm/etc/nginx/wp.conf | sed -e "s/example.com/$HOSTNAME/g" > $home/conf.d/wordpress.conf
+	then cat /wpm/etc/nginx/wpssl.conf | sed -e "s/example.com/$HOSTNAME/g" > $home/conf.d/nginx.conf && wpm_ssl
+	else cat /wpm/etc/nginx/wp.conf | sed -e "s/example.com/$HOSTNAME/g" > $home/conf.d/nginx.conf
 	fi
 	
 	# ------------------------
 	# PHP-FPM
 	# ------------------------
 	
-	cat /wpm/etc/init.d/php-fpm.ini > $home/init.d/php-fpm.ini
-	cat /wpm/etc/smtp/msmtprc > /etc/msmtprc
+	cat /wpm/etc/init.d/php-fpm.ini | sed -e "s/example.com/$HOSTNAME/g" > $home/init.d/php-fpm.ini
 
 	if [[  $(free -m | grep 'Mem' | awk '{print $2}') -gt 1800  ]];
 	then cat /wpm/etc/php/php-fpm.conf | sed -e "s/example.com/$HOSTNAME/g" > $home/conf.d/php-fpm.conf
 	else cat /wpm/etc/php/php-fpm-min.conf | sed -e "s/example.com/$HOSTNAME/g" > $home/conf.d/php-fpm.conf
+	fi
+	
+	# ------------------------
+	# MYSQL
+	# ------------------------
+	
+	if [[  -z $MYSQL_PORT  ]];
+	then wpm_mysql_setup
+	else wpm_mysql_link
 	fi
 	
 	# ------------------------

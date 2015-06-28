@@ -7,10 +7,10 @@
 # version: 0.3
 # ------------------------------------
 
-user="wordpress"
-home="/home/$user"
-wpm="$home/wpm"
-web="$wpm/web"
+export user="wordpress"
+export home="/home/$user"
+export wpm="$home/wpm"
+export web="$wpm/web"
 
 # ------------------------------------
 # wpm functions

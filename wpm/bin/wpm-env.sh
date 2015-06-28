@@ -18,7 +18,6 @@ wpm_env() {
 	
 	export WP_SITEURL="${WP_HOME}/wp"
 	export WPM_ENV_HTTP_PASS="`openssl rand 12 -hex`"
-	export WPM_ENV_HTTP_SHA1="`echo -ne "$WPM_ENV_HTTP_PASS" | sha1sum | awk '{print $1}'`"
 	export AUTH_KEY="`openssl rand 48 -base64`"
 	export SECURE_AUTH_KEY="`openssl rand 48 -base64`"
 	export LOGGED_IN_KEY="`openssl rand 48 -base64`"
@@ -29,6 +28,9 @@ wpm_env() {
 	export NONCE_SALT="`openssl rand 48 -base64`"
 	export HOME="/home/wordpress"
 	export VISUAL="nano"
+
+# 	export WPM_ENV_HTTP_SHA1="`echo -ne "$WPM_ENV_HTTP_PASS" | sha1sum | awk '{print $1}'`"
+# 	echo -e "$user:`openssl passwd -crypt $WPM_ENV_HTTP_PASS`\n" > $home/.htpasswd
 
 	# environment dump
 	echo "" > /etc/.env && env | grep = >> /etc/.env
@@ -45,6 +47,5 @@ wpm_env() {
 	| sed -e "s/WPM_ENV_HTTP_PASS/{SHA}$WPM_ENV_HTTP_SHA1/g" \
 	> /etc/supervisord.conf && chmod 644 /etc/supervisord.conf
 
-	echo -e "$user:`openssl passwd -crypt $WPM_ENV_HTTP_PASS`\n" > $home/.htpasswd
 	echo -e "$(date +%Y-%m-%d\ %T) Environment setup completed" >> $home/log/wpm-install.log
 }

@@ -83,7 +83,6 @@ wpm_build() {
 	cat /wpm/etc/.profile > /root/.profile
 	cat /wpm/etc/.profile > $home/.profile
 		
-	wpm_chmod
 	wpm_header "Build completed"
 }
 

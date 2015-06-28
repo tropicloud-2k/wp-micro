@@ -27,6 +27,7 @@ wpm_env() {
 	export SECURE_AUTH_SALT="`openssl rand 48 -base64`"
 	export LOGGED_IN_SALT="`openssl rand 48 -base64`"
 	export NONCE_SALT="`openssl rand 48 -base64`"
+	export HOME="/home/$HOSTNAME"
 	export VISUAL="nano"
 
 	# environment dump

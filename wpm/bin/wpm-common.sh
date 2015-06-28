@@ -55,12 +55,11 @@ wpm_links() {
 wpm_chmod() { 
 
 	wpm_header "WPM CHMOD"
+	
+	WPS_USER_UID=`id -u $WPS_USER`
+	WPS_USER_GID=`id -g $WPS_USER`
 
-	echo -e "WPS_USER: $WPS_USER"
-	echo -e "WPS_HOME: $WPS_HOME"
-	echo -e "WPS_PASS: $WPS_PASS \n"	
-
-	chown -R "$WPS_USER":nginx $WPS_HOME
+	chown -R ${WPS_USER_UID}:${WPS_USER_GID} $WPS_HOME
 	
 	find $WPS_HOME -type f -exec chmod 644 {} \;
 	find $WPS_HOME -type d -exec chmod 755 {} \;

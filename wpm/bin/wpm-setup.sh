@@ -1,7 +1,3 @@
-# ------------------------
-# WORDPRESS SETUP
-# ------------------------
-
 wpm_wp_version(){
 
 	WP_VER=`cat $wpm/composer.json | grep 'johnpbloch/wordpress' | cut -d: -f2`
@@ -13,17 +9,8 @@ wpm_wp_version(){
 
 wpm_setup() {
 
-	# ------------------------
-	# MSMTP
-	# ------------------------
-
-	cat /wpm/etc/smtp/msmtprc | sed -e "s/example.com/$HOSTNAME/g" > /etc/msmtprc
-	echo "sendmail_path = /usr/bin/msmtp -t" > /etc/php/conf.d/sendmail.ini
-	touch /var/log/msmtp.log && chmod 777 /var/log/msmtp.log
-
-	# ------------------------
-	# NGINX
-	# ------------------------
+# NGINX
+# ---------------------------------------------------------------------------------
 
 	cat /wpm/etc/init.d/nginx.ini | sed -e "s/example.com/$HOSTNAME/g" > $home/init.d/nginx.ini
 	cat /wpm/etc/nginx/nginx.conf | sed -e "s/example.com/$HOSTNAME/g" > /etc/nginx/nginx.conf
@@ -33,9 +20,9 @@ wpm_setup() {
 	else cat /wpm/etc/nginx/wp.conf | sed -e "s/example.com/$HOSTNAME/g" > $home/conf.d/nginx.conf
 	fi
 	
-	# ------------------------
-	# PHP-FPM
-	# ------------------------
+
+# PHP
+# ---------------------------------------------------------------------------------
 	
 	cat /wpm/etc/init.d/php-fpm.ini | sed -e "s/example.com/$HOSTNAME/g" > $home/init.d/php-fpm.ini
 
@@ -43,19 +30,33 @@ wpm_setup() {
 	then cat /wpm/etc/php/php-fpm.conf | sed -e "s/example.com/$HOSTNAME/g" > $home/conf.d/php-fpm.conf
 	else cat /wpm/etc/php/php-fpm-min.conf | sed -e "s/example.com/$HOSTNAME/g" > $home/conf.d/php-fpm.conf
 	fi
+
+
+# MYSQL
+# ---------------------------------------------------------------------------------
 	
-	# ------------------------
-	# MYSQL
-	# ------------------------
+	if [[  -z $MYSQL_PORT  ]]; then wpm_mysql_setup; else wpm_mysql_link; fi
 	
-	if [[  -z $MYSQL_PORT  ]];
-	then wpm_mysql_setup
-	else wpm_mysql_link
-	fi
 	
-	# ------------------------
-	# WORDPRESS
-	# ------------------------
+# MSMTP
+# ---------------------------------------------------------------------------------
+
+	cat /wpm/etc/smtp/msmtprc | sed -e "s/example.com/$HOSTNAME/g" > /etc/msmtprc
+	echo "sendmail_path = /usr/bin/msmtp -t" > /etc/php/conf.d/sendmail.ini
+	touch /var/log/msmtp.log && chmod 777 /var/log/msmtp.log
+
+
+# SUPERVISOR
+# ---------------------------------------------------------------------------------
+	
+	cat /wpm/etc/supervisord.conf \
+	| sed -e "s/example.com/$HOSTNAME/g" \
+	| sed -e "s/WPM_ENV_HTTP_PASS/{SHA}$WPM_ENV_HTTP_SHA1/g" \
+	> /etc/supervisord.conf && chmod 644 /etc/supervisord.conf
+
+
+# WORDPRESS
+# ---------------------------------------------------------------------------------
 	
 	wpm_header "WordPress Setup"
 	

@@ -1,11 +1,10 @@
-wpm_build() {
 
-	# ------------------------
-	# PACKGES
-	# ------------------------
+wpm_build() { wpm_header "Build"
+
+
+# PACKGES
+# ---------------------------------------------------------------------------------	
 	
-	wpm_header "Build"
-
 	apk add --update \
 		mariadb-client \
 		msmtp \
@@ -38,38 +37,38 @@ wpm_build() {
 	                 
 	rm -rf /var/cache/apk/*
 	rm -rf /var/lib/apt/lists/*
+
 	
-	# ------------------------
-	# ADMINER
-	# ------------------------
+# ADMINER
+# ---------------------------------------------------------------------------------
 	
 	mkdir -p /usr/local/adminer
 	curl -sL http://www.adminer.org/latest-en.php > /usr/local/adminer/index.php
+
 	
-	# ------------------------
-	# COMPOSER
-	# ------------------------
-	
+# COMPOSER
+# ---------------------------------------------------------------------------------
+
 	curl -sS https://getcomposer.org/installer | php
 	mv composer.phar /usr/local/bin/composer
+
 	
-	# ------------------------
-	# PREDIS
-	# ------------------------
+# PREDIS
+# ---------------------------------------------------------------------------------
 	
 	pear channel-discover pear.nrk.io
 	pear install nrk/Predis
+
 	
-	# ------------------------
-	# WP-CLI
-	# ------------------------
+# WP-CLI
+# ---------------------------------------------------------------------------------
 
 	curl -sL https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar > /usr/local/bin/wp
 	chmod +x /usr/local/bin/wp
+
 	
-	# ------------------------
-	# WP-MICRO
-	# ------------------------
+# WP-USER
+# ---------------------------------------------------------------------------------
 	
 	chmod +x /wpm/wpm.sh && ln -s /wpm/wpm.sh /usr/bin/wpm
 	adduser -D -G nginx -s /bin/sh -h $home $user

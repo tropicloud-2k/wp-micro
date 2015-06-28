@@ -1,11 +1,12 @@
-# ------------------------
-# WPM ENV.
-# ------------------------
 
 wpm_env() {
 
 	# hide "The mysql extension is deprecated and will be removed in the future: use mysqli or PDO"
 	sed -i "s/define('WP_DEBUG'.*/define('WP_DEBUG', false);/g" $wpm/config/environments/development.php
+
+
+# EXPORT
+# ---------------------------------------------------------------------------------
 
 	if [[  ! -z $MEMCACHED_PORT  ]]; then export MEMCACHED=`echo $MEMCACHED_PORT | cut -d/ -f3`; fi		
 	if [[  ! -z $REDIS_PORT  ]]; then export REDIS=`echo $REDIS_PORT | cut -d/ -f3`; fi
@@ -31,21 +32,17 @@ wpm_env() {
 
 # 	export WPM_ENV_HTTP_SHA1="`echo -ne "$WPM_ENV_HTTP_PASS" | sha1sum | awk '{print $1}'`"
 # 	echo -e "$user:`openssl passwd -crypt $WPM_ENV_HTTP_PASS`\n" > $home/.htpasswd
-
-	# environment dump
-	echo "" > /etc/.env && env | grep = >> /etc/.env
-	
-	# php dotenv
-	for var in `cat /etc/.env`; do echo $var >> $wpm/.env; done	
-	
 	echo -e "set \$MYSQL_HOST $DB_HOST;" >  $home/.adminer
 	echo -e "set \$MYSQL_NAME $DB_NAME;" >> $home/.adminer
 	echo -e "set \$MYSQL_USER $DB_USER;" >> $home/.adminer
 	
-	cat /wpm/etc/supervisord.conf \
-	| sed -e "s/example.com/$HOSTNAME/g" \
-	| sed -e "s/WPM_ENV_HTTP_PASS/{SHA}$WPM_ENV_HTTP_SHA1/g" \
-	> /etc/supervisord.conf && chmod 644 /etc/supervisord.conf
+	
+# DUMP
+# ---------------------------------------------------------------------------------
 
+	echo "" > /etc/.env && env | grep = >> /etc/.env
+	
+	for var in `cat /etc/.env`; do echo $var >> $wpm/.env; done	
+	
 	echo -e "$(date +%Y-%m-%d\ %T) Environment setup completed" >> $home/log/wpm-install.log
 }

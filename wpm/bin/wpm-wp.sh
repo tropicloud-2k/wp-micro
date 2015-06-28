@@ -1,10 +1,36 @@
-# ------------------------
-# WORDPRESS PLUGINS
-# ------------------------
+
+# WP INSTALL
+# ---------------------------------------------------------------------------------
+
+wpm_core_install() {
+
+	wp core install --url=$WP_HOME --title=$WP_TITLE --admin_name=$WP_USER --admin_email=$WP_MAIL --admin_password=$WP_PASS
+	wp rewrite structure '/%postname%/'
+	wpm_wp_plugins
+}
+
+wpm_wp_install() {
+
+	wpm_env
+	cd $web
+	
+	if [[  ! -z "$WP_TITLE" && ! -z "$WP_USER" && ! -z "$WP_MAIL" && ! -z "$WP_PASS"  ]]; then 
+		if [[  -z $MYSQL_PORT  ]]; then
+			mysqld_safe > /dev/null 2>&1 &
+			while [[  ! -e /run/mysqld/mysqld.sock  ]]; do sleep 1; done && wpm_core_install			
+			mysqladmin -u root shutdown
+		else wpm_core_install
+		fi
+	fi
+	echo -e "$(date +%Y-%m-%d\ %T) WordPress setup completed" >> $home/log/wpm-install.log
+}
+
+
+# WP PLUGINS
+# ---------------------------------------------------------------------------------
 
 wpm_wp_plugins() {
 
-	# Memcached full-page cache
 	if [[  ! -z $MEMCACHED_PORT  ]]; then
 		wp plugin install wp-ffpc --activate
 		sed -i "s/127.0.0.1:11211/$MEMCACHED/g" $home/conf.d/nginx.conf		
@@ -18,7 +44,6 @@ wpm_wp_plugins() {
 		echo "define('WP_CACHE', true);" >> $wpm/config/environments/production.php
 	fi
 	
-	# Redis object-cache
 	if [[  ! -z $REDIS_PORT  ]]; then
 		wp plugin install redis-cache --activate
 		sed -i "s/127.0.0.1:11211/$REDIS/g" $home/conf.d/nginx.conf

@@ -53,13 +53,13 @@ wpm_links() {
 # ------------------------
 
 wpm_chmod() { 
-	chown -R $WPS_USER:nginx $WPS_HOME
+	chown -R ${WPS_USER}:nginx $WPS_HOME
 	find $WPS_HOME -type f -exec chmod 644 {} \;
 	find $WPS_HOME -type d -exec chmod 755 {} \;
 }
 
 wpm_adminer() { 
 	wpm_header "Adminer (mysql admin)"
-	echo -e "  Dorium: $WPS_PASS\n"
+	echo -e "  Password: $WPS_PASS\n"
 	php -S 0.0.0.0:8080 -t /usr/local/adminer
 }

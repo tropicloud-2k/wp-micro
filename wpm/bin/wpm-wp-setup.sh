@@ -78,13 +78,13 @@ wpm_wp_setup() {
 	wpm_header "WP Install"
 	wpm_wp_install		
 #	wpm_wp_install > $WPS_HOME/log/wpm-wordpress.log 2>&1 & 			
-	wpm_wp_status() { cat $WPS_HOME/log/wpm-install.log | grep -q "WordPress setup completed"; }
-		
-	echo -ne "Installing WordPress..."
-	while ! wpm_wp_status true; do echo -n '.' && sleep 1; done
-	echo -ne " done.\n"
-	
-	if [[  `cat $WPS_HOME/log/wpm-wordpress.log | grep -q "Plugin 'wp-ffpc' activated"` true  ]]; then echo "Plugin 'wp-ffpc' activated."; fi
-	if [[  `cat $WPS_HOME/log/wpm-wordpress.log | grep -q "Plugin 'redis-cache' activated"` true  ]]; then echo "Plugin 'redis-cache' activated."; fi	
-	if [[  `cat $WPS_HOME/log/wpm-wordpress.log | grep -q "WordPress installed successfully"` true  ]]; then echo "WordPress installed successfully."; fi
+# 	wpm_wp_status() { cat $WPS_HOME/log/wpm-install.log | grep -q "WordPress setup completed"; }
+# 		
+# 	echo -ne "Installing WordPress..."
+# 	while ! wpm_wp_status true; do echo -n '.' && sleep 1; done
+# 	echo -ne " done.\n"
+# 	
+# 	if [[  `cat $WPS_HOME/log/wpm-wordpress.log | grep -q "Plugin 'wp-ffpc' activated"` true  ]]; then echo "Plugin 'wp-ffpc' activated."; fi
+# 	if [[  `cat $WPS_HOME/log/wpm-wordpress.log | grep -q "Plugin 'redis-cache' activated"` true  ]]; then echo "Plugin 'redis-cache' activated."; fi	
+# 	if [[  `cat $WPS_HOME/log/wpm-wordpress.log | grep -q "WordPress installed successfully"` true  ]]; then echo "WordPress installed successfully."; fi
 }

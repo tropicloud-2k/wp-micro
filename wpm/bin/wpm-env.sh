@@ -45,6 +45,6 @@ wpm_env() {
 	| sed -e "s/WPS_PASS/$WPS_PASS/g" \
 	> /etc/supervisord.conf && chmod 644 /etc/supervisord.conf
 
-	echo -e "$WPS_USER:`openssl passwd -crypt $WPS_PASS`" > $WPS_HOME/.htpasswd
+# 	echo -e "$WPS_USER:`openssl passwd -crypt $WPS_PASS`" > $WPS_HOME/.htpasswd
 	echo -e "$(date +%Y-%m-%d\ %T) Environment setup completed" >> $WPS_HOME/log/wpm-install.log
 }

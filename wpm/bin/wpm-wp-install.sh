@@ -4,13 +4,13 @@
 
 wpm_core_install() {
 
-	su -l $WPS_USER -c "cd $WPS_WEB && wp core install \
+	su -l $HOSTNAME -c "cd $WPS_WEB && wp core install \
 	--url=$WP_HOME \
 	--title=$WP_TITLE \
 	--admin_name=$WP_USER \
 	--admin_email=$WP_MAIL \
 	--admin_password=$WP_PASS"
-	su -l $WPS_USER -c "cd $WPS_WEB && wp rewrite structure '/%postname%/'"
+	su -l $HOSTNAME -c "cd $WPS_WEB && wp rewrite structure '/%postname%/'"
 	wpm_wp_plugins
 }
 

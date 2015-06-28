@@ -83,4 +83,5 @@ wpm_wp_setup() {
 	# ------------------------
 	
 	wpm_header "WP Install"
+	wpm_wp_install
 }

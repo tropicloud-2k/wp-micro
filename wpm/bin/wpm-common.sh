@@ -10,8 +10,11 @@ wpm_check() {
 }
 
 wpm_check_true() {
-	if [[  ! -d /var/lib/mysql  ]]; then wpm_mysql_setup; fi
-	if [[  ! -d $web  ]]; then wpm_wp_setup; fi
+
+	export USER="$HOSTNAME"
+	export HOME="/home/$HOSTNAME"
+	
+	wpm_wp_setup
 }
 
 wpm_check_false() {

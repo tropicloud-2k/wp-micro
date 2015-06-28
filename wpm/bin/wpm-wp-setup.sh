@@ -38,23 +38,32 @@ wpm_wp_setup() {
 	# NGINX
 	# ------------------------
 
-	cat /wpm/etc/init.d/nginx.ini > $HOME/init.d/nginx.ini
-	cat /wpm/etc/nginx/nginx.conf | sed -e "s/example.com/$HOSTNAME/g" > /etc/nginx/nginx.conf
-	
 	if [[  $WP_SSL == 'true'  ]];
 	then cat /wpm/etc/nginx/wpssl.conf | sed -e "s/example.com/$HOSTNAME/g" > $HOME/conf.d/wordpress.conf && wpm_ssl
 	else cat /wpm/etc/nginx/wp.conf | sed -e "s/example.com/$HOSTNAME/g" > $HOME/conf.d/wordpress.conf
 	fi
 	
+	cat /wpm/etc/init.d/nginx.ini > $HOME/init.d/nginx.ini
+	cat /wpm/etc/nginx/nginx.conf | sed -e "s/example.com/$HOSTNAME/g" > /etc/nginx/nginx.conf
+	
 	# ------------------------
 	# PHP-FPM
 	# ------------------------
 	
-	cat /wpm/etc/init.d/php-fpm.ini > $HOME/init.d/php-fpm.ini
-
 	if [[  $(free -m | grep 'Mem' | awk '{print $2}') -gt 1800  ]];
 	then cat /wpm/etc/php/php-fpm.conf | sed -e "s/example.com/$HOSTNAME/g" > $HOME/conf.d/php-fpm.conf
 	else cat /wpm/etc/php/php-fpm-min.conf | sed -e "s/example.com/$HOSTNAME/g" > $HOME/conf.d/php-fpm.conf
+	fi
+	
+	cat /wpm/etc/init.d/php-fpm.ini > $HOME/init.d/php-fpm.ini
+
+	# ------------------------
+	# MySQL
+	# ------------------------
+	
+	if [[  -z $MYSQL_PORT  ]];
+	then wpm_mysql_setup
+	else wpm_mysql_link
 	fi
 	
 	# ------------------------

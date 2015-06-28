@@ -15,7 +15,13 @@ wpm_start() {
 		else /usr/bin/supervisorctl -u $HOSTNAME -p $WPS_PASS start $2;
 		fi
 
-	else wpm_chmod && exec /usr/bin/supervisord -n -c /etc/supervisord.conf
+	else
+	
+		chown -R ${HOSTNAME}:nginx $WPS_HOME
+		find $WPS_HOME -type f -exec chmod 644 {} \;
+		find $WPS_HOME -type d -exec chmod 755 {} \;
+		
+		exec /usr/bin/supervisord -n -c /etc/supervisord.conf
 	fi
 }
 

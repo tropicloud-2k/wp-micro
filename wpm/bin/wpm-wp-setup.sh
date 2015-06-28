@@ -16,12 +16,7 @@ wpm_wp_setup() {
 	# ------------------------
 	# WP SETUP
 	# ------------------------
-		
-	export WPS_USER="${HOSTNAME}"
-	export WPS_HOME="/home/${HOSTNAME}"
-	export WPS_WWW="/home/${HOSTNAME}/www"
-	export WPS_WEB="/home/${HOSTNAME}/www/web"
-	
+
 	wpm_header "WP Setup"
 	
 	adduser -D -G nginx -s /bin/sh -h $WPS_HOME $WPS_USER

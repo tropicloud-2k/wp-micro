@@ -58,9 +58,10 @@ wpm_chmod() {
 
 	echo -e "WPS_USER: $WPS_USER"
 	echo -e "WPS_HOME: $WPS_HOME"
-	echo -e "WPS_PASS: $WPS_PASS"	
+	echo -e "WPS_PASS: $WPS_PASS \n"	
 
-	chown -R ${WPS_USER}:nginx $WPS_HOME
+	chown -R "$WPS_USER":nginx $WPS_HOME
+	
 	find $WPS_HOME -type f -exec chmod 644 {} \;
 	find $WPS_HOME -type d -exec chmod 755 {} \;
 }

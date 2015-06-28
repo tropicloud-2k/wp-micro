@@ -4,21 +4,19 @@
 
 wpm_core_install() {
 
-	echo -e "su -l $HOSTNAME -c "
-	
-	su -l $HOSTNAME -c "cd $WPS_WEB && wp core install \
+	su -l $WPS_USER -c "cd $WPS_WEB && wp core install \
 	--url=$WP_HOME \
 	--title=$WP_TITLE \
 	--admin_name=$WP_USER \
 	--admin_email=$WP_MAIL \
 	--admin_password=$WP_PASS"
-	su -l $HOSTNAME -c "cd $WPS_WEB && wp rewrite structure '/%postname%/'"
+	su -l $WPS_USER -c "cd $WPS_WEB && wp rewrite structure '/%postname%/'"
 	wpm_wp_plugins
 }
 
 wpm_wp_install() {
 
-	wpm_env && cd $WPS_WEB
+	wpm_env
 	
 	if [[  ! -z "$WP_TITLE" && ! -z "$WP_USER" && ! -z "$WP_MAIL" && ! -z "$WP_PASS"  ]]; then 
 		if [[  -z $MYSQL_PORT  ]]; then

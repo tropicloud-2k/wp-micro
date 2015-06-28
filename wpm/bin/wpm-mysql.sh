@@ -45,8 +45,8 @@ wpm_mysql_setup() {
 	wpm_header "MariaDB Setup"
 	
 	export DB_HOST="127.0.0.1"
-	export DB_NAME="$WPS_USER"
-	export DB_USER="$WPS_USER"
+	export DB_NAME=`echo ${HOSTNAME//./_} | cut -c 1-16`
+	export DB_USER=`echo ${HOSTNAME//./_} | cut -c 1-16`
 	export DB_PASSWORD=`openssl rand -hex 12`
 	
 	apk add --update mariadb && rm -rf /var/cache/apk/* && rm -rf /var/lib/apt/lists/*

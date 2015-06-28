@@ -34,11 +34,33 @@ wpm_wp_setup() {
 	
 	cat /wpm/etc/.profile > $WPS_HOME/.profile
 	cat /wpm/etc/.profile > /root/.profile
-	cat /wpm/etc/smtp/msmtprc > /etc/msmtprc
 		
 	su -l $WPS_USER -c "git clone $WP_REPO $WPS_WWW" && wpm_wp_version
 	su -l $WPS_USER -c "cd $WPS_WWW && composer install"
 
+	# ------------------------
+	# NGINX
+	# ------------------------
+
+	cat /wpm/etc/init.d/nginx.ini > $WPS_HOME/init.d/nginx.ini
+	cat /wpm/etc/nginx/nginx.conf | sed -e "s/example.com/$HOSTNAME/g" > /etc/nginx/nginx.conf
+	
+	if [[  $WP_SSL == 'true'  ]];
+	then cat /wpm/etc/nginx/wpssl.conf | sed -e "s/example.com/$HOSTNAME/g" > $WPS_HOME/conf.d/wordpress.conf && wpm_ssl
+	else cat /wpm/etc/nginx/wp.conf | sed -e "s/example.com/$HOSTNAME/g" > $WPS_HOME/conf.d/wordpress.conf
+	fi
+	
+	# ------------------------
+	# PHP-FPM
+	# ------------------------
+	
+	cat /wpm/etc/init.d/php-fpm.ini | sed -e "s/example.com/$HOSTNAME/g" > $WPS_HOME/init.d/php-fpm.ini
+
+	if [[  $(free -m | grep 'Mem' | awk '{print $2}') -gt 1800  ]];
+	then cat /wpm/etc/php/php-fpm.conf | sed -e "s/example.com/$HOSTNAME/g" > $WPS_HOME/conf.d/php-fpm.conf
+	else cat /wpm/etc/php/php-fpm-min.conf | sed -e "s/example.com/$HOSTNAME/g" > $WPS_HOME/conf.d/php-fpm.conf
+	fi
+	
 	# ------------------------
 	# MYSQL
 	# ------------------------
@@ -49,42 +71,16 @@ wpm_wp_setup() {
 	fi
 	
 	# ------------------------
-	# NGINX
+	# MSMTP
 	# ------------------------
 
-	if [[  $WP_SSL == 'true'  ]];
-	then cat /wpm/etc/nginx/wpssl.conf | sed -e "s/example.com/$HOSTNAME/g" > $WPS_HOME/conf.d/wordpress.conf && wpm_ssl
-	else cat /wpm/etc/nginx/wp.conf | sed -e "s/example.com/$HOSTNAME/g" > $WPS_HOME/conf.d/wordpress.conf
-	fi
-	
-	cat /wpm/etc/init.d/nginx.ini > $WPS_HOME/init.d/nginx.ini
-	cat /wpm/etc/nginx/nginx.conf | sed -e "s/example.com/$HOSTNAME/g" > /etc/nginx/nginx.conf
-	
-	# ------------------------
-	# PHP-FPM
-	# ------------------------
-	
-	if [[  $(free -m | grep 'Mem' | awk '{print $2}') -gt 1800  ]];
-	then cat /wpm/etc/php/php-fpm.conf | sed -e "s/example.com/$HOSTNAME/g" > $WPS_HOME/conf.d/php-fpm.conf
-	else cat /wpm/etc/php/php-fpm-min.conf | sed -e "s/example.com/$HOSTNAME/g" > $WPS_HOME/conf.d/php-fpm.conf
-	fi
-	
-	cat /wpm/etc/init.d/php-fpm.ini | sed -e "s/example.com/$HOSTNAME/g" > $WPS_HOME/init.d/php-fpm.ini
+	cat /wpm/etc/smtp/msmtprc | sed -e "s/example.com/$HOSTNAME/g" > /etc/msmtprc
+	echo "sendmail_path = /usr/bin/msmtp -t" > /etc/php/conf.d/sendmail.ini
+	touch /var/log/msmtp.log && chmod 777 /var/log/msmtp.log
 
 	# ------------------------
 	# WP INSTALL
 	# ------------------------
 	
 	wpm_header "WP Install"
-	wpm_wp_install		
-#	wpm_wp_install > $WPS_HOME/log/wpm-wordpress.log 2>&1 & 			
-# 	wpm_wp_status() { cat $WPS_HOME/log/wpm-install.log | grep -q "WordPress setup completed"; }
-# 		
-# 	echo -ne "Installing WordPress..."
-# 	while ! wpm_wp_status true; do echo -n '.' && sleep 1; done
-# 	echo -ne " done.\n"
-# 	
-# 	if [[  `cat $WPS_HOME/log/wpm-wordpress.log | grep -q "Plugin 'wp-ffpc' activated"` true  ]]; then echo "Plugin 'wp-ffpc' activated."; fi
-# 	if [[  `cat $WPS_HOME/log/wpm-wordpress.log | grep -q "Plugin 'redis-cache' activated"` true  ]]; then echo "Plugin 'redis-cache' activated."; fi	
-# 	if [[  `cat $WPS_HOME/log/wpm-wordpress.log | grep -q "WordPress installed successfully"` true  ]]; then echo "WordPress installed successfully."; fi
 }

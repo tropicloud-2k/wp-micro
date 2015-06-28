@@ -17,7 +17,7 @@ wpm_wp_setup() {
 	# WP SETUP
 	# ------------------------
 		
-	export USER="$HOSTNAME"
+	export USER="${HOSTNAME}"
 	export HOME="/home/${HOSTNAME}"
 	export WPS="/home/${HOSTNAME}/www"
 	export WEB="/home/${HOSTNAME}/www/web"

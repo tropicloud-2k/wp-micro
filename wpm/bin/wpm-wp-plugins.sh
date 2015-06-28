@@ -5,7 +5,7 @@
 wpm_wp_plugins() {
 
 	# Memcached full-page cache
-	if [[  ! -z $WPS_MEMCACHED_PORT  ]]; then
+	if [[  ! -z $MEMCACHED_PORT  ]]; then
 		su -l $WPS_USER -c "cd $WPS_WEB && wp plugin install wp-ffpc --activate"
 		sed -i "s/127.0.0.1:11211/$WPS_MEMCACHED/g" $WPS_HOME/conf.d/nginx.conf		
 		curl -sL https://raw.githubusercontent.com/petermolnar/wp-ffpc/master/wp-ffpc.php \
@@ -19,7 +19,7 @@ wpm_wp_plugins() {
 	fi
 	
 	# Redis object-cache
-	if [[  ! -z $WPS_REDIS_PORT  ]]; then
+	if [[  ! -z $REDIS_PORT  ]]; then
 		su -l $WPS_USER -c "cd $WPS_WEB && wp plugin install redis-cache --activate"		
 		sed -i "s/127.0.0.1:11211/$WPS_REDIS/g" $WPS_HOME/conf.d/nginx.conf
 		echo "define('WP_REDIS_HOST', getenv('REDIS_PORT_6379_TCP_ADDR'));" >> $WPS_WWW/config/environments/production.php

@@ -38,12 +38,12 @@ wpm_links() {
 	then echo -e "\033[1;32m  •\033[0;37m MySQL\033[0m --> `echo $MYSQL_PORT | cut -d/ -f3 | cut -d: -f1`"
 	else echo -e "\033[1;31m  •\033[0;37m MySQL\033[0m (not linked)"
 	fi	
-	if [[  ! -z $WPS_REDIS_PORT  ]];
-	then echo -e "\033[1;32m  •\033[0;37m Redis\033[0m --> `echo $WPS_REDIS_PORT | cut -d/ -f3 | cut -d: -f1`"		
+	if [[  ! -z $REDIS_PORT  ]];
+	then echo -e "\033[1;32m  •\033[0;37m Redis\033[0m --> `echo $REDIS_PORT | cut -d/ -f3 | cut -d: -f1`"		
 	else echo -e "\033[1;31m  •\033[0;37m Redis\033[0m (not linked)"
 	fi		
-	if [[  ! -z $WPS_MEMCACHED_PORT  ]];
-	then echo -e "\033[1;32m  •\033[0;37m Memcached\033[0m --> `echo $WPS_MEMCACHED_PORT | cut -d/ -f3 | cut -d: -f1`"
+	if [[  ! -z $MEMCACHED_PORT  ]];
+	then echo -e "\033[1;32m  •\033[0;37m Memcached\033[0m --> `echo $MEMCACHED_PORT | cut -d/ -f3 | cut -d: -f1`"
 	else echo -e "\033[1;31m  •\033[0;37m Memcached\033[0m (not linked)"
 	fi
 }
@@ -53,6 +53,10 @@ wpm_links() {
 # ------------------------
 
 wpm_chmod() { 
+	wpm_header "WPM CHMOD"
+	echo -e "WPS_USER: $WPS_USER"
+	echo -e "WPS_HOME: $WPS_HOME"
+	echo -e "WPS_PASS: $WPS_PASS"	
 	chown -R ${WPS_USER}:nginx $WPS_HOME
 	find $WPS_HOME -type f -exec chmod 644 {} \;
 	find $WPS_HOME -type d -exec chmod 755 {} \;

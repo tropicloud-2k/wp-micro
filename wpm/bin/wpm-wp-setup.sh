@@ -17,11 +17,11 @@ wpm_wp_setup() {
 	# WP SETUP
 	# ------------------------
 
-export WPS_USER="${HOSTNAME}"
-export WPS_HOME="/home/${HOSTNAME}"
-export WPS_WWW="/home/${HOSTNAME}/www"
-export WPS_WEB="/home/${HOSTNAME}/www/web"
-
+	export WPS_USER="${HOSTNAME}"
+	export WPS_HOME="/home/${HOSTNAME}"
+	export WPS_WWW="/home/${HOSTNAME}/www"
+	export WPS_WEB="/home/${HOSTNAME}/www/web"
+	
 	wpm_header "WP Setup"
 	
 	adduser -D -G nginx -s /bin/sh -h $WPS_HOME $WPS_USER
@@ -32,8 +32,8 @@ export WPS_WEB="/home/${HOSTNAME}/www/web"
 	mkdir -p $WPS_HOME/log/php
 	mkdir -p $WPS_HOME/ssl
 	
-	cat /wpm/etc/.profile > /root/.profile
 	cat /wpm/etc/.profile > $WPS_HOME/.profile
+	cat /wpm/etc/.profile > /root/.profile
 	cat /wpm/etc/smtp/msmtprc > /etc/msmtprc
 		
 	su -l $WPS_USER -c "git clone $WP_REPO $WPS_WWW" && wpm_wp_version
@@ -69,7 +69,7 @@ export WPS_WEB="/home/${HOSTNAME}/www/web"
 	else cat /wpm/etc/php/php-fpm-min.conf | sed -e "s/example.com/$HOSTNAME/g" > $WPS_HOME/conf.d/php-fpm.conf
 	fi
 	
-	cat /wpm/etc/init.d/php-fpm.ini > $WPS_HOME/init.d/php-fpm.ini
+	cat /wpm/etc/init.d/php-fpm.ini | sed -e "s/example.com/$HOSTNAME/g" > $WPS_HOME/init.d/php-fpm.ini
 
 	# ------------------------
 	# WP INSTALL

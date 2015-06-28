@@ -16,6 +16,8 @@ wpm_env() {
 	else export WP_HOME="http://${HOSTNAME}"
 	fi
 	
+	export WPS_UID="`id -u $WPS_USER`"
+	export WPS_GID="`id -g $WPS_USER`"
 	export WP_SITEURL="${WP_HOME}/wp"
 	export WPM_ENV_HTTP_PASS="`openssl rand 12 -hex`"
 	export WPM_ENV_HTTP_SHA1="`echo -ne "$WPM_ENV_HTTP_PASS" | sha1sum | awk '{print $1}'`"

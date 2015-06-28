@@ -52,7 +52,7 @@ wpm_build() {
 	# COMPOSER
 	# ------------------------
 	
-	curl -sS https://getcomposer.org/installer | php
+	php -r "readfile('https://getcomposer.org/installer');" | php
 	mv composer.phar /usr/local/bin/composer
 	
 	# ------------------------

@@ -7,8 +7,8 @@ wpm_env() {
 	# hide "The mysql extension is deprecated and will be removed in the future: use mysqli or PDO"
 	sed -i "s/define('WP_DEBUG'.*/define('WP_DEBUG', false);/g" $WPS_WWW/config/environments/development.php
 
-	if [[  ! -z $MEMCACHED_PORT  ]]; then export MEMCACHED=`echo $MEMCACHED_PORT | cut -d/ -f3`; fi		
-	if [[  ! -z $REDIS_PORT  ]]; then export REDIS=`echo $REDIS_PORT | cut -d/ -f3`; fi
+	if [[  ! -z $WPS_MEMCACHED_PORT  ]]; then export MEMCACHED=`echo $WPS_MEMCACHED_PORT | cut -d/ -f3`; fi		
+	if [[  ! -z $WPS_REDIS_PORT  ]]; then export REDIS=`echo $WPS_REDIS_PORT | cut -d/ -f3`; fi
 	if [[  ! -z $MYSQL_PORT  ]]; then export MYSQL=`echo $MYSQL_PORT | cut -d/ -f3`; fi
 	
 	if [[  $WP_SSL == 'true'  ]];

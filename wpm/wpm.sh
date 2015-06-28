@@ -7,15 +7,6 @@
 # version: 0.3
 # ------------------------------------
 
-export WPS_USER="${HOSTNAME}"
-export WPS_HOME="/home/${HOSTNAME}"
-export WPS_WWW="/home/${HOSTNAME}/www"
-export WPS_WEB="/home/${HOSTNAME}/www/web"
-
-# ------------------------------------
-# wpm functions
-# ------------------------------------
-
 for f in /wpm/bin/*; do
 	. $f
 done

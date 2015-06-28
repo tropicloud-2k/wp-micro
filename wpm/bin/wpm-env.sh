@@ -16,8 +16,6 @@ wpm_env() {
 	else export WP_HOME="http://${HOSTNAME}"
 	fi
 	
-	export WPS_UID="`id -u $user`"
-	export WPS_GID="`id -g $user`"
 	export WP_SITEURL="${WP_HOME}/wp"
 	export WPM_PASSWORD="`openssl rand 12 -hex`"
 	export AUTH_KEY="`openssl rand 48 -base64`"

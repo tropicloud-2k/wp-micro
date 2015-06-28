@@ -5,7 +5,7 @@
 wpm_env() {
 
 	# hide "The mysql extension is deprecated and will be removed in the future: use mysqli or PDO"
-	sed -i "s/define('WP_DEBUG'.*/define('WP_DEBUG', false);/g" $wpm/config/environments/development.php
+	sed -i "s/define('WP_DEBUG'.*/define('WP_DEBUG', false);/g" $WPS/config/environments/development.php
 
 	if [[  ! -z $MEMCACHED_PORT  ]]; then export MEMCACHED=`echo $MEMCACHED_PORT | cut -d/ -f3`; fi		
 	if [[  ! -z $REDIS_PORT  ]]; then export REDIS=`echo $REDIS_PORT | cut -d/ -f3`; fi
@@ -33,7 +33,7 @@ wpm_env() {
 	echo "" > /etc/.env && env | grep = >> /etc/.env
 	
 	# php dotenv
-	for var in `cat /etc/.env`; do echo $var >> $wpm/.env; done	
+	for var in `cat /etc/.env`; do echo $var >> $WPS/.env; done	
 	
 	echo -e "set \$MYSQL_HOST $DB_HOST;" >  $HOME/.adminer
 	echo -e "set \$MYSQL_NAME $DB_NAME;" >> $HOME/.adminer

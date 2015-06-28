@@ -4,7 +4,7 @@
 
 wpm_start() {
 
-	wpm_check	
+	wpm_check
 	wpm_header "Start"
 	wpm_links && echo ""
 	

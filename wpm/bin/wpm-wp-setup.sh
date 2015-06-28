@@ -4,10 +4,10 @@
 
 wpm_wp_version(){
 
-	WP_VER=`cat $wpm/composer.json | grep 'johnpbloch/wordpress' | cut -d: -f2`
+	WP_VER=`cat $WPS/composer.json | grep 'johnpbloch/wordpress' | cut -d: -f2`
 	
 	if [[  ! -z $WP_VERSION  ]];
-	then sed -i "s/$WP_VER/\"$WP_VERSION\"/g" $wpm/composer.json && su -l $USER -c "cd $wpm && composer update"
+	then sed -i "s/$WP_VER/\"$WP_VERSION\"/g" $WPS/composer.json && su -l $USER -c "cd $WPS && composer update"
 	fi
 }
 
@@ -17,6 +17,11 @@ wpm_wp_setup() {
 	# WP SETUP
 	# ------------------------
 		
+	export USER="$HOSTNAME"
+	export HOME="/home/${HOSTNAME}"
+	export WPS="/home/${HOSTNAME}/www"
+	export WEB="/home/${HOSTNAME}/www/web"
+	
 	wpm_header "WordPress Setup"
 	
 	adduser -D -G nginx -s /bin/sh -h $HOME $USER
@@ -31,9 +36,18 @@ wpm_wp_setup() {
 	cat /wpm/etc/.profile > $HOME/.profile
 	cat /wpm/etc/smtp/msmtprc > /etc/msmtprc
 		
-	su -l $USER -c "git clone $WP_REPO wpm" && wpm_wp_version
-	su -l $USER -c "cd $wpm && composer install"
+	su -l $USER -c "git clone $WP_REPO $WPS" && wpm_wp_version
+	su -l $USER -c "cd $WPS && composer install"
 
+	# ------------------------
+	# MYSQL
+	# ------------------------
+	
+	if [[  -z $MYSQL_PORT  ]];
+	then wpm_mysql_setup
+	else wpm_mysql_link
+	fi
+	
 	# ------------------------
 	# NGINX
 	# ------------------------
@@ -57,15 +71,6 @@ wpm_wp_setup() {
 	
 	cat /wpm/etc/init.d/php-fpm.ini > $HOME/init.d/php-fpm.ini
 
-	# ------------------------
-	# MySQL
-	# ------------------------
-	
-	if [[  -z $MYSQL_PORT  ]];
-	then wpm_mysql_setup
-	else wpm_mysql_link
-	fi
-	
 	# ------------------------
 	# WP INSTALL
 	# ------------------------

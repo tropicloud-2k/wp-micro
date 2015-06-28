@@ -4,20 +4,12 @@
 
 wpm_check() {
 	case "$HOSTNAME" in
-		*.*) wpm_check_true;;
-		*) wpm_check_false;;
+		*.*) wpm_wp_setup;;
+		*) wpm_false;;
 	esac
 }
 
-wpm_check_true() {
-
-	export USER="$HOSTNAME"
-	export HOME="/home/$HOSTNAME"
-	
-	wpm_wp_setup
-}
-
-wpm_check_false() {
+wpm_false() {
 	wpm_header "(error) hostname is not set!"
 	echo -e "\033[1;31m  Use the \033[1;37m-h\033[1;31m flag to set the hostname (domain)\n
 \033[0m  Ex: docker run -P -h example.com -d tropicloud/wp-micro \n

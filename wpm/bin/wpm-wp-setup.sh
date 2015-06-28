@@ -75,7 +75,8 @@ wpm_wp_setup() {
 	# WP INSTALL
 	# ------------------------
 	
-	wpm_wp_install > $WPS_HOME/log/wpm-wordpress.log 2>&1 & 			
+	wpm_wp_install			
+#	wpm_wp_install > $WPS_HOME/log/wpm-wordpress.log 2>&1 & 			
 	wpm_wp_status() { cat $WPS_HOME/log/wpm-install.log | grep -q "WordPress setup completed"; }
 		
 	echo -ne "Installing WordPress..."

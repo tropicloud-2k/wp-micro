@@ -16,10 +16,10 @@ wpm_mariadb_secure() {
 }
 
 wpm_mysql_create() {
-	mysql -u root -p$MYSQL_ENV_MYSQL_ROOT_PASSWORD -h $MYSQL_PORT_3306_TCP_ADDR -e "CREATE USER '$DB_USER'@'%' IDENTIFIED BY '$DB_PASSWORD'"
-	mysql -u root -p$MYSQL_ENV_MYSQL_ROOT_PASSWORD -h $MYSQL_PORT_3306_TCP_ADDR -e "CREATE DATABASE $DB_NAME"
-	mysql -u root -p$MYSQL_ENV_MYSQL_ROOT_PASSWORD -h $MYSQL_PORT_3306_TCP_ADDR -e "GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$DB_USER'@'%' WITH GRANT OPTION"
-	mysql -u root -p$MYSQL_ENV_MYSQL_ROOT_PASSWORD -h $MYSQL_PORT_3306_TCP_ADDR -e "FLUSH PRIVILEGES"
+	mysql -u root -p$DB_PASSWORD -h $DB_HOST -e "CREATE USER '$DB_USER'@'%' IDENTIFIED BY '$DB_PASSWORD'"
+	mysql -u root -p$DB_PASSWORD -h $DB_HOST -e "CREATE DATABASE $DB_NAME"
+	mysql -u root -p$DB_PASSWORD -h $DB_HOST -e "GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$DB_USER'@'%' WITH GRANT OPTION"
+	mysql -u root -p$DB_PASSWORD -h $DB_HOST -e "FLUSH PRIVILEGES"
 }
 
 wpm_mysql_link() {
@@ -31,7 +31,7 @@ wpm_mysql_link() {
 	if [[    -z $MYSQL_ENV_MYSQL_DATABASE  ]]; then
 	
 		export DB_NAME=`echo ${HOSTNAME//./_} | cut -c 1-16`
-		export DB_USER=$DB_NAME
+		export DB_USER=`echo ${HOSTNAME//./_} | cut -c 1-16`
 		export DB_PASSWORD=`openssl rand -hex 12`
 		
 		wpm_mysql_create
@@ -45,13 +45,13 @@ wpm_mysql_setup() {
 	wpm_header "MariaDB Setup"
 	
 	export DB_HOST="127.0.0.1"
-	export DB_NAME="wordpress"
-	export DB_USER="wordpress"
+	export DB_NAME="`echo ${HOSTNAME//./_} | cut -c 1-16`"
+	export DB_USER="`echo ${HOSTNAME//./_} | cut -c 1-16`"
 	export DB_PASSWORD=`openssl rand -hex 12`
 	
 	apk add --update mariadb && rm -rf /var/cache/apk/* && rm -rf /var/lib/apt/lists/*
 	sed -i 's/^\(bind-address\s.*\)/# \1/' /etc/mysql/my.cnf
-	cat /wpm/et	c/init.d/mariadb.ini > $WPS_HOME/init.d/mariadb.ini
+	cat /wpm/etc/init.d/mariadb.ini > $WPS_HOME/init.d/mariadb.ini
 	
 	mysql_install_db --user=mysql > /dev/null 2>&1
 	mysqld_safe > /dev/null 2>&1 &

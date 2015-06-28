@@ -16,13 +16,12 @@ wpm_core_install() {
 
 wpm_wp_install() {
 
-	wpm_env
-	cd $WPS_WEB
+	wpm_env && cd $WPS_WEB
 	
 	if [[  ! -z "$WP_TITLE" && ! -z "$WP_USER" && ! -z "$WP_MAIL" && ! -z "$WP_PASS"  ]]; then 
 		if [[  -z $MYSQL_PORT  ]]; then
 			mysqld_safe > /dev/null 2>&1 &
-			while [[  ! -e /run/mysqld/mysqld.sock  ]]; do sleep 1; done && wpm_wp_core_install			
+			while [[  ! -e /run/mysqld/mysqld.sock  ]]; do sleep 1; done && wpm_core_install			
 			mysqladmin -u root shutdown
 		else wpm_core_install
 		fi

@@ -15,4 +15,6 @@ wpm_ssl() {
 	openssl x509 -req -days 365 -sha256 -in $HOSTNAME.csr -signkey $HOSTNAME.key -out $HOSTNAME.crt	
 
 	rm -f openssl.conf
+	
+	echo -e "\nAll done with SSL!\n"
 }

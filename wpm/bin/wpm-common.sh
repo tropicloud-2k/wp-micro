@@ -59,14 +59,14 @@ wpm_links() {
 
 wpm_chmod() { 
 	
-	chown -R ${WPS_UID}:${WPS_GID} $WPS_HOME
+	chown -R ${WPS_UID}:${WPS_GID} $wpm
 	
-	find $WPS_HOME -type f -exec chmod 644 {} \;
-	find $WPS_HOME -type d -exec chmod 755 {} \;
+	find $wpm -type f -exec chmod 644 {} \;
+	find $wpm -type d -exec chmod 755 {} \;
 }
 
 wpm_adminer() { 
 	wpm_header "Adminer (mysql admin)"
-	echo -e "  Password: $WPM_ENV_HTTP_PASS\n"
+	echo -e "  Password: $WPM_PASSWORD\n"
 	php -S 0.0.0.0:8080 -t /usr/local/adminer
 }

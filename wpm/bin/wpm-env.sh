@@ -16,11 +16,11 @@ wpm_env() {
 	else export WP_HOME="http://${HOSTNAME}"
 	fi
 	
-	export WPS_UID="`id -u $WPS_USER`"
-	export WPS_GID="`id -g $WPS_USER`"
+	export WPS_UID="`id -u $user`"
+	export WPS_GID="`id -g $user`"
 	export WP_SITEURL="${WP_HOME}/wp"
-	export WPM_ENV_HTTP_PASS="`openssl rand 12 -hex`"
-	export WPM_ENV_HTTP_SHA1="`echo -ne "$WPM_ENV_HTTP_PASS" | sha1sum | awk '{print $1}'`"
+	export WPM_PASSWORD="`openssl rand 12 -hex`"
+	export WPM_PASS_SHA="`echo -ne "$WPM_PASSWORD" | sha1sum | awk '{print $1}'`"
 	export AUTH_KEY="`openssl rand 48 -base64`"
 	export SECURE_AUTH_KEY="`openssl rand 48 -base64`"
 	export LOGGED_IN_KEY="`openssl rand 48 -base64`"
@@ -44,9 +44,9 @@ wpm_env() {
 	
 	cat /wpm/etc/supervisord.conf \
 	| sed -e "s/example.com/$HOSTNAME/g" \
-	| sed -e "s/WPM_ENV_HTTP_PASS/{SHA}$WPM_ENV_HTTP_SHA1/g" \
+	| sed -e "s/WPM_PASSWORD/{SHA}$WPM_PASS_SHA/g" \
 	> /etc/supervisord.conf && chmod 644 /etc/supervisord.conf
 
-	echo -e "$user:`openssl passwd -crypt $WPM_ENV_HTTP_PASS`\n" > $home/.htpasswd
+	echo -e "$user:`openssl passwd -crypt $WPM_PASSWORD`\n" > $home/.htpasswd
 	echo -e "$(date +%Y-%m-%d\ %T) Environment setup completed" >> $home/log/wpm-install.log
 }

@@ -12,6 +12,8 @@ export WPS_HOME="/home/${HOSTNAME}"
 export WPS_WWW="/home/${HOSTNAME}/www"
 export WPS_WEB="/home/${HOSTNAME}/www/web"
 
+# lorem
+
 # ------------------------------------
 # wpm functions
 # ------------------------------------

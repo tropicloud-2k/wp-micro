@@ -5,7 +5,7 @@
 wpm_env() {
 
 	# hide "The mysql extension is deprecated and will be removed in the future: use mysqli or PDO"
-	sed -i "s/define('WP_DEBUG'.*/define('WP_DEBUG', false);/g" $WPS/config/environments/development.php
+	sed -i "s/define('WP_DEBUG'.*/define('WP_DEBUG', false);/g" $WPS_WWW/config/environments/development.php
 
 	if [[  ! -z $MEMCACHED_PORT  ]]; then export MEMCACHED=`echo $MEMCACHED_PORT | cut -d/ -f3`; fi		
 	if [[  ! -z $REDIS_PORT  ]]; then export REDIS=`echo $REDIS_PORT | cut -d/ -f3`; fi
@@ -17,8 +17,8 @@ wpm_env() {
 	fi
 	
 	export WP_SITEURL="${WP_HOME}/wp"
-	export WPM_ENV_HTTP_PASS="`openssl rand 12 -hex`"
-	export WPM_ENV_HTTP_SHA1="`echo -ne "$WPM_ENV_HTTP_PASS" | sha1sum | awk '{print $1}'`"
+	export WPS_PASS="`openssl rand 12 -hex`"
+	export WPS_SHA1="`echo -ne "$WPS_ENV_HTTP_PASS" | sha1sum | awk '{print $1}'`"
 	export AUTH_KEY="`openssl rand 48 -base64`"
 	export SECURE_AUTH_KEY="`openssl rand 48 -base64`"
 	export LOGGED_IN_KEY="`openssl rand 48 -base64`"
@@ -33,17 +33,17 @@ wpm_env() {
 	echo "" > /etc/.env && env | grep = >> /etc/.env
 	
 	# php dotenv
-	for var in `cat /etc/.env`; do echo $var >> $WPS/.env; done	
+	for var in `cat /etc/.env`; do echo $var >> $WPS_WWW/.env; done	
 	
-	echo -e "set \$MYSQL_HOST $DB_HOST;" >  $HOME/.adminer
-	echo -e "set \$MYSQL_NAME $DB_NAME;" >> $HOME/.adminer
-	echo -e "set \$MYSQL_USER $DB_USER;" >> $HOME/.adminer
+	echo -e "set \$MYSQL_HOST $DB_HOST;" >  $WPS_HOME/.adminer
+	echo -e "set \$MYSQL_NAME $DB_NAME;" >> $WPS_HOME/.adminer
+	echo -e "set \$MYSQL_USER $DB_USER;" >> $WPS_HOME/.adminer
 	
 	cat /wpm/etc/supervisord.conf \
 	| sed -e "s/example.com/$HOSTNAME/g" \
-	| sed -e "s/WPM_ENV_HTTP_PASS/{SHA}$WPM_ENV_HTTP_SHA1/g" \
+	| sed -e "s/WPS_PASS/{SHA}$WPS_ENV_HTTP_SHA1/g" \
 	> /etc/supervisord.conf && chmod 644 /etc/supervisord.conf
 
-	echo -e "$USER:`openssl passwd -crypt $WPM_ENV_HTTP_PASS`\n" > $HOME/.htpasswd
-	echo -e "$(date +%Y-%m-%d\ %T) Environment setup completed" >> $HOME/log/wpm-install.log
+	echo -e "$WPS_USER:`openssl passwd -crypt $WPS_ENV_HTTP_PASS`\n" > $WPS_HOME/.htpasswd
+	echo -e "$(date +%Y-%m-%d\ %T) Environment setup completed" >> $WPS_HOME/log/wpm-install.log
 }

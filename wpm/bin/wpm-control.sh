@@ -11,8 +11,8 @@ wpm_start() {
 	if [[  -f /tmp/supervisord.pid  ]]; then
 	
 		if [[  -z $2  ]];
-		then /usr/bin/supervisorctl -u $USER -p $WPM_ENV_HTTP_PASS start all;
-		else /usr/bin/supervisorctl -u $USER -p $WPM_ENV_HTTP_PASS start $2;
+		then /usr/bin/supervisorctl -u $WPS_USER -p $WPS_ENV_HTTP_PASS start all;
+		else /usr/bin/supervisorctl -u $WPS_USER -p $WPS_ENV_HTTP_PASS start $2;
 		fi
 
 	else wpm_chmod && exec /usr/bin/supervisord -n -c /etc/supervisord.conf
@@ -30,8 +30,8 @@ wpm_stop() {
 	if [[  -f /tmp/supervisord.pid  ]]; then
 	
 		if [[  -z $2  ]];
-		then /usr/bin/supervisorctl -u $USER -p $WPM_ENV_HTTP_PASS stop all;
-		else /usr/bin/supervisorctl -u $USER -p $WPM_ENV_HTTP_PASS stop $2;
+		then /usr/bin/supervisorctl -u $WPS_USER -p $WPS_ENV_HTTP_PASS stop all;
+		else /usr/bin/supervisorctl -u $WPS_USER -p $WPS_ENV_HTTP_PASS stop $2;
 		fi
 	
 	fi
@@ -49,8 +49,8 @@ wpm_restart() {
 	if [[  -f /tmp/supervisord.pid  ]]; then
 	
 		if [[  -z $2  ]];
-		then /usr/bin/supervisorctl -u $USER -p $WPM_ENV_HTTP_PASS restart all;
-		else /usr/bin/supervisorctl -u $USER -p $WPM_ENV_HTTP_PASS restart $2;
+		then /usr/bin/supervisorctl -u $WPS_USER -p $WPS_ENV_HTTP_PASS restart all;
+		else /usr/bin/supervisorctl -u $WPS_USER -p $WPS_ENV_HTTP_PASS restart $2;
 		fi
 		
 	else exec /usr/bin/supervisord -n -c /etc/supervisord.conf;
@@ -67,7 +67,7 @@ wpm_reload() {
 	wpm_header "Reload"
 
 	if [[  -f /tmp/supervisord.pid  ]];
-	then /usr/bin/supervisorctl -u $USER -p $WPM_ENV_HTTP_PASS reload;
+	then /usr/bin/supervisorctl -u $WPS_USER -p $WPS_ENV_HTTP_PASS reload;
 	fi
 	echo ""
 }
@@ -81,7 +81,7 @@ wpm_shutdown() {
 	wpm_header "Shutdown"
 
 	if [[  -f /tmp/supervisord.pid  ]];
-	then /usr/bin/supervisorctl -u $USER -p $WPM_ENV_HTTP_PASS shutdown;
+	then /usr/bin/supervisorctl -u $WPS_USER -p $WPS_ENV_HTTP_PASS shutdown;
 	fi
 	echo ""
 }
@@ -97,8 +97,8 @@ wpm_status() {
 	if [[  -f /tmp/supervisord.pid  ]]; then
 	
 		if [[  -z $2  ]];
-		then /usr/bin/supervisorctl -u $USER -p $WPM_ENV_HTTP_PASS status all;
-		else /usr/bin/supervisorctl -u $USER -p $WPM_ENV_HTTP_PASS status $2;
+		then /usr/bin/supervisorctl -u $WPS_USER -p $WPS_ENV_HTTP_PASS status all;
+		else /usr/bin/supervisorctl -u $WPS_USER -p $WPS_ENV_HTTP_PASS status $2;
 		fi
 	
 	fi
@@ -114,7 +114,7 @@ wpm_log() {
 	wpm_header "Log"
 	
 	if [[  -f /tmp/supervisord.pid  ]];
-	then /usr/bin/supervisorctl -u $USER -p $WPM_ENV_HTTP_PASS maintail;
+	then /usr/bin/supervisorctl -u $WPS_USER -p $WPS_ENV_HTTP_PASS maintail;
 	fi
 	echo ""
 }
@@ -136,8 +136,8 @@ wpm_ps() {
 
 wpm_login() {
 
-	wpm_header "\033[0mLogged as \033[1;37m$USER\033[0m"
-	su -l $USER
+	wpm_header "\033[0mLogged as \033[1;37m$WPS_USER\033[0m"
+	su -l $WPS_USER
 }
 
 # ------------------------

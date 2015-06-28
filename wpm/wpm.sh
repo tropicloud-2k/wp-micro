@@ -7,8 +7,8 @@
 # version: 0.3
 # ------------------------------------
 
-wpm="$HOME/wpm"
-web="$WPS/web"
+wpm="$WPS_HOME/wpm"
+web="$WPS_WWW/web"
 
 # ------------------------------------
 # wpm functions

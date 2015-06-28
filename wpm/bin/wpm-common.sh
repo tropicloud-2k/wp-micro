@@ -53,13 +53,13 @@ wpm_links() {
 # ------------------------
 
 wpm_chmod() { 
-	chown -R $USER:nginx $HOME
-	find $HOME -type f -exec chmod 644 {} \;
-	find $HOME -type d -exec chmod 755 {} \;
+	chown -R $WPS_USER:nginx $WPS_HOME
+	find $WPS_HOME -type f -exec chmod 644 {} \;
+	find $WPS_HOME -type d -exec chmod 755 {} \;
 }
 
 wpm_adminer() { 
 	wpm_header "Adminer (mysql admin)"
-	echo -e "  Password: $WPM_ENV_HTTP_PASS\n"
+	echo -e "  Password: $WPS_ENV_HTTP_PASS\n"
 	php -S 0.0.0.0:8080 -t /usr/local/adminer
 }

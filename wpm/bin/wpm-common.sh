@@ -53,11 +53,6 @@ wpm_links() {
 # ------------------------
 
 wpm_chmod() { 
-	
-	echo -e "USER: $USER"
-	echo -e "HOME: $HOME"
-	echo -e "HOST: $HOSTNAME"
-
 	chown -R $USER:nginx $HOME
 	find $HOME -type f -exec chmod 644 {} \;
 	find $HOME -type d -exec chmod 755 {} \;

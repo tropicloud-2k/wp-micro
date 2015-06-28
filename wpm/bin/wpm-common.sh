@@ -53,8 +53,8 @@ wpm_links() {
 # ------------------------
 
 wpm_chmod() { 
-
-	chown -R `id -u $WPS_USER`:`id -g $WPS_USER` $WPS_HOME
+	
+	chown -R ${WPS_UID}:${WPS_GID} $WPS_HOME
 	
 	find $WPS_HOME -type f -exec chmod 644 {} \;
 	find $WPS_HOME -type d -exec chmod 755 {} \;

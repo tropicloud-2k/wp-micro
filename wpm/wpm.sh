@@ -8,30 +8,30 @@
 
 export user="wordpress"
 export home="/home/$user"
-export wpm="$home/wpm"
-export web="$wpm/web"
+export www="$home/www"
+export web="$www/web"
 
 # FUNCTIONS
 # ---------------------------------------------------------------------------------
 
-for f in /wpm/bin/*; do source $f; done
+for f in /wps/bin/*; do source $f; done
 
 
 # COMMANDS
 # ---------------------------------------------------------------------------------
 
-  if [[  $1 == 'build'  ]];     then wpm_build $@
-elif [[  $1 == 'start'  ]];     then wpm_start $@
-elif [[  $1 == 'stop'  ]];      then wpm_stop $@
-elif [[  $1 == 'restart'  ]];   then wpm_restart $@
-elif [[  $1 == 'reload'  ]];    then wpm_reload $@
-elif [[  $1 == 'shutdown'  ]];  then wpm_shutdown $@
-elif [[  $1 == 'status'  ]];    then wpm_status $@
-elif [[  $1 == 'log'  ]];       then wpm_log $@
-elif [[  $1 == 'ps'  ]];        then wpm_ps $@
-elif [[  $1 == 'login'  ]];     then wpm_login $@
-elif [[  $1 == 'root'  ]];      then wpm_root $@
-elif [[  $1 == 'adminer'  ]];   then wpm_adminer $@
+  if [[  $1 == 'build'  ]];     then wps_build $@
+elif [[  $1 == 'start'  ]];     then wps_start $@
+elif [[  $1 == 'stop'  ]];      then wps_stop $@
+elif [[  $1 == 'restart'  ]];   then wps_restart $@
+elif [[  $1 == 'reload'  ]];    then wps_reload $@
+elif [[  $1 == 'shutdown'  ]];  then wps_shutdown $@
+elif [[  $1 == 'status'  ]];    then wps_status $@
+elif [[  $1 == 'log'  ]];       then wps_log $@
+elif [[  $1 == 'ps'  ]];        then wps_ps $@
+elif [[  $1 == 'login'  ]];     then wps_login $@
+elif [[  $1 == 'root'  ]];      then wps_root $@
+elif [[  $1 == 'adminer'  ]];   then wps_adminer $@
 
 
 # HELP
@@ -44,20 +44,20 @@ else echo "
 
   HOW TO USE:
   
-  wpm start                 # Start all processes
-  wpm start <name>          # Start a specific process
-  wpm stop                  # Stop all processes
-  wpm stop <name>           # Stop a specific process
-  wpm status                # Get status for all processes
-  wpm status <name>         # Get status for a single process
-  wpm restart               # Restart all processes
-  wpm restart <name>        # Restart a specific process
-  wpm reload                # Restart Supervisord
-  wpm shutdown              # Stop the container
-  wpm ps                    # List all container processes
-  wpm log                   # Display last 1600 *bytes* of main log file
-  wpm login                 # Login as wordpress user
-  wpm root                  # Login as root
+  wps start                 # Start all processes
+  wps start <name>          # Start a specific process
+  wps stop                  # Stop all processes
+  wps stop <name>           # Stop a specific process
+  wps status                # Get status for all processes
+  wps status <name>         # Get status for a single process
+  wps restart               # Restart all processes
+  wps restart <name>        # Restart a specific process
+  wps reload                # Restart Supervisord
+  wps shutdown              # Stop the container
+  wps ps                    # List all container processes
+  wps log                   # Display last 1600 *bytes* of main log file
+  wps login                 # Login as wordpress user
+  wps root                  # Login as root
 
 ----------------------------------------------------  
 

@@ -1,8 +1,8 @@
 
-wpm_env() {
+wps_env() {
 
 	# hide "The mysql extension is deprecated and will be removed in the future: use mysqli or PDO"
-	sed -i "s/define('WP_DEBUG'.*/define('WP_DEBUG', false);/g" $wpm/config/environments/development.php
+	sed -i "s/define('WP_DEBUG'.*/define('WP_DEBUG', false);/g" $www/config/environments/development.php
 
 
 # EXPORT
@@ -42,7 +42,7 @@ wpm_env() {
 
 	echo "" > /etc/.env && env | grep = >> /etc/.env
 	
-	for var in `cat /etc/.env`; do echo $var >> $wpm/.env; done	
+	for var in `cat /etc/.env`; do echo $var >> $www/.env; done	
 	
-	echo -e "$(date +%Y-%m-%d\ %T) Environment setup completed" >> $home/log/wpm-install.log
+	echo -e "$(date +%Y-%m-%d\ %T) Environment setup completed" >> $home/log/wps-install.log
 }

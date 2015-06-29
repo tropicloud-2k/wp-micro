@@ -1,5 +1,5 @@
 
-wpm_build() { wpm_header "Build"
+wps_build() { wps_header "Build"
 
 
 # PACKGES
@@ -70,7 +70,7 @@ wpm_build() { wpm_header "Build"
 # WP-USER
 # ---------------------------------------------------------------------------------
 	
-	chmod +x /wpm/wpm.sh && ln -s /wpm/wpm.sh /usr/bin/wpm
+	chmod +x /wps/wps.sh && ln -s /wps/wps.sh /usr/bin/wps
 	adduser -D -G nginx -s /bin/sh -h $home $user
 	
 	mkdir -p $home/conf.d
@@ -79,9 +79,9 @@ wpm_build() { wpm_header "Build"
 	mkdir -p $home/log/php
 	mkdir -p $home/ssl
 	
-	cat /wpm/etc/.profile > /root/.profile
-	cat /wpm/etc/.profile > $home/.profile
+	cat /wps/etc/.profile > /root/.profile
+	cat /wps/etc/.profile > $home/.profile
 		
-	wpm_header "Build completed"
+	wps_header "Build completed"
 }
 

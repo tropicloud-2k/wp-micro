@@ -2,15 +2,15 @@
 # SSL (https)
 # ---------------------------------------------------------------------------------
 
-wpm_ssl() {
+wps_ssl() {
 
 	if [[  ! -f $home/ssl/${HOSTNAME}.crt  ]]; then
 
-		wpm_header "SSL Setup"
+		wps_header "SSL Setup"
 	
 		cd $home/ssl && rm -f $home/ssl/$HOSTNAME.*
 		
-		cat /wpm/etc/nginx/openssl.conf | sed -e "s/example.com/$HOSTNAME/g" > openssl.conf
+		cat /wps/etc/nginx/openssl.conf | sed -e "s/example.com/$HOSTNAME/g" > openssl.conf
 	
 		openssl req -nodes -sha256 -newkey rsa:2048 -keyout $HOSTNAME.key -out $HOSTNAME.csr -config openssl.conf -batch
 		openssl rsa -in $HOSTNAME.key -out $HOSTNAME.key
